@@ -10,6 +10,10 @@ from graph_builder.refactoring_recommendations import (
     generate_recommendations
 )
 
+from graph_builder.improvement_planner import (
+    build_improvement_plan
+)
+
 symbol_index = load_symbol_index(
     "graphify-out/symbol_index.json"
 )
@@ -25,25 +29,21 @@ recommendations = (
     )
 )
 
-print()
-
-print(
-    "REPOSITORY IMPROVEMENT PLAN"
+plan = build_improvement_plan(
+    recommendations
 )
 
-print(
-    "=" * 40
-)
-
-for recommendation in recommendations:
+for item in plan:
 
     print()
 
     print(
-        f"[{recommendation['priority']}] "
-        f"(score={recommendation['score']})"
+        f"[{item['priority']}] "
+        f"{item['title']}"
     )
 
-    print(
-        recommendation["message"]
-    )
+    for step in item["steps"]:
+
+        print(
+            f"  - {step}"
+        )
