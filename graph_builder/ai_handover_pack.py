@@ -13,9 +13,7 @@ def generate_ai_handover_pack(
         knowledge_graph,
         project_name="Graphify",
         project_purpose=
-        "AI Context Transfer Engine",
-        current_stage=
-        "Stage 5 Complete"
+        "AI Context Transfer Engine"
     )
 
     lines = []
@@ -31,6 +29,7 @@ def generate_ai_handover_pack(
     )
 
     lines.append("")
+
     lines.append(
         "Graphify is an AI Context Transfer Engine."
     )
@@ -52,7 +51,19 @@ def generate_ai_handover_pack(
     lines.append("")
 
     lines.append(
-        "Stage 5 Complete"
+        brain["current_stage"]
+    )
+
+    lines.append("")
+
+    lines.append(
+        f"Latest Commit: "
+        f"{brain['latest_commit']}"
+    )
+
+    lines.append(
+        f"Total Commits: "
+        f"{brain['total_commits']}"
     )
 
     lines.append("")
@@ -61,45 +72,16 @@ def generate_ai_handover_pack(
         "Completed Modules:"
     )
 
-    lines.append(
-        "- Repository Scanner"
-    )
-
-    lines.append(
-        "- Symbol Index"
-    )
-
-    lines.append(
-        "- Knowledge Graph"
-    )
-
-    lines.append(
-        "- Dependency Explorer"
-    )
-
-    lines.append(
-        "- Impact Analysis"
-    )
-
-    lines.append(
-        "- Risk Ranking"
-    )
-
-    lines.append(
-        "- Critical Symbol Ranking"
-    )
-
-    lines.append(
-        "- Repository Health Engine"
-    )
-
-    lines.append(
-        "- Repository Brain Generator"
-    )
-
-    lines.append(
-        "- Context Pack Generator"
-    )
+    lines.append("- Repository Scanner")
+    lines.append("- Symbol Index")
+    lines.append("- Knowledge Graph")
+    lines.append("- Dependency Explorer")
+    lines.append("- Impact Analysis")
+    lines.append("- Risk Ranking")
+    lines.append("- Critical Symbol Ranking")
+    lines.append("- Repository Health Engine")
+    lines.append("- Repository Brain Generator")
+    lines.append("- Context Pack Generator")
 
     lines.append("")
 
@@ -159,21 +141,10 @@ def generate_ai_handover_pack(
 
     lines.append("")
 
-    lines.append(
-        "- symbol_index.json"
-    )
-
-    lines.append(
-        "- repository_dashboard.json"
-    )
-
-    lines.append(
-        "- repository_brain.json"
-    )
-
-    lines.append(
-        "- repository_context.md"
-    )
+    lines.append("- symbol_index.json")
+    lines.append("- repository_dashboard.json")
+    lines.append("- repository_brain.json")
+    lines.append("- repository_context.md")
 
     lines.append("")
 
@@ -199,25 +170,11 @@ def generate_ai_handover_pack(
 
     lines.append("")
 
-    lines.append(
-        "- Improve Repository Brain"
-    )
-
-    lines.append(
-        "- Generate Architecture Summaries"
-    )
-
-    lines.append(
-        "- AI Conversation Memory Export"
-    )
-
-    lines.append(
-        "- GitHub Integration"
-    )
-
-    lines.append(
-        "- VS Code Extension"
-    )
+    lines.append("- Improve Repository Brain")
+    lines.append("- Generate Architecture Summaries")
+    lines.append("- AI Conversation Memory Export")
+    lines.append("- GitHub Integration")
+    lines.append("- VS Code Extension")
 
     lines.append("")
 
@@ -228,11 +185,12 @@ def generate_ai_handover_pack(
     lines.append("")
 
     lines.append(
-        "Continue development from Stage 6."
+        f"Continue development from "
+        f"{brain['current_stage']}."
     )
 
     lines.append(
-        "Treat Stage 5 as stable and complete."
+        "Treat previous stages as stable."
     )
 
     return "\n".join(

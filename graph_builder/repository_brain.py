@@ -6,14 +6,21 @@ from graph_builder.repository_knowledge_pack import (
     build_repository_knowledge_pack
 )
 
+from graph_builder.repository_metadata import (
+    get_repository_metadata
+)
+
 
 def generate_repository_brain(
     symbol_index,
     knowledge_graph,
     project_name="Unknown Project",
-    project_purpose="Not Specified",
-    current_stage="Unknown"
+    project_purpose="Not Specified"
 ):
+
+    metadata = (
+        get_repository_metadata()
+    )
 
     health_report = (
         generate_health_report(
@@ -58,7 +65,31 @@ def generate_repository_brain(
             project_purpose,
 
         "current_stage":
-            current_stage,
+            metadata[
+                "current_stage"
+            ],
+
+        "latest_commit":
+            metadata[
+                "latest_commit"
+            ],
+
+        "total_commits":
+            metadata[
+                "total_commits"
+            ],
+
+        "latest_tag":
+            metadata.get(
+                "latest_tag",
+                "unknown"
+            ),
+
+        "current_branch":
+            metadata.get(
+                "current_branch",
+                "unknown"
+            ),
 
         "health_score":
             health_report[

@@ -13,9 +13,7 @@ def generate_context_pack(
         knowledge_graph,
         project_name="Graphify",
         project_purpose=
-        "AI Context Transfer Engine",
-        current_stage=
-        "Stage 5 Complete"
+        "AI Context Transfer Engine"
     )
 
     lines = []
@@ -39,6 +37,16 @@ def generate_context_pack(
     lines.append(
         f"Current Stage: "
         f"{brain['current_stage']}"
+    )
+
+    lines.append(
+        f"Latest Commit: "
+        f"{brain['latest_commit']}"
+    )
+
+    lines.append(
+        f"Total Commits: "
+        f"{brain['total_commits']}"
     )
 
     lines.append("")

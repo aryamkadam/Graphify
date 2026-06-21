@@ -10,8 +10,7 @@ def export_repository_brain(
     knowledge_graph,
     output_file,
     project_name,
-    project_purpose,
-    current_stage
+    project_purpose
 ):
 
     brain = (
@@ -19,8 +18,7 @@ def export_repository_brain(
             symbol_index,
             knowledge_graph,
             project_name,
-            project_purpose,
-            current_stage
+            project_purpose
         )
     )
 

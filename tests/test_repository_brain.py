@@ -31,10 +31,7 @@ brain = export_repository_brain(
     project_name="Graphify",
 
     project_purpose=
-    "AI Context Transfer Engine",
-
-    current_stage=
-    "Stage 5 Complete"
+    "AI Context Transfer Engine"
 )
 
 pprint(
