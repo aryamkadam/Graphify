@@ -10,6 +10,14 @@ from graph_builder.repository_metadata import (
     get_repository_metadata
 )
 
+from graph_builder.project_decision_brain import (
+    generate_project_decision_brain
+)
+
+from graph_builder.decision_insights import (
+    generate_decision_insights
+)
+
 
 def generate_repository_brain(
     symbol_index,
@@ -34,6 +42,14 @@ def generate_repository_brain(
             symbol_index,
             knowledge_graph
         )
+    )
+
+    decision_brain = (
+        generate_project_decision_brain()
+    )
+
+    decision_insights = (
+        generate_decision_insights()
     )
 
     critical_symbols = []
@@ -120,6 +136,29 @@ def generate_repository_brain(
                     "hotspots"
                 ]
             ),
+
+        "decision_count":
+            decision_brain[
+                "decision_count"
+            ],
+
+        "latest_decisions":
+            decision_brain[
+                "latest_decisions"
+            ],
+
+        "most_important_decision":
+            decision_brain[
+                "most_important_decisions"
+            ][0],
+
+        "decision_insights":
+            decision_insights,
+
+        "project_direction":
+            decision_insights[
+                "dominant_area"
+            ],
 
         "top_recommendations":
             health_report[
