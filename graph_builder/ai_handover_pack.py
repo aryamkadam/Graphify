@@ -1,5 +1,9 @@
-from graph_builder.repository_brain import (
-    generate_repository_brain
+from graph_builder.ai_context_pack import (
+    build_ai_context_pack
+)
+
+from graph_builder.prediction_engine import (
+    generate_prediction
 )
 
 
@@ -8,14 +12,24 @@ def generate_ai_handover_pack(
     knowledge_graph
 ):
 
-    brain = generate_repository_brain(
-        symbol_index,
-        knowledge_graph,
-        project_name="Graphify",
-        project_purpose=
-        "AI Context Transfer Engine"
-    )
+    context = build_ai_context_pack(
+    symbol_index,
+    knowledge_graph
+)
 
+    repo = context["repository_brain"]
+
+    project = context["project_memory"]
+
+    github = context["github_intelligence"]
+
+    decision = context["decision_brain"]
+
+    session = context["session_memory"]
+
+    prediction = generate_prediction(
+    repo
+ )
     lines = []
 
     lines.append(
@@ -23,65 +37,24 @@ def generate_ai_handover_pack(
     )
 
     lines.append("")
-
-    lines.append(
-        "## Project Purpose"
-    )
-
+    lines.append("## Project Overview")
     lines.append("")
 
     lines.append(
-        "Graphify is an AI Context Transfer Engine."
+        f"Project: {project['project_name']}"
     )
 
     lines.append(
-        "It solves the problem of losing project context"
+        f"Goal: {project['goal']}"
     )
 
     lines.append(
-        "when switching between AI systems."
-    )
-
-    lines.append("")
-
-    lines.append(
-        "## Current Development Status"
-    )
-
-    lines.append("")
-
-    lines.append(
-        brain["current_stage"]
-    )
-
-    lines.append("")
-
-    lines.append(
-        f"Latest Commit: "
-        f"{brain['latest_commit']}"
+        f"Current Stage: {project['current_stage']}"
     )
 
     lines.append(
-        f"Total Commits: "
-        f"{brain['total_commits']}"
+        f"Latest Commit: {project['latest_commit']}"
     )
-
-    lines.append("")
-
-    lines.append(
-        "Completed Modules:"
-    )
-
-    lines.append("- Repository Scanner")
-    lines.append("- Symbol Index")
-    lines.append("- Knowledge Graph")
-    lines.append("- Dependency Explorer")
-    lines.append("- Impact Analysis")
-    lines.append("- Risk Ranking")
-    lines.append("- Critical Symbol Ranking")
-    lines.append("- Repository Health Engine")
-    lines.append("- Repository Brain Generator")
-    lines.append("- Context Pack Generator")
 
     lines.append("")
 
@@ -92,13 +65,19 @@ def generate_ai_handover_pack(
     lines.append("")
 
     lines.append(
-        f"Health Score: "
-        f"{brain['health_score']}"
+        f"Health Score: {repo['health_score']}"
     )
 
     lines.append(
-        f"Status: "
-        f"{brain['status']}"
+        f"Status: {repo['status']}"
+    )
+
+    lines.append(
+        f"Dead Code Count: {repo['dead_code_count']}"
+    )
+
+    lines.append(
+        f"Hotspot Count: {repo['hotspot_count']}"
     )
 
     lines.append("")
@@ -109,9 +88,7 @@ def generate_ai_handover_pack(
 
     lines.append("")
 
-    for symbol in brain[
-        "critical_symbols"
-    ]:
+    for symbol in repo["critical_symbols"]:
 
         lines.append(
             f"- {symbol}"
@@ -120,77 +97,98 @@ def generate_ai_handover_pack(
     lines.append("")
 
     lines.append(
-        "## Risky Symbols"
+        "## Important Decisions"
     )
 
     lines.append("")
 
-    for symbol in brain[
-        "risky_symbols"
-    ]:
+    for item in decision["latest_decisions"]:
 
         lines.append(
-            f"- {symbol}"
+            f"- {item['title']}"
         )
 
     lines.append("")
 
     lines.append(
-        "## Existing Outputs"
-    )
-
-    lines.append("")
-
-    lines.append("- symbol_index.json")
-    lines.append("- repository_dashboard.json")
-    lines.append("- repository_brain.json")
-    lines.append("- repository_context.md")
-
-    lines.append("")
-
-    lines.append(
-        "## Rules For Future Development"
+        "## GitHub Intelligence"
     )
 
     lines.append("")
 
     lines.append(
-        "Do not rebuild completed intelligence modules."
+        f"Repository Maturity: "
+        f"{github['maturity']['maturity_level']}"
     )
 
     lines.append(
-        "Extend existing architecture."
+        f"GitHub Health: "
+        f"{github['github_health']['github_health']}"
     )
 
-    lines.append("")
-
     lines.append(
-        "## Recommended Next Steps"
-    )
-
-    lines.append("")
-
-    lines.append("- Improve Repository Brain")
-    lines.append("- Generate Architecture Summaries")
-    lines.append("- AI Conversation Memory Export")
-    lines.append("- GitHub Integration")
-    lines.append("- VS Code Extension")
-
-    lines.append("")
-
-    lines.append(
-        "## AI Instruction"
+        f"Total Commits: "
+        f"{github['activity']['total_commits']}"
     )
 
     lines.append("")
 
     lines.append(
-        f"Continue development from "
-        f"{brain['current_stage']}."
+        "## AI Session Memory"
+    )
+
+    lines.append("")
+
+    lines.append(
+        f"Latest Focus: "
+        f"{session['latest_focus']}"
     )
 
     lines.append(
-        "Treat previous stages as stable."
+        f"Total Sessions: "
+        f"{session['total_sessions']}"
+    )
+
+    lines.append("")
+
+    lines.append(
+        "## Future Roadmap"
+    )
+
+    lines.append("")
+
+    lines.append(
+        f"Recommended Next Stage: "
+        f"{prediction['recommended_next_stage']}"
+    )
+
+    lines.append(
+        f"Recommended Feature: "
+        f"{prediction['recommended_feature']}"
+    )
+
+    lines.append("")
+
+    lines.append(
+        "## Instructions For Next AI"
+    )
+
+    lines.append("")
+
+    lines.append(
+        "Continue development without rebuilding completed engines."
+    )
+
+    lines.append(
+        "Use Repository Brain as source of truth."
+    )
+
+    lines.append(
+        "Use Project Memory for roadmap continuity."
+    )
+
+    lines.append(
+        "Use Decision Brain for architectural reasoning."
     )
 
     return "\n".join(
