@@ -22,13 +22,14 @@ def generate_prediction(
     if direction == "architecture":
 
         feature = (
-            "GitHub Integration"
+            "Context Evolution Engine"
         )
 
-        confidence = 90
+        confidence = 95
 
         reason = (
-            "Project direction is architecture focused."
+            "Architecture foundation is complete. "
+            "Next logical step is context evolution."
         )
 
     elif direction == "memory":
@@ -37,7 +38,7 @@ def generate_prediction(
             "AI Session Export"
         )
 
-        confidence = 85
+        confidence = 90
 
         reason = (
             "Project is focused on memory systems."
@@ -49,7 +50,7 @@ def generate_prediction(
             "VS Code Extension"
         )
 
-        confidence = 75
+        confidence = 80
 
         reason = (
             "General platform expansion."
@@ -58,7 +59,7 @@ def generate_prediction(
     prediction = {
 
         "recommended_next_stage":
-            "Stage 6.4",
+            "Stage 6.8",
 
         "recommended_feature":
             feature,
@@ -70,7 +71,10 @@ def generate_prediction(
             reason,
 
         "health_score":
-            health_score
+            health_score,
+
+        "project_status":
+            "ACTIVE"
     }
 
     return prediction
