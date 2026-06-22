@@ -17,15 +17,17 @@ def generate_context_diff(
 
     old_commits = old_context[
         "project"
-    ][
-        "total_commits"
-    ]
+    ].get(
+        "total_commits",
+        0
+    )
 
     new_commits = new_context[
         "project"
-    ][
-        "total_commits"
-    ]
+    ].get(
+        "total_commits",
+        0
+    )
 
     old_health = old_context[
         "repository"
@@ -42,17 +44,19 @@ def generate_context_diff(
     old_features = set(
         old_context[
             "project"
-        ][
-            "future_features"
-        ]
+        ].get(
+            "future_features",
+            []
+        )
     )
 
     new_features = set(
         new_context[
             "project"
-        ][
-            "future_features"
-        ]
+        ].get(
+            "future_features",
+            []
+        )
     )
 
     added = list(
