@@ -2,24 +2,14 @@ def export_chatgpt_context(
     context
 ):
 
-    repo = context[
-        "repository_brain"
-    ]
+    return {
 
-    return f"""
-You are continuing work on Graphify.
+        "platform":
+            "ChatGPT",
 
-Current Stage:
-{repo['current_stage']}
+        "full_context":
+            context,
 
-Project Purpose:
-{repo['project_purpose']}
-
-Health Score:
-{repo['health_score']}
-
-Critical Symbols:
-{repo['critical_symbols']}
-
-Continue development from here.
-"""
+        "mode":
+            "maximum_reasoning"
+    }

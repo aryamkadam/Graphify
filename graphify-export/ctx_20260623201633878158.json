@@ -1,0 +1,205 @@
+{
+    "context_id": "ctx_20260623201633878158",
+    "timestamp": "2026-06-23T20:16:33.878158",
+    "message": "Stage 7.7 Context Pack Export",
+    "project_name": "Graphify",
+    "stage": "stage-6.17-stable",
+    "health_score": 71,
+    "latest_commit": "504714d",
+    "latest_tag": "stage-6.17-stable",
+    "project_memory": {
+        "project_name": "Graphify",
+        "goal": "AI Context Transfer Engine",
+        "completed_stages": [
+            "stage-4.4-stable",
+            "stage-4.5-stable",
+            "stage-5-stable",
+            "stage-6.1-stable",
+            "stage-6.11-stable",
+            "stage-6.12-stable",
+            "stage-6.13-stable",
+            "stage-6.14-stable",
+            "stage-6.15-stable",
+            "stage-6.16-stable",
+            "stage-6.17-stable",
+            "stage-6.2-stable",
+            "stage-6.3-stable",
+            "stage-6.4-stable",
+            "stage-6.5-stable",
+            "stage-6.6-stable",
+            "stage-6.7-stable",
+            "stage-6.8-stable",
+            "stage-6.9-stable"
+        ],
+        "current_stage": "stage-6.17-stable",
+        "latest_commit": "504714d",
+        "latest_tag": "stage-6.17-stable",
+        "current_branch": "master",
+        "total_commits": 22,
+        "next_stage": "Stage 6.8",
+        "future_features": [
+            "Project Memory Engine",
+            "Decision Tracking",
+            "GitHub Integration",
+            "VS Code Extension",
+            "AI Session Export",
+            "Multi-AI Context Transfer",
+            "Context Evolution Engine"
+        ]
+    },
+    "repository_brain": {
+        "project_name": "Graphify",
+        "project_purpose": "AI Context Transfer Engine",
+        "current_stage": "stage-6.17-stable",
+        "latest_commit": "504714d",
+        "total_commits": 22,
+        "latest_tag": "stage-6.17-stable",
+        "current_branch": "master",
+        "health_score": 71,
+        "status": "GOOD",
+        "critical_symbols": [
+            "parse_python_file",
+            "extract_parameters",
+            "classify_file",
+            "calculate_sha256",
+            "build_graph"
+        ],
+        "risky_symbols": [
+            "extract_parameters",
+            "parse_python_file",
+            "classify_file",
+            "calculate_sha256",
+            "build_graph"
+        ],
+        "dead_code_count": 14,
+        "hotspot_count": 10,
+        "decision_count": 4,
+        "latest_decisions": [
+            {
+                "title": "Repository Brain Introduced",
+                "reason": "Need single source of truth for AI context transfer",
+                "impact": "repository_brain.json generated",
+                "stage": "stage-6.1-stable",
+                "commit": "fc4e2b3"
+            },
+            {
+                "title": "Project Memory Engine Introduced",
+                "reason": "Project should remember its own evolution",
+                "impact": "project_memory.json generated",
+                "stage": "stage-6.2-stable",
+                "commit": null
+            },
+            {
+                "title": "Metadata Engine Introduced",
+                "reason": "Graphify should understand Git history",
+                "impact": "Repository metadata generated automatically",
+                "stage": "stage-6.2-stable",
+                "commit": null
+            }
+        ],
+        "most_important_decision": {
+            "title": "Graphify Became AI Context Transfer Engine",
+            "reason": "Developers lose context when switching AI systems",
+            "impact": "Entire roadmap shifted toward AI handover",
+            "stage": "stage-5-stable",
+            "commit": null
+        },
+        "decision_insights": {
+            "decision_count": 4,
+            "dominant_area": "architecture",
+            "category_counts": {
+                "architecture": 1,
+                "memory": 1,
+                "metadata": 1,
+                "context": 1,
+                "other": 0
+            }
+        },
+        "project_direction": "architecture",
+        "top_recommendations": [
+            {
+                "priority": "HIGH",
+                "score": 120,
+                "message": "Reduce dependency on parse_python_file."
+            },
+            {
+                "priority": "HIGH",
+                "score": 60,
+                "message": "Review high-risk symbol extract_parameters."
+            },
+            {
+                "priority": "MEDIUM",
+                "score": 50,
+                "message": "Consider splitting parser\\ast_models.py."
+            },
+            {
+                "priority": "LOW",
+                "score": 14,
+                "message": "Remove or review 14 dead symbols."
+            }
+        ]
+    },
+    "decision_brain": {
+        "decision_count": 4,
+        "latest_decisions": [
+            {
+                "title": "Repository Brain Introduced",
+                "reason": "Need single source of truth for AI context transfer",
+                "impact": "repository_brain.json generated",
+                "stage": "stage-6.1-stable",
+                "commit": "fc4e2b3"
+            },
+            {
+                "title": "Project Memory Engine Introduced",
+                "reason": "Project should remember its own evolution",
+                "impact": "project_memory.json generated",
+                "stage": "stage-6.2-stable",
+                "commit": null
+            },
+            {
+                "title": "Metadata Engine Introduced",
+                "reason": "Graphify should understand Git history",
+                "impact": "Repository metadata generated automatically",
+                "stage": "stage-6.2-stable",
+                "commit": null
+            }
+        ],
+        "most_important_decisions": [
+            {
+                "title": "Graphify Became AI Context Transfer Engine",
+                "reason": "Developers lose context when switching AI systems",
+                "impact": "Entire roadmap shifted toward AI handover",
+                "stage": "stage-5-stable",
+                "commit": null
+            },
+            {
+                "title": "Repository Brain Introduced",
+                "reason": "Need single source of truth for AI context transfer",
+                "impact": "repository_brain.json generated",
+                "stage": "stage-6.1-stable",
+                "commit": "fc4e2b3"
+            },
+            {
+                "title": "Project Memory Engine Introduced",
+                "reason": "Project should remember its own evolution",
+                "impact": "project_memory.json generated",
+                "stage": "stage-6.2-stable",
+                "commit": null
+            },
+            {
+                "title": "Metadata Engine Introduced",
+                "reason": "Graphify should understand Git history",
+                "impact": "Repository metadata generated automatically",
+                "stage": "stage-6.2-stable",
+                "commit": null
+            }
+        ]
+    },
+    "context_intelligence": {
+        "project_maturity": "ADVANCED",
+        "development_pattern": "ARCHITECTURE",
+        "risk_trend": "DECREASING",
+        "ai_readiness": 91,
+        "predicted_direction": "AI Memory Infrastructure"
+    }
+}

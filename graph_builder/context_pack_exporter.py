@@ -1,29 +1,38 @@
-from graph_builder.context_pack_generator import (
-    generate_context_pack
+import json
+import os
+
+
+EXPORT_DIR = (
+    "graphify-export"
 )
 
 
 def export_context_pack(
-    symbol_index,
-    knowledge_graph,
-    output_file
+    context_commit
 ):
 
-    context_pack = (
-        generate_context_pack(
-            symbol_index,
-            knowledge_graph
-        )
+    os.makedirs(
+        EXPORT_DIR,
+        exist_ok=True
+    )
+
+    file_path = os.path.join(
+
+        EXPORT_DIR,
+
+        f"{context_commit['context_id']}.json"
     )
 
     with open(
-        output_file,
+        file_path,
         "w",
         encoding="utf-8"
-    ) as f:
+    ) as file:
 
-        f.write(
-            context_pack
+        json.dump(
+            context_commit,
+            file,
+            indent=4
         )
 
-    return context_pack
+    return file_path
