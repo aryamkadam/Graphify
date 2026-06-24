@@ -6,8 +6,8 @@ from graph_builder.decision_history import (
     build_decision_history
 )
 
-from graph_builder.session_reconstruction import (
-    generate_session_reconstruction
+from graph_builder.structured_reconstruction import (
+    generate_structured_reconstruction
 )
 
 from graph_builder.work_continuation import (
@@ -59,11 +59,8 @@ def generate_universal_context_schema():
                 decisions
         },
 
-        "reconstruction": {
-
-            "session":
-                generate_session_reconstruction()
-        },
+       "reconstruction":
+         generate_structured_reconstruction(),
 
         "continuation":
             continuation,
