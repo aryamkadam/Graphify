@@ -3,68 +3,64 @@ def generate_context_diff(
     new_context
 ):
 
-    old_stage = old_context[
-        "project"
-    ][
+    old_identity = old_context[
+        "identity"
+    ]
+
+    new_identity = new_context[
+        "identity"
+    ]
+
+    old_quality = old_context[
+        "quality"
+    ]
+
+    new_quality = new_context[
+        "quality"
+    ]
+
+    old_stage = old_identity[
         "current_stage"
     ]
 
-    new_stage = new_context[
-        "project"
-    ][
+    new_stage = new_identity[
         "current_stage"
     ]
 
-    old_commits = old_context[
-        "project"
-    ].get(
-        "total_commits",
+    old_score = old_quality.get(
+        "transfer_score",
         0
     )
 
-    new_commits = new_context[
-        "project"
-    ].get(
-        "total_commits",
+    new_score = new_quality.get(
+        "transfer_score",
         0
     )
 
-    old_health = old_context[
-        "repository"
-    ][
-        "health_score"
-    ]
-
-    new_health = new_context[
-        "repository"
-    ][
-        "health_score"
-    ]
-
-    old_features = set(
+    old_actions = set(
         old_context[
-            "project"
+            "continuation"
         ].get(
-            "future_features",
+            "recommended_actions",
             []
         )
     )
 
-    new_features = set(
+    new_actions = set(
         new_context[
-            "project"
+            "continuation"
         ].get(
-            "future_features",
+            "recommended_actions",
             []
         )
     )
 
     added = list(
-        new_features - old_features
+        new_actions - old_actions
     )
 
     removed = list(
-        old_features - new_features
+        old_actions - new_actions
     )
 
     return {
@@ -75,15 +71,12 @@ def generate_context_diff(
         "new_stage":
             new_stage,
 
-        "commit_change":
-            new_commits - old_commits,
+        "transfer_score_change":
+            new_score - old_score,
 
-        "health_change":
-            new_health - old_health,
-
-        "added_features":
+        "added_actions":
             added,
 
-        "removed_features":
+        "removed_actions":
             removed
     }

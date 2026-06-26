@@ -5,9 +5,25 @@ def ask_context_reason(
 
     question = question.lower()
 
-    repository = context["repository"]
+    identity = context.get(
+        "identity",
+        {}
+    )
 
-    github = context["github"]
+    quality = context.get(
+        "quality",
+        {}
+    )
+
+    continuation = context.get(
+        "continuation",
+        {}
+    )
+
+    decisions = context.get(
+        "decisions",
+        {}
+    )
 
     if "health" in question:
 
@@ -18,15 +34,16 @@ def ask_context_reason(
 
             "answer":
                 (
-                    f"Health score is "
-                    f"{repository['health_score']} "
-                    f"because repository contains "
-                    f"{repository['dead_code_count']} dead symbols and "
-                    f"{repository['hotspot_count']} hotspots."
+                    f"Transfer quality score is "
+                    f"{quality.get('transfer_score',0)}. "
+                    f"History coverage is "
+                    f"{quality.get('history_coverage',0)} "
+                    f"and decision coverage is "
+                    f"{quality.get('decision_coverage',0)}."
                 )
         }
 
-    if "maturity" in question:
+    if "stage" in question:
 
         return {
 
@@ -35,11 +52,22 @@ def ask_context_reason(
 
             "answer":
                 (
-                    f"Repository maturity is "
-                    f"{github['maturity']['maturity_level']} "
-                    f"because project has "
-                    f"{github['activity']['total_commits']} commits and "
-                    f"{github['releases']['release_count']} releases."
+                    f"Current project stage is "
+                    f"{identity.get('current_stage','unknown')}."
+                )
+        }
+
+    if "goal" in question:
+
+        return {
+
+            "question":
+                question,
+
+            "answer":
+                (
+                    f"Project goal is "
+                    f"{identity.get('goal','unknown')}."
                 )
         }
 
@@ -52,13 +80,12 @@ def ask_context_reason(
 
             "answer":
                 (
-                    f"Current project direction is "
-                    f"{repository['project_direction']} "
-                    f"based on decision analysis."
+                    f"Current direction is "
+                    f"{continuation.get('next_objective','unknown')}."
                 )
         }
 
-    if "risk" in question:
+    if "decision" in question:
 
         return {
 
@@ -67,10 +94,9 @@ def ask_context_reason(
 
             "answer":
                 (
-                    "Repository risks are concentrated around: "
-                    + ", ".join(
-                        repository["risky_symbols"]
-                    )
+                    f"Project contains "
+                    f"{len(decisions.get('decision_history',[]))} "
+                    f"tracked architectural decisions."
                 )
         }
 

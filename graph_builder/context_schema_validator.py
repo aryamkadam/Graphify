@@ -1,3 +1,7 @@
+from graph_builder.schema_versioning import (
+    get_schema_version
+)
+
 REQUIRED_SECTIONS = [
 
     "identity",
@@ -38,7 +42,7 @@ def validate_context_schema(
             valid,
 
         "schema_version":
-            "1.0",
+            get_schema_version(),
 
         "missing_sections":
             missing,

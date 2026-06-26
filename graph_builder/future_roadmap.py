@@ -32,15 +32,15 @@ def generate_future_roadmap(
 
         "future_stages": [
 
-            "Stage 6.4 - Prediction Engine",
+            "Stage 12 - AI Context Recovery",
 
-            "Stage 6.5 - GitHub Intelligence",
+            "Stage 13 - Context Merge Engine",
 
-            "Stage 6.6 - VS Code Extension",
+            "Stage 14 - Multi-Repository Memory",
 
-            "Stage 7 - Multi-AI Context Transfer",
+            "Stage 15 - Context Diff Visualization",
 
-            "Stage 8 - Autonomous Repository Architect"
+            "Stage 16 - Universal AI Memory Protocol"
         ]
     }
 

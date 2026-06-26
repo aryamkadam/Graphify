@@ -2,17 +2,27 @@ def generate_context_advice(
     context
 ):
 
-    recommendations = (
-        context[
-            "repository"
-        ][
-            "top_recommendations"
-        ]
+    continuation = context.get(
+        "continuation",
+        {}
     )
 
-    if len(
-        recommendations
-    ) == 0:
+    quality = context.get(
+        "quality",
+        {}
+    )
+
+    actions = continuation.get(
+        "recommended_actions",
+        []
+    )
+
+    transfer_score = quality.get(
+        "transfer_score",
+        0
+    )
+
+    if len(actions) == 0:
 
         return {
 
@@ -26,42 +36,30 @@ def generate_context_advice(
                 0,
 
             "reason":
-                "Repository is healthy"
+                "Context transfer capability is already complete"
         }
 
-    best = max(
-        recommendations,
-        key=lambda item:
-        item["score"]
-    )
-
-    score = best[
-        "score"
-    ]
+    next_action = actions[0]
 
     expected_gain = min(
         10,
         max(
             1,
-            score // 20
+            (100 - transfer_score) // 10
         )
     )
 
     return {
 
         "next_action":
-            best[
-                "message"
-            ],
+            next_action,
 
         "priority":
-            best[
-                "priority"
-            ],
+            "HIGH",
 
         "expected_gain":
             expected_gain,
 
         "reason":
-            "Highest impact recommendation"
+            "Highest impact action for improving AI context transfer"
     }

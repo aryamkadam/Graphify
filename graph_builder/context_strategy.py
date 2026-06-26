@@ -1,29 +1,37 @@
 def generate_strategy(
     context,
-    target_health=90
+    target_transfer_score=100
 ):
 
-    repository = context[
-        "repository"
-    ]
-
-    current_health = (
-        repository[
-            "health_score"
-        ]
+    quality = context.get(
+        "quality",
+        {}
     )
 
-    recommendations = (
-        repository[
-            "top_recommendations"
-        ]
+    continuation = context.get(
+        "continuation",
+        {}
+    )
+
+    current_score = (
+        quality.get(
+            "transfer_score",
+            0
+        )
+    )
+
+    actions = (
+        continuation.get(
+            "recommended_actions",
+            []
+        )
     )
 
     steps = []
 
     step_number = 1
 
-    for item in recommendations:
+    for action in actions:
 
         steps.append({
 
@@ -31,21 +39,17 @@ def generate_strategy(
                 step_number,
 
             "action":
-                item[
-                    "message"
-                ],
+                action,
 
             "priority":
-                item[
-                    "priority"
-                ]
+                "HIGH"
         })
 
         step_number += 1
 
     gap = (
-        target_health -
-        current_health
+        target_transfer_score -
+        current_score
     )
 
     if gap <= 0:
@@ -74,11 +78,11 @@ def generate_strategy(
 
     return {
 
-        "current_health":
-            current_health,
+        "current_transfer_score":
+            current_score,
 
-        "target_health":
-            target_health,
+        "target_transfer_score":
+            target_transfer_score,
 
         "estimated_effort":
             effort,

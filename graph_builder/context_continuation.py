@@ -6,17 +6,65 @@ from graph_builder.context_history import (
     get_context_history
 )
 
+from graph_builder.stage_resolver import (
+    resolve_current_stage
+)
+
 
 def generate_context_continuation():
 
-    history = get_context_history()
+    history = (
+        get_context_history()
+    )
 
-    decisions = generate_decision_replay()
+    decisions = (
+        generate_decision_replay()
+    )
+
+    current_stage = (
+        resolve_current_stage()
+    )
+
+    if current_stage.startswith(
+        "stage-11"
+    ):
+
+        next_objective = (
+            "Cross-AI Context Transfer"
+        )
+
+        current_maturity = (
+            "AI Memory Infrastructure"
+        )
+
+        reason = (
+            "Graphify already captures, "
+            "stores, reconstructs and verifies "
+            "AI context. The next logical step "
+            "is transferring context across "
+            "different AI systems."
+        )
+
+    else:
+
+        next_objective = (
+            "Autonomous AI Handover"
+        )
+
+        current_maturity = (
+            "AI Context Platform"
+        )
+
+        reason = (
+            "Graphify should evolve toward "
+            "fully autonomous AI-to-AI "
+            "continuity and handover."
+        )
 
     return {
 
         "current_maturity":
-            "AI Memory Infrastructure",
+            current_maturity,
 
         "completed_context_commits":
             len(history),
@@ -25,14 +73,8 @@ def generate_context_continuation():
             len(decisions),
 
         "recommended_next_stage":
-            "Cross-AI Context Transfer",
+            next_objective,
 
         "reason":
-            (
-                "Graphify already preserves "
-                "and reconstructs AI context. "
-                "The next logical step is "
-                "transferring context between "
-                "different AI systems."
-            )
+            reason
     }

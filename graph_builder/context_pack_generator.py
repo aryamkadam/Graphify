@@ -1,126 +1,125 @@
-from graph_builder.repository_brain import (
-    generate_repository_brain
+from graph_builder.graphify_context_pack import (
+    generate_graphify_context_pack
 )
 
 
-def generate_context_pack(
-    symbol_index,
-    knowledge_graph
-):
+def generate_context_pack():
 
-    brain = generate_repository_brain(
-        symbol_index,
-        knowledge_graph,
-        project_name="Graphify",
-        project_purpose=
-        "AI Context Transfer Engine"
+    pack = (
+        generate_graphify_context_pack()
     )
+
+    schema = pack[
+        "schema"
+    ]
+
+    identity = schema[
+        "identity"
+    ]
+
+    quality = schema[
+        "quality"
+    ]
+
+    continuation = schema[
+        "continuation"
+    ]
+
+    reconstruction = schema[
+        "reconstruction"
+    ]
 
     lines = []
 
     lines.append(
-        "# Repository Context"
+        "# Graphify Context Pack"
+    )
+
+    lines.append("")
+
+    lines.append(
+        "## Identity"
     )
 
     lines.append("")
 
     lines.append(
         f"Project Name: "
-        f"{brain['project_name']}"
+        f"{identity['project_name']}"
     )
 
     lines.append(
-        f"Purpose: "
-        f"{brain['project_purpose']}"
+        f"Goal: "
+        f"{identity['goal']}"
     )
 
     lines.append(
         f"Current Stage: "
-        f"{brain['current_stage']}"
-    )
-
-    lines.append(
-        f"Latest Commit: "
-        f"{brain['latest_commit']}"
-    )
-
-    lines.append(
-        f"Total Commits: "
-        f"{brain['total_commits']}"
+        f"{identity['current_stage']}"
     )
 
     lines.append("")
 
     lines.append(
-        "## Repository Health"
-    )
-
-    lines.append(
-        f"Health Score: "
-        f"{brain['health_score']}"
-    )
-
-    lines.append(
-        f"Status: "
-        f"{brain['status']}"
+        "## Transfer Quality"
     )
 
     lines.append("")
 
     lines.append(
-        "## Critical Symbols"
+        f"Transfer Score: "
+        f"{quality['transfer_score']}"
     )
 
-    for symbol in brain[
-        "critical_symbols"
+    lines.append(
+        f"Recommendation: "
+        f"{quality['recommendation']}"
+    )
+
+    lines.append("")
+
+    lines.append(
+        "## Reconstruction Summary"
+    )
+
+    lines.append("")
+
+    lines.append(
+        reconstruction[
+            "reconstruction_summary"
+        ]
+    )
+
+    lines.append("")
+
+    lines.append(
+        "## Continuation Plan"
+    )
+
+    lines.append("")
+
+    lines.append(
+        f"Current State: "
+        f"{continuation['current_state']}"
+    )
+
+    lines.append(
+        f"Next Objective: "
+        f"{continuation['next_objective']}"
+    )
+
+    lines.append("")
+
+    lines.append(
+        "Recommended Actions:"
+    )
+
+    for action in continuation[
+        "recommended_actions"
     ]:
 
         lines.append(
-            f"- {symbol}"
-        )
-
-    lines.append("")
-
-    lines.append(
-        "## Risky Symbols"
-    )
-
-    for symbol in brain[
-        "risky_symbols"
-    ]:
-
-        lines.append(
-            f"- {symbol}"
-        )
-
-    lines.append("")
-
-    lines.append(
-        "## Repository Statistics"
-    )
-
-    lines.append(
-        f"Dead Code Count: "
-        f"{brain['dead_code_count']}"
-    )
-
-    lines.append(
-        f"Hotspot Count: "
-        f"{brain['hotspot_count']}"
-    )
-
-    lines.append("")
-
-    lines.append(
-        "## Top Recommendations"
-    )
-
-    for recommendation in brain[
-        "top_recommendations"
-    ]:
-
-        lines.append(
-            f"- {recommendation['message']}"
+            f"- {action}"
         )
 
     lines.append("")
@@ -130,9 +129,19 @@ def generate_context_pack(
     )
 
     lines.append(
-        "Continue development "
-        "without rebuilding "
-        "existing intelligence modules."
+        "Use Universal Context Schema as source of truth."
+    )
+
+    lines.append(
+        "Use Context History for continuity."
+    )
+
+    lines.append(
+        "Use Decision History for reasoning."
+    )
+
+    lines.append(
+        "Resume development from current stage."
     )
 
     return "\n".join(

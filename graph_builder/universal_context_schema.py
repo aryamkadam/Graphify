@@ -18,6 +18,10 @@ from graph_builder.context_transfer_quality import (
     generate_transfer_quality
 )
 
+from graph_builder.stage_resolver import (
+    resolve_current_stage
+)
+
 
 def generate_universal_context_schema():
 
@@ -44,7 +48,7 @@ def generate_universal_context_schema():
                 "Git for AI Context",
 
             "current_stage":
-                "stage-9.5-stable"
+                resolve_current_stage()
         },
 
         "history": {
@@ -59,8 +63,8 @@ def generate_universal_context_schema():
                 decisions
         },
 
-       "reconstruction":
-         generate_structured_reconstruction(),
+        "reconstruction":
+            generate_structured_reconstruction(),
 
         "continuation":
             continuation,

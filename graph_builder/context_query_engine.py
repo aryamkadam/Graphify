@@ -15,7 +15,7 @@ def query_context(
     ):
 
         return context[
-            "project"
+            "identity"
         ][
             "current_stage"
         ]
@@ -23,73 +23,94 @@ def query_context(
     elif any(
         word in question
         for word in [
-            "health",
-            "healthy",
+            "goal",
+            "purpose",
+            "mission"
+        ]
+    ):
+
+        return context[
+            "identity"
+        ][
+            "goal"
+        ]
+
+    elif any(
+        word in question
+        for word in [
+            "project",
+            "name"
+        ]
+    ):
+
+        return context[
+            "identity"
+        ][
+            "project_name"
+        ]
+
+    elif any(
+        word in question
+        for word in [
+            "quality",
+            "transfer",
             "score"
         ]
     ):
 
         return context[
-            "repository"
+            "quality"
         ][
-            "health_score"
+            "transfer_score"
         ]
 
     elif any(
         word in question
         for word in [
-            "critical",
-            "important"
+            "decision",
+            "decisions"
         ]
     ):
 
         return context[
-            "repository"
-        ][
-            "critical_symbols"
+            "decisions"
         ]
 
     elif any(
         word in question
         for word in [
-            "risk",
-            "risky"
+            "history",
+            "context history"
         ]
     ):
 
         return context[
-            "repository"
-        ][
-            "risky_symbols"
+            "history"
         ]
 
     elif any(
         word in question
         for word in [
-            "direction",
-            "heading",
-            "future"
+            "next",
+            "future",
+            "continuation"
         ]
     ):
 
         return context[
-            "repository"
-        ][
-            "project_direction"
+            "continuation"
         ]
 
     elif any(
         word in question
         for word in [
-            "commit",
-            "latest commit"
+            "reconstruction",
+            "summary"
         ]
     ):
 
         return context[
-            "project"
-        ][
-            "latest_commit"
+            "reconstruction"
         ]
 
     return "Unknown Question"

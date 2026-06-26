@@ -5,17 +5,24 @@ from graph_builder.context_forecast import (
 
 def generate_goal_plan(
     context,
-    target_health=95
+    target_transfer_score=100
 ):
 
-    repository = context[
-        "repository"
-    ]
+    quality = context.get(
+        "quality",
+        {}
+    )
 
-    current_health = (
-        repository[
-            "health_score"
-        ]
+    continuation = context.get(
+        "continuation",
+        {}
+    )
+
+    current_score = (
+        quality.get(
+            "transfer_score",
+            0
+        )
     )
 
     forecast = (
@@ -26,33 +33,24 @@ def generate_goal_plan(
 
     predicted = (
         forecast[
-            "predicted_final_health"
+            "predicted_final_score"
         ]
     )
 
     gap = (
-        target_health -
-        current_health
+        target_transfer_score -
+        current_score
     )
 
     actions = []
 
-    if current_health < target_health:
+    if current_score < target_transfer_score:
 
-        actions.append(
-            "Remove dead symbols"
-        )
-
-        actions.append(
-            "Refactor critical symbols"
-        )
-
-        actions.append(
-            "Reduce repository hotspots"
-        )
-
-        actions.append(
-            "Improve module structure"
+        actions.extend(
+            continuation.get(
+                "recommended_actions",
+                []
+            )
         )
 
     probability = max(
@@ -60,7 +58,8 @@ def generate_goal_plan(
         min(
             100,
             int(
-                (predicted / target_health)
+                (predicted /
+                 target_transfer_score)
                 * 100
             )
         )
@@ -68,16 +67,16 @@ def generate_goal_plan(
 
     return {
 
-        "current_health":
-            current_health,
+        "current_transfer_score":
+            current_score,
 
-        "target_health":
-            target_health,
+        "target_transfer_score":
+            target_transfer_score,
 
-        "health_gap":
+        "score_gap":
             gap,
 
-        "predicted_health":
+        "predicted_score":
             predicted,
 
         "success_probability":

@@ -1,17 +1,5 @@
 from datetime import datetime
 
-from graph_builder.project_memory import (
-    generate_project_memory
-)
-
-from graph_builder.repository_brain import (
-    generate_repository_brain
-)
-
-from graph_builder.project_decision_brain import (
-    generate_project_decision_brain
-)
-
 from graph_builder.context_intelligence import (
     generate_context_intelligence
 )
@@ -22,12 +10,12 @@ def create_context_commit(
     message
 ):
 
-    repository = context[
-        "repository"
+    identity = context[
+        "identity"
     ]
 
-    project = context[
-        "project"
+    quality = context[
+        "quality"
     ]
 
     commit = {
@@ -42,51 +30,61 @@ def create_context_commit(
             message,
 
         "project_name":
-            project[
+            identity[
                 "project_name"
             ],
 
         "stage":
-            project[
+            identity[
                 "current_stage"
             ],
 
         "health_score":
-            repository[
-                "health_score"
-            ],
+            quality.get(
+                "transfer_score",
+                0
+            ),
 
         "latest_commit":
-            repository[
-                "latest_commit"
-            ],
+            identity.get(
+                "latest_commit",
+                "unknown"
+            ),
 
         "latest_tag":
-            repository[
-                "latest_tag"
+            identity[
+                "current_stage"
             ],
 
-        "project_memory":
+        "identity":
             context[
-                "project"
+                "identity"
             ],
 
-        "repository_brain":
+        "history":
             context[
-                "repository"
+                "history"
             ],
 
-        "decision_brain":
+        "decisions":
             context[
                 "decisions"
             ],
 
-        "context_intelligence":
-            generate_context_intelligence(
-                context[
-                    "repository"
-                ]
-            )
+        "reconstruction":
+            context[
+                "reconstruction"
+            ],
+
+        "continuation":
+            context[
+                "continuation"
+            ],
+
+        "quality":
+            context[
+                "quality"
+            ]
     }
 
     return commit

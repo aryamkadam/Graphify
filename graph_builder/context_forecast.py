@@ -2,61 +2,73 @@ def generate_forecast(
     context
 ):
 
-    repository = context[
-        "repository"
-    ]
-
-    current_health = (
-        repository[
-            "health_score"
-        ]
+    quality = context.get(
+        "quality",
+        {}
     )
 
-    dead_code_count = (
-        repository[
-            "dead_code_count"
-        ]
+    history = context.get(
+        "history",
+        {}
     )
 
-    hotspot_count = (
-        repository[
-            "hotspot_count"
-        ]
+    decisions = context.get(
+        "decisions",
+        {}
     )
 
-    after_dead_code = (
-        current_health +
-        min(dead_code_count // 2, 5)
+    current_score = (
+        quality.get(
+            "transfer_score",
+            0
+        )
     )
 
-    after_refactor = (
-        after_dead_code + 8
+    context_commits = len(
+        history.get(
+            "context_commits",
+            []
+        )
     )
 
-    after_hotspot_fix = (
-        after_refactor +
-        min(hotspot_count // 2, 8)
+    decision_count = len(
+        decisions.get(
+            "decision_history",
+            []
+        )
     )
 
-    predicted_final = min(
-        after_hotspot_fix,
+    after_history_growth = min(
+        current_score +
+        (context_commits * 2),
+        100
+    )
+
+    after_decision_growth = min(
+        after_history_growth +
+        decision_count,
+        100
+    )
+
+    predicted_ai_readiness = min(
+        after_decision_growth + 5,
         100
     )
 
     return {
 
-        "current_health":
-            current_health,
+        "current_transfer_score":
+            current_score,
 
-        "after_dead_code_removal":
-            after_dead_code,
+        "after_context_growth":
+            after_history_growth,
 
-        "after_refactoring":
-            after_refactor,
+        "after_decision_growth":
+            after_decision_growth,
 
-        "after_hotspot_reduction":
-            after_hotspot_fix,
+        "predicted_ai_readiness":
+            predicted_ai_readiness,
 
-        "predicted_final_health":
-            predicted_final
+        "predicted_final_score":
+            predicted_ai_readiness
     }

@@ -1,30 +1,31 @@
+REQUIRED_SECTIONS = [
+
+    "identity",
+
+    "history",
+
+    "decisions",
+
+    "reconstruction",
+
+    "continuation",
+
+    "quality"
+]
+
+
 def validate_context(
     context
 ):
 
-    required_keys = [
-
-        "schema_version",
-
-        "project",
-
-        "repository",
-
-        "github",
-
-        "decisions",
-
-        "sessions"
-    ]
-
     missing_keys = []
 
-    for key in required_keys:
+    for section in REQUIRED_SECTIONS:
 
-        if key not in context:
+        if section not in context:
 
             missing_keys.append(
-                key
+                section
             )
 
     if missing_keys:
@@ -39,6 +40,44 @@ def validate_context(
 
             "missing_keys":
                 missing_keys
+        }
+
+    identity = context.get(
+        "identity",
+        {}
+    )
+
+    required_identity = [
+
+        "project_name",
+
+        "goal",
+
+        "current_stage"
+    ]
+
+    missing_identity = []
+
+    for field in required_identity:
+
+        if field not in identity:
+
+            missing_identity.append(
+                field
+            )
+
+    if missing_identity:
+
+        return {
+
+            "valid":
+                False,
+
+            "status":
+                "INVALID_IDENTITY",
+
+            "missing_keys":
+                missing_identity
         }
 
     return {

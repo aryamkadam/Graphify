@@ -9,7 +9,7 @@ from graph_builder.context_goal import (
 
 def generate_roadmap(
     context,
-    target_health=95
+    target_transfer_score=100
 ):
 
     forecast = generate_forecast(
@@ -18,55 +18,63 @@ def generate_roadmap(
 
     goal = generate_goal_plan(
         context,
-        target_health
+        target_transfer_score
     )
 
     phases = [
 
         {
             "phase": 1,
-            "title": "Remove Dead Symbols",
-            "expected_health":
+            "title":
+                "Universal Context Schema",
+
+            "expected_score":
                 forecast[
-                    "after_dead_code_removal"
+                    "after_context_growth"
                 ]
         },
 
         {
             "phase": 2,
-            "title": "Refactor Critical Symbols",
-            "expected_health":
+            "title":
+                "Claude Context Adapter",
+
+            "expected_score":
                 forecast[
-                    "after_refactoring"
+                    "after_decision_growth"
                 ]
         },
 
         {
             "phase": 3,
-            "title": "Reduce Hotspots",
-            "expected_health":
+            "title":
+                "Gemini Context Adapter",
+
+            "expected_score":
                 forecast[
-                    "after_hotspot_reduction"
+                    "predicted_ai_readiness"
                 ]
         },
 
         {
             "phase": 4,
-            "title": "Improve Architecture",
-            "expected_health":
-                target_health
+            "title":
+                "Local LLM Adapter",
+
+            "expected_score":
+                target_transfer_score
         }
     ]
 
     return {
 
-        "current_health":
+        "current_transfer_score":
             goal[
-                "current_health"
+                "current_transfer_score"
             ],
 
-        "target_health":
-            target_health,
+        "target_transfer_score":
+            target_transfer_score,
 
         "confidence":
             goal[
@@ -74,7 +82,7 @@ def generate_roadmap(
             ],
 
         "estimated_duration":
-            "2 Weeks",
+            "4 Stages",
 
         "phases":
             phases
