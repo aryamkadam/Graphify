@@ -1,18 +1,26 @@
-from graph_builder.protocols.uacp.builder import (
-    build_uacp
+from graph_builder.protocols.uacp.adapters.base import (
+    BaseAdapter
 )
+
+
+class ClaudeAdapter(
+    BaseAdapter
+):
+
+    AI_NAME = "Claude"
+
+    ADAPTER_NAME = "claude"
+
+
+_adapter = ClaudeAdapter()
 
 
 def claude_to_uacp(
     universal_context_schema
 ):
 
-    uacp = build_uacp(
+    return _adapter.convert(
+
         universal_context_schema
+
     )
-
-    uacp["metadata"]["source_ai"] = "Claude"
-
-    uacp["metadata"]["adapter"] = "claude"
-
-    return uacp

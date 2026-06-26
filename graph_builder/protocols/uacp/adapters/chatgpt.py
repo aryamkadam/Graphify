@@ -1,18 +1,26 @@
-from graph_builder.protocols.uacp.builder import (
-    build_uacp
+from graph_builder.protocols.uacp.adapters.base import (
+    BaseAdapter
 )
+
+
+class ChatGPTAdapter(
+    BaseAdapter
+):
+
+    AI_NAME = "ChatGPT"
+
+    ADAPTER_NAME = "chatgpt"
+
+
+_adapter = ChatGPTAdapter()
 
 
 def chatgpt_to_uacp(
     universal_context_schema
 ):
 
-    uacp = build_uacp(
+    return _adapter.convert(
+
         universal_context_schema
+
     )
-
-    uacp["metadata"]["source_ai"] = "ChatGPT"
-
-    uacp["metadata"]["adapter"] = "chatgpt"
-
-    return uacp
