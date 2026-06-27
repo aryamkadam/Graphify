@@ -1,3 +1,6 @@
+from graph_builder.protocols.uacp.adapters.gemini import (
+    gemini_to_uacp
+)
 from graph_builder.protocols.uacp.adapters.chatgpt import (
     chatgpt_to_uacp
 )
@@ -14,6 +17,8 @@ ADAPTERS = {
 
     "chatgpt": chatgpt_to_uacp,
      "claude": claude_to_uacp,
+       "gemini": gemini_to_uacp,
+
 
 
 }
