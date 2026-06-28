@@ -1,78 +1,89 @@
 """
-Stage 15.7.3
+Stage 16.2
 
 Repository Reasoning Summary
 
-Converts repository reasoning into one
-high-level engineering assessment.
+Builds one executive summary from the
+Repository Reasoning Engine.
 
-This summary is designed for:
+Consumes the NEW reasoning object.
 
-- AI Assistants
-- CTO Dashboards
-- Repository Brain
-- Executive Reports
+Repository Brain
+        ↓
+Repository Reasoning
+        ↓
+Executive Summary
 """
 
 class RepositoryReasoningSummary:
 
-    def generate(self, reasoning):
-
-        health = reasoning.get("health_reasoning", [])
-
-        execution = reasoning.get("execution_reasoning", [])
-
-        knowledge = reasoning.get("knowledge_reasoning", [])
-
-        decision = reasoning.get("decision_reasoning", [])
-
-        direction = reasoning.get("repository_direction", [])
+   def build(self, reasoning):
 
         paragraphs = []
 
-        # ----------------------------------
+        purpose = reasoning.get(
+            "repository_purpose"
+        )
 
-        if health:
+        if purpose:
 
-            paragraphs.append(
-                "Repository health analysis indicates that "
-                + health[0].lower()
-            )
+            paragraphs.append(purpose)
 
-        # ----------------------------------
+        focus = reasoning.get(
+            "current_focus"
+        )
 
-        if execution:
-
-            paragraphs.append(
-                "Execution analysis shows that "
-                + execution[0].lower()
-            )
-
-        # ----------------------------------
-
-        if knowledge:
+        if focus:
 
             paragraphs.append(
-                "Knowledge analysis suggests that "
-                + knowledge[0].lower()
+
+                f"Current engineering focus is {focus}."
+
             )
 
-        # ----------------------------------
+        risk = reasoning.get(
+            "biggest_risk"
+        )
 
-        if decision:
+        if risk:
 
             paragraphs.append(
-                "Decision history demonstrates that "
-                + decision[0].lower()
+
+                f"Biggest repository risk is {risk}."
+
             )
 
-        # ----------------------------------
+        critical = reasoning.get(
+            "critical_module"
+        )
 
-        if direction:
+        if critical != "Unknown":
 
             paragraphs.append(
-                direction[0]
+
+                f"Critical repository component is {critical}."
+
             )
+
+        next_step = reasoning.get(
+            "recommended_next_step"
+        )
+
+        if next_step:
+
+            paragraphs.append(
+
+                f"Recommended next step is {next_step}."
+
+            )
+
+        story = reasoning.get(
+            "repository_story"
+        )
+
+        if story:
+
+            paragraphs.append(story)
 
         summary = " ".join(paragraphs)
 

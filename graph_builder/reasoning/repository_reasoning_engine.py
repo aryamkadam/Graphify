@@ -6,13 +6,7 @@ Repository Reasoning Engine
 Converts Repository Intelligence
 into human-like understanding.
 
-This is the first reasoning layer
-of Graphify.
-
-Future versions will use LLMs.
-
-Current version uses deterministic
-reasoning rules.
+Compatible with the NEW Repository Brain.
 """
 
 
@@ -26,9 +20,15 @@ class RepositoryReasoningEngine:
 
     def _repository_purpose(self):
 
-        health = self.intelligence["health"]
+        health = self.intelligence.get(
+            "health",
+            {}
+        )
 
-        score = health["health_score"]
+        score = health.get(
+            "health_score",
+            0
+        )
 
         if score >= 90:
 
@@ -56,27 +56,36 @@ class RepositoryReasoningEngine:
 
     def _current_focus(self):
 
-        insights = self.intelligence["decisions"]["insights"]
+        insights = self.intelligence.get(
+            "insights",
+            {}
+        )
 
         return insights.get(
-
             "dominant_area",
-
             "Unknown"
-
         )
 
     # -------------------------------------------------
 
     def _biggest_risk(self):
 
-        knowledge = self.intelligence["knowledge"]
+        knowledge = self.intelligence.get(
+            "knowledge",
+            {}
+        )
 
-        if knowledge["dead_code"]:
+        if knowledge.get(
+            "dead_code_count",
+            0
+        ) > 0:
 
             return "Dead code accumulation"
 
-        if knowledge["risky_symbols"]:
+        if knowledge.get(
+            "risky_symbols",
+            []
+        ):
 
             return "High-risk symbols detected"
 
@@ -86,23 +95,42 @@ class RepositoryReasoningEngine:
 
     def _critical_module(self):
 
-        knowledge = self.intelligence["knowledge"]
+        knowledge = self.intelligence.get(
+            "knowledge",
+            {}
+        )
 
-        if not knowledge["critical_symbols"]:
+        critical = knowledge.get(
+            "critical_symbols",
+            []
+        )
+
+        if not critical:
 
             return "Unknown"
 
-        return knowledge["critical_symbols"][0]["symbol"]
+        first = critical[0]
+
+        if isinstance(first, dict):
+
+            return first.get(
+                "symbol",
+                "Unknown"
+            )
+
+        return str(first)
 
     # -------------------------------------------------
 
     def _recommended_next_step(self):
 
-        recommendations = self.intelligence["health"][
-
-            "top_recommendations"
-
-        ]
+        recommendations = self.intelligence.get(
+            "health",
+            {}
+        ).get(
+            "top_recommendations",
+            []
+        )
 
         if recommendations:
 
@@ -114,9 +142,15 @@ class RepositoryReasoningEngine:
 
     def _repository_story(self):
 
-        metadata = self.intelligence["identity"]
+        metadata = self.intelligence.get(
+            "metadata",
+            {}
+        )
 
-        commits = metadata["total_commits"]
+        commits = metadata.get(
+            "total_commits",
+            0
+        )
 
         if commits < 20:
 
@@ -147,27 +181,21 @@ class RepositoryReasoningEngine:
         reasoning = {
 
             "repository_purpose":
-
                 self._repository_purpose(),
 
             "current_focus":
-
                 self._current_focus(),
 
             "biggest_risk":
-
                 self._biggest_risk(),
 
             "critical_module":
-
                 self._critical_module(),
 
             "recommended_next_step":
-
                 self._recommended_next_step(),
 
             "repository_story":
-
                 self._repository_story(),
 
         }

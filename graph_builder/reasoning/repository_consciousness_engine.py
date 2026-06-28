@@ -5,20 +5,7 @@ Repository Consciousness Engine
 
 Builds the high-level identity of the repository.
 
-This is NOT AI consciousness.
-
-It represents:
-
-- Identity
-- Mission
-- Direction
-- Strengths
-- Weaknesses
-- Long-term evolution
-
-Future reasoning engines,
-LLMs and autonomous agents
-consume this object.
+Consumes the NEW Repository Brain structure.
 """
 
 
@@ -32,35 +19,24 @@ class RepositoryConsciousnessEngine:
 
     def _identity(self):
 
-        metadata = self.intelligence["identity"]
+        metadata = self.intelligence.get("metadata", {})
 
         return {
 
             "repository": metadata.get(
-
                 "repository_name",
-
                 "Unknown"
-
             ),
 
             "branch": metadata.get(
-
                 "current_branch",
-
                 "unknown"
-
             ),
 
-            "latest_commit":
-
-                metadata.get(
-
-                    "latest_commit",
-
-                    "unknown"
-
-                )
+            "latest_commit": metadata.get(
+                "latest_commit",
+                "unknown"
+            )
 
         }
 
@@ -68,13 +44,21 @@ class RepositoryConsciousnessEngine:
 
     def _mission(self):
 
-        insights = self.intelligence["decisions"]["insights"]
+        insights = self.intelligence.get(
+            "insights",
+            {}
+        )
+
+        area = insights.get(
+            "dominant_area",
+            "software evolution"
+        )
 
         return (
 
             f"Repository is primarily focused on "
 
-            f"{insights['dominant_area']}."
+            f"{area}."
 
         )
 
@@ -82,40 +66,48 @@ class RepositoryConsciousnessEngine:
 
     def _strengths(self):
 
-        health = self.intelligence["health"]
-
         strengths = []
 
-        if health["health_score"] >= 90:
+        health = self.intelligence.get(
+            "health",
+            {}
+        )
+
+        knowledge = self.intelligence.get(
+            "knowledge",
+            {}
+        )
+
+        execution = self.intelligence.get(
+            "execution",
+            {}
+        )
+
+        if health.get(
+            "health_score",
+            0
+        ) >= 90:
 
             strengths.append(
-
                 "Healthy architecture"
-
             )
 
-        if len(
-
-            self.intelligence["knowledge"]["critical_symbols"]
-
-        ) > 0:
+        if knowledge.get(
+            "critical_symbols",
+            []
+        ):
 
             strengths.append(
-
                 "Clear critical modules"
-
             )
 
-        if len(
-
-            self.intelligence["execution"]["importance_ranking"]
-
-        ) > 0:
+        if execution.get(
+            "top_important_functions",
+            []
+        ):
 
             strengths.append(
-
                 "Execution flow understood"
-
             )
 
         return strengths
@@ -126,22 +118,27 @@ class RepositoryConsciousnessEngine:
 
         weaknesses = []
 
-        knowledge = self.intelligence["knowledge"]
+        knowledge = self.intelligence.get(
+            "knowledge",
+            {}
+        )
 
-        if knowledge["dead_code"]:
+        if knowledge.get(
+            "dead_code_count",
+            0
+        ) > 0:
 
             weaknesses.append(
-
                 "Dead code exists"
-
             )
 
-        if knowledge["risky_symbols"]:
+        if knowledge.get(
+            "risky_symbols",
+            []
+        ):
 
             weaknesses.append(
-
                 "High-risk symbols detected"
-
             )
 
         return weaknesses
@@ -150,35 +147,41 @@ class RepositoryConsciousnessEngine:
 
     def _goal(self):
 
-        health = self.intelligence["health"]["health_score"]
+        score = self.intelligence.get(
+            "health",
+            {}
+        ).get(
+            "health_score",
+            0
+        )
 
-        if health >= 90:
+        if score >= 90:
 
             return (
-
                 "Scale into an enterprise-grade repository."
-
             )
 
-        elif health >= 70:
+        elif score >= 70:
 
             return (
-
                 "Continue improving architecture."
-
             )
 
         return (
-
             "Stabilize the repository before expansion."
-
         )
 
     # ------------------------------------------------
 
     def _evolution(self):
 
-        commits = self.intelligence["identity"]["total_commits"]
+        commits = self.intelligence.get(
+            "metadata",
+            {}
+        ).get(
+            "total_commits",
+            0
+        )
 
         if commits < 20:
 
@@ -198,32 +201,24 @@ class RepositoryConsciousnessEngine:
 
     def build(self):
 
-        consciousness = {
+        return {
 
             "identity":
-
                 self._identity(),
 
             "mission":
-
                 self._mission(),
 
             "strengths":
-
                 self._strengths(),
 
             "weaknesses":
-
                 self._weaknesses(),
 
             "goal":
-
                 self._goal(),
 
             "evolution_stage":
-
                 self._evolution()
 
         }
-
-        return consciousness
