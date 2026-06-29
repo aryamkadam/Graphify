@@ -36,11 +36,11 @@ from graph_builder.reasoning.repository_story_engine import (
     RepositoryStoryEngine,
 )
 
-from graph_builder.intelligence.repository_planning_engine import (
+from graph_builder.planning.repository_planning_engine import (
     RepositoryPlanningEngine,
 )
 
-from graph_builder.intelligence.repository_prediction_engine import (
+from graph_builder.prediction.repository_prediction_engine import (
     RepositoryPredictionEngine,
 )
 
