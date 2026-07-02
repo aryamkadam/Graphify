@@ -4,8 +4,8 @@ from graph_builder.context.universal_repository_context import (
     UniversalRepositoryContext,
 )
 
-from graph_builder.context.adapters.chatgpt_adapter import (
-    ChatGPTAdapter,
+from graph_builder.context.universal_context_serializer import (
+    UniversalContextSerializer,
 )
 
 executive_brain = {
@@ -23,7 +23,6 @@ executive_brain = {
     "strategy": {
 
         "engineering_strategy":
-
         "Repository-wide Refactoring"
 
     },
@@ -32,9 +31,7 @@ executive_brain = {
 
         "highest_priority": {
 
-            "task":
-
-            "Remove Technical Debt"
+            "task": "Remove Technical Debt"
 
         }
 
@@ -42,26 +39,21 @@ executive_brain = {
 
     "planner": {
 
-        "summary":
-
-        "3 engineering sprints generated."
+        "summary": "3 engineering sprints generated."
 
     },
 
     "decision": {
 
         "next_engineering_action":
-
         "Remove Technical Debt"
 
     },
 
     "future_direction":
-
     "Remove Technical Debt",
 
     "summary":
-
     "Repository Executive Brain ready."
 
 }
@@ -75,7 +67,6 @@ memory = {
 story = {
 
     "summary":
-
     "Repository has evolved positively."
 
 }
@@ -83,7 +74,6 @@ story = {
 consciousness = {
 
     "phase":
-
     "Stabilization"
 
 }
@@ -100,18 +90,28 @@ context = UniversalRepositoryContext().build(
 
 )
 
-adapter = ChatGPTAdapter()
+serializer = UniversalContextSerializer()
 
-print("\n========================================")
-print("ChatGPT Adapter")
-print("========================================\n")
+result = serializer.save(
 
-pprint(
-
-    adapter.adapt(
-
-        context
-
-    )
+    context,
 
 )
+
+loaded = serializer.load(
+
+    result["file_path"]
+
+)
+
+print("\n========================================")
+print("Universal Context Serializer")
+print("========================================\n")
+
+print("Save Result:\n")
+
+pprint(result)
+
+print("\nLoaded Context:\n")
+
+pprint(loaded)

@@ -4,28 +4,17 @@ from graph_builder.context.universal_repository_context import (
     UniversalRepositoryContext,
 )
 
-from graph_builder.context.adapters.chatgpt_adapter import (
-    ChatGPTAdapter,
-)
-
 executive_brain = {
 
     "identity": {
-
         "phase": "Stabilization",
-
         "technical_direction": "Positive",
-
         "brain_state": "Growing",
-
     },
 
     "strategy": {
-
         "engineering_strategy":
-
-        "Repository-wide Refactoring"
-
+            "Repository-wide Refactoring",
     },
 
     "priorities": {
@@ -33,8 +22,7 @@ executive_brain = {
         "highest_priority": {
 
             "task":
-
-            "Remove Technical Debt"
+                "Remove Technical Debt"
 
         }
 
@@ -43,48 +31,42 @@ executive_brain = {
     "planner": {
 
         "summary":
-
-        "3 engineering sprints generated."
+            "3 engineering sprints generated."
 
     },
 
     "decision": {
 
         "next_engineering_action":
-
-        "Remove Technical Debt"
+            "Remove Technical Debt"
 
     },
 
     "future_direction":
-
-    "Remove Technical Debt",
+        "Remove Technical Debt",
 
     "summary":
-
-    "Repository Executive Brain ready."
+        "Repository Executive Brain ready."
 
 }
 
-memory = {
+repository_memory = {
 
     "memory_strength": 0.60
 
 }
 
-story = {
+repository_story = {
 
     "summary":
-
-    "Repository has evolved positively."
+        "Repository has evolved positively."
 
 }
 
-consciousness = {
+repository_consciousness = {
 
     "phase":
-
-    "Stabilization"
+        "Stabilization"
 
 }
 
@@ -92,26 +74,16 @@ context = UniversalRepositoryContext().build(
 
     executive_brain,
 
-    memory,
+    repository_memory,
 
-    story,
+    repository_story,
 
-    consciousness,
+    repository_consciousness,
 
 )
-
-adapter = ChatGPTAdapter()
 
 print("\n========================================")
-print("ChatGPT Adapter")
+print("Universal Repository Context")
 print("========================================\n")
 
-pprint(
-
-    adapter.adapt(
-
-        context
-
-    )
-
-)
+pprint(context)

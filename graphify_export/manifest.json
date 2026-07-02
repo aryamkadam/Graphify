@@ -1,0 +1,17 @@
+{
+    "graphify_version": "19.5.5",
+    "protocol": "Graphify Repository Transfer Protocol",
+    "package_type": "Repository AI Continuation",
+    "target_ai": "chatgpt",
+    "portable": true,
+    "verified": true,
+    "files": [
+        "repository_context.graphify",
+        "repository_context.gctx",
+        "metadata.json",
+        "README.md",
+        "AI_INSTRUCTIONS.md",
+        "checksum.sha256",
+        "manifest.json"
+    ]
+}
