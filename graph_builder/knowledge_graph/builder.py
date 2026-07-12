@@ -76,11 +76,16 @@ class KnowledgeGraphBuilder:
 
         resolved_edges = resolver.resolve(edges)
 
+        classifier = DependencyClassifier()
+
+        classified_edges = classifier.classify(
+        resolved_edges
+)
+
         return {
 
             "nodes": self.build_nodes(),
 
-            "edges": resolved_edges,
-
+            "edges": classified_edges,
             "status": "graph_created"
         }

@@ -1,0 +1,24 @@
+{
+    "stages": [
+        {
+            "tag": "stage-4.4-stable",
+            "commit": "c76bc71"
+        },
+        {
+            "tag": "stage-4.5-stable",
+            "commit": "855dcfe"
+        },
+        {
+            "tag": "stage-5-stable",
+            "commit": "f8b17be"
+        },
+        {
+            "tag": "stage-6.1-stable",
+            "commit": "fc4e2b3"
+        },
+        {
+            "tag": "v1.0-engine-complete",
+            "commit": "f8b17be"
+        }
+    ]
+}

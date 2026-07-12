@@ -1,0 +1,11 @@
+{
+    "decision_count": 4,
+    "dominant_area": "architecture",
+    "category_counts": {
+        "architecture": 1,
+        "memory": 1,
+        "metadata": 1,
+        "context": 1,
+        "other": 0
+    }
+}

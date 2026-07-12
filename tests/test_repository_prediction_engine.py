@@ -1,6 +1,6 @@
 from pprint import pprint
 
-from graph_builder.intelligence.repository_prediction_engine import (
+from graph_builder.prediction.repository_prediction_engine import (
     RepositoryPredictionEngine,
 )
 

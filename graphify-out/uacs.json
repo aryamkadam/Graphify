@@ -1,0 +1,242 @@
+{
+    "uacs_version": "1.0",
+    "project": {
+        "project_name": "Graphify",
+        "goal": "AI Context Transfer Engine",
+        "completed_stages": [
+            "stage-4.4-stable",
+            "stage-4.5-stable",
+            "stage-5-stable",
+            "stage-6.1-stable",
+            "stage-6.2-stable",
+            "stage-6.3-stable",
+            "stage-6.4-stable",
+            "stage-6.5-stable",
+            "stage-6.6-stable"
+        ],
+        "current_stage": "stage-6.6-stable",
+        "latest_commit": "695df06",
+        "latest_tag": "stage-6.6-stable",
+        "current_branch": "master",
+        "total_commits": 11,
+        "next_stage": "Stage 6.2",
+        "future_features": [
+            "Project Memory Engine",
+            "Decision Tracking",
+            "GitHub Integration",
+            "VS Code Extension",
+            "AI Session Export",
+            "Multi-AI Context Transfer"
+        ]
+    },
+    "repository": {
+        "project_name": "Graphify",
+        "project_purpose": "AI Context Transfer Engine",
+        "current_stage": "stage-6.6-stable",
+        "latest_commit": "695df06",
+        "total_commits": 11,
+        "latest_tag": "stage-6.6-stable",
+        "current_branch": "master",
+        "health_score": 71,
+        "status": "GOOD",
+        "critical_symbols": [
+            "parse_python_file",
+            "extract_parameters",
+            "classify_file",
+            "calculate_sha256",
+            "build_graph"
+        ],
+        "risky_symbols": [
+            "extract_parameters",
+            "parse_python_file",
+            "classify_file",
+            "calculate_sha256",
+            "build_graph"
+        ],
+        "dead_code_count": 14,
+        "hotspot_count": 10,
+        "decision_count": 4,
+        "latest_decisions": [
+            {
+                "title": "Repository Brain Introduced",
+                "reason": "Need single source of truth for AI context transfer",
+                "impact": "repository_brain.json generated",
+                "stage": "stage-6.1-stable",
+                "commit": "fc4e2b3"
+            },
+            {
+                "title": "Project Memory Engine Introduced",
+                "reason": "Project should remember its own evolution",
+                "impact": "project_memory.json generated",
+                "stage": "stage-6.2-stable",
+                "commit": null
+            },
+            {
+                "title": "Metadata Engine Introduced",
+                "reason": "Graphify should understand Git history",
+                "impact": "Repository metadata generated automatically",
+                "stage": "stage-6.2-stable",
+                "commit": null
+            }
+        ],
+        "most_important_decision": {
+            "title": "Graphify Became AI Context Transfer Engine",
+            "reason": "Developers lose context when switching AI systems",
+            "impact": "Entire roadmap shifted toward AI handover",
+            "stage": "stage-5-stable",
+            "commit": null
+        },
+        "decision_insights": {
+            "decision_count": 4,
+            "dominant_area": "architecture",
+            "category_counts": {
+                "architecture": 1,
+                "memory": 1,
+                "metadata": 1,
+                "context": 1,
+                "other": 0
+            }
+        },
+        "project_direction": "architecture",
+        "top_recommendations": [
+            {
+                "priority": "HIGH",
+                "score": 120,
+                "message": "Reduce dependency on parse_python_file."
+            },
+            {
+                "priority": "HIGH",
+                "score": 60,
+                "message": "Review high-risk symbol extract_parameters."
+            },
+            {
+                "priority": "MEDIUM",
+                "score": 50,
+                "message": "Consider splitting parser\\ast_models.py."
+            },
+            {
+                "priority": "LOW",
+                "score": 14,
+                "message": "Remove or review 14 dead symbols."
+            }
+        ]
+    },
+    "github": {
+        "activity": {
+            "total_commits": 11,
+            "activity_score": 100
+        },
+        "contributors": {
+            "contributors": [
+                "arya"
+            ],
+            "count": 1
+        },
+        "releases": {
+            "release_count": 10,
+            "releases": [
+                "stage-4.4-stable",
+                "stage-4.5-stable",
+                "stage-5-stable",
+                "stage-6.1-stable",
+                "stage-6.2-stable",
+                "stage-6.3-stable",
+                "stage-6.4-stable",
+                "stage-6.5-stable",
+                "stage-6.6-stable",
+                "v1.0-engine-complete"
+            ]
+        },
+        "velocity": {
+            "total_commits": 11,
+            "total_releases": 10,
+            "velocity_score": 1.1
+        },
+        "contributor_ranking": {
+            "top_contributor": "arya",
+            "contributors": [
+                {
+                    "name": "arya",
+                    "commits": 11
+                }
+            ]
+        },
+        "growth": {
+            "growth_status": "FAST",
+            "commit_count": 11,
+            "release_count": 10
+        },
+        "github_health": {
+            "github_health": "EXCELLENT",
+            "score": 100
+        },
+        "maturity": {
+            "maturity_score": 100,
+            "maturity_level": "ADVANCED"
+        },
+        "repository_maturity": "HIGH"
+    },
+    "decisions": {
+        "decision_count": 4,
+        "latest_decisions": [
+            {
+                "title": "Repository Brain Introduced",
+                "reason": "Need single source of truth for AI context transfer",
+                "impact": "repository_brain.json generated",
+                "stage": "stage-6.1-stable",
+                "commit": "fc4e2b3"
+            },
+            {
+                "title": "Project Memory Engine Introduced",
+                "reason": "Project should remember its own evolution",
+                "impact": "project_memory.json generated",
+                "stage": "stage-6.2-stable",
+                "commit": null
+            },
+            {
+                "title": "Metadata Engine Introduced",
+                "reason": "Graphify should understand Git history",
+                "impact": "Repository metadata generated automatically",
+                "stage": "stage-6.2-stable",
+                "commit": null
+            }
+        ],
+        "most_important_decisions": [
+            {
+                "title": "Graphify Became AI Context Transfer Engine",
+                "reason": "Developers lose context when switching AI systems",
+                "impact": "Entire roadmap shifted toward AI handover",
+                "stage": "stage-5-stable",
+                "commit": null
+            },
+            {
+                "title": "Repository Brain Introduced",
+                "reason": "Need single source of truth for AI context transfer",
+                "impact": "repository_brain.json generated",
+                "stage": "stage-6.1-stable",
+                "commit": "fc4e2b3"
+            },
+            {
+                "title": "Project Memory Engine Introduced",
+                "reason": "Project should remember its own evolution",
+                "impact": "project_memory.json generated",
+                "stage": "stage-6.2-stable",
+                "commit": null
+            },
+            {
+                "title": "Metadata Engine Introduced",
+                "reason": "Graphify should understand Git history",
+                "impact": "Repository metadata generated automatically",
+                "stage": "stage-6.2-stable",
+                "commit": null
+            }
+        ]
+    },
+    "sessions": {
+        "total_sessions": 1,
+        "major_topics": [
+            "GitHub Intelligence"
+        ],
+        "latest_focus": "GitHub Intelligence"
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "activity": {
+        "total_commits": 10,
+        "activity_score": 100
+    },
+    "contributors": {
+        "contributors": [
+            "arya"
+        ],
+        "count": 1
+    },
+    "releases": {
+        "release_count": 9,
+        "releases": [
+            "stage-4.4-stable",
+            "stage-4.5-stable",
+            "stage-5-stable",
+            "stage-6.1-stable",
+            "stage-6.2-stable",
+            "stage-6.3-stable",
+            "stage-6.4-stable",
+            "stage-6.5-stable",
+            "v1.0-engine-complete"
+        ]
+    },
+    "velocity": {
+        "total_commits": 10,
+        "total_releases": 9,
+        "velocity_score": 1.11
+    },
+    "contributor_ranking": {
+        "top_contributor": "arya",
+        "contributors": [
+            {
+                "name": "arya",
+                "commits": 10
+            }
+        ]
+    },
+    "growth": {
+        "growth_status": "FAST",
+        "commit_count": 10,
+        "release_count": 9
+    },
+    "github_health": {
+        "github_health": "EXCELLENT",
+        "score": 100
+    },
+    "maturity": {
+        "maturity_score": 100,
+        "maturity_level": "ADVANCED"
+    },
+    "repository_maturity": "HIGH"
+}

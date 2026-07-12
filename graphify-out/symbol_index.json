@@ -1,0 +1,336 @@
+{
+    "scan": {
+        "file": "cli\\main.py",
+        "type": "function",
+        "line": 18,
+        "parameters": [
+            "path"
+        ],
+        "docstring": null,
+        "used_by": []
+    },
+    "detect_architecture_layers": {
+        "file": "graph_builder\\architecture_layers.py",
+        "type": "function",
+        "line": 6,
+        "parameters": [
+            "root_path"
+        ],
+        "docstring": null,
+        "used_by": []
+    },
+    "build_graph": {
+        "file": "graph_builder\\builder.py",
+        "type": "function",
+        "line": 1,
+        "parameters": [
+            "parsed_data"
+        ],
+        "docstring": null,
+        "used_by": [
+            {
+                "file": "graph_builder\\repository_graph.py",
+                "caller": "build_repository_graph",
+                "count": 1
+            }
+        ]
+    },
+    "generate_context_pack": {
+        "file": "graph_builder\\context_pack.py",
+        "type": "function",
+        "line": 1,
+        "parameters": [
+            "symbol_index"
+        ],
+        "docstring": null,
+        "used_by": []
+    },
+    "detect_critical_symbols": {
+        "file": "graph_builder\\critical_path.py",
+        "type": "function",
+        "line": 6,
+        "parameters": [
+            "symbol_index",
+            "min_usage"
+        ],
+        "docstring": null,
+        "used_by": []
+    },
+    "export_graph": {
+        "file": "graph_builder\\exporter.py",
+        "type": "function",
+        "line": 5,
+        "parameters": [
+            "graph",
+            "output_dir"
+        ],
+        "docstring": null,
+        "used_by": []
+    },
+    "analyze_impact": {
+        "file": "graph_builder\\impact_analysis.py",
+        "type": "function",
+        "line": 1,
+        "parameters": [
+            "symbol_name",
+            "symbol_index",
+            "visited"
+        ],
+        "docstring": null,
+        "used_by": [
+            {
+                "file": "graph_builder\\impact_analysis.py",
+                "caller": "analyze_impact",
+                "count": 1
+            }
+        ]
+    },
+    "build_module_dependency_map": {
+        "file": "graph_builder\\module_dependency_map.py",
+        "type": "function",
+        "line": 8,
+        "parameters": [
+            "root_path"
+        ],
+        "docstring": null,
+        "used_by": [
+            {
+                "file": "graph_builder\\architecture_layers.py",
+                "caller": "detect_architecture_layers",
+                "count": 1
+            }
+        ]
+    },
+    "load_symbol_index": {
+        "file": "graph_builder\\query_engine.py",
+        "type": "function",
+        "line": 4,
+        "parameters": [
+            "path"
+        ],
+        "docstring": null,
+        "used_by": []
+    },
+    "find_symbol": {
+        "file": "graph_builder\\query_engine.py",
+        "type": "function",
+        "line": 15,
+        "parameters": [
+            "symbol_name",
+            "symbol_index"
+        ],
+        "docstring": null,
+        "used_by": []
+    },
+    "build_repository_flow": {
+        "file": "graph_builder\\repository_flow.py",
+        "type": "function",
+        "line": 6,
+        "parameters": [
+            "symbol_name",
+            "symbol_index",
+            "visited"
+        ],
+        "docstring": null,
+        "used_by": [
+            {
+                "file": "graph_builder\\repository_flow.py",
+                "caller": "build_repository_flow",
+                "count": 1
+            }
+        ]
+    },
+    "build_repository_graph": {
+        "file": "graph_builder\\repository_graph.py",
+        "type": "function",
+        "line": 7,
+        "parameters": [
+            "root_path"
+        ],
+        "docstring": null,
+        "used_by": []
+    },
+    "generate_repository_summary": {
+        "file": "graph_builder\\repository_summary.py",
+        "type": "function",
+        "line": 8,
+        "parameters": [
+            "root_path"
+        ],
+        "docstring": null,
+        "used_by": []
+    },
+    "build_symbol_index": {
+        "file": "graph_builder\\symbol_index.py",
+        "type": "function",
+        "line": 6,
+        "parameters": [
+            "root_path"
+        ],
+        "docstring": null,
+        "used_by": []
+    },
+    "FunctionNode": {
+        "file": "parser\\ast_models.py",
+        "type": "class",
+        "line": 5,
+        "docstring": null,
+        "used_by": []
+    },
+    "ClassNode": {
+        "file": "parser\\ast_models.py",
+        "type": "class",
+        "line": 11,
+        "docstring": null,
+        "used_by": []
+    },
+    "ImportNode": {
+        "file": "parser\\ast_models.py",
+        "type": "class",
+        "line": 17,
+        "docstring": null,
+        "used_by": []
+    },
+    "extract_parameters": {
+        "file": "parser\\python_parser.py",
+        "type": "function",
+        "line": 4,
+        "parameters": [
+            "node"
+        ],
+        "docstring": null,
+        "used_by": [
+            {
+                "file": "parser\\python_parser.py",
+                "caller": "parse_python_file",
+                "count": 1
+            }
+        ]
+    },
+    "parse_python_file": {
+        "file": "parser\\python_parser.py",
+        "type": "function",
+        "line": 17,
+        "parameters": [
+            "file_path"
+        ],
+        "docstring": null,
+        "used_by": [
+            {
+                "file": "graph_builder\\module_dependency_map.py",
+                "caller": "build_module_dependency_map",
+                "count": 1
+            },
+            {
+                "file": "graph_builder\\repository_graph.py",
+                "caller": "build_repository_graph",
+                "count": 1
+            },
+            {
+                "file": "graph_builder\\repository_summary.py",
+                "caller": "generate_repository_summary",
+                "count": 1
+            },
+            {
+                "file": "graph_builder\\symbol_index.py",
+                "caller": "build_symbol_index",
+                "count": 2
+            }
+        ]
+    },
+    "classify_file": {
+        "file": "scanner\\classifier.py",
+        "type": "function",
+        "line": 15,
+        "parameters": [
+            "filepath"
+        ],
+        "docstring": null,
+        "used_by": [
+            {
+                "file": "scanner\\scanner.py",
+                "caller": "scan_repository",
+                "count": 1
+            }
+        ]
+    },
+    "find_duplicates": {
+        "file": "scanner\\duplicates.py",
+        "type": "function",
+        "line": 1,
+        "parameters": [
+            "files"
+        ],
+        "docstring": null,
+        "used_by": [
+            {
+                "file": "cli\\main.py",
+                "caller": "scan",
+                "count": 1
+            }
+        ]
+    },
+    "calculate_sha256": {
+        "file": "scanner\\hash_utils.py",
+        "type": "function",
+        "line": 4,
+        "parameters": [
+            "filepath"
+        ],
+        "docstring": null,
+        "used_by": [
+            {
+                "file": "scanner\\scanner.py",
+                "caller": "scan_repository",
+                "count": 1
+            }
+        ]
+    },
+    "load_ignore_patterns": {
+        "file": "scanner\\ignore.py",
+        "type": "function",
+        "line": 5,
+        "parameters": [
+            "root_path"
+        ],
+        "docstring": null,
+        "used_by": [
+            {
+                "file": "cli\\main.py",
+                "caller": "scan",
+                "count": 1
+            }
+        ]
+    },
+    "generate_report": {
+        "file": "scanner\\report.py",
+        "type": "function",
+        "line": 4,
+        "parameters": [
+            "root",
+            "files",
+            "language_stats",
+            "duplicates",
+            "output_file"
+        ],
+        "docstring": null,
+        "used_by": []
+    },
+    "scan_repository": {
+        "file": "scanner\\scanner.py",
+        "type": "function",
+        "line": 23,
+        "parameters": [
+            "root_path",
+            "ignore_spec"
+        ],
+        "docstring": null,
+        "used_by": [
+            {
+                "file": "cli\\main.py",
+                "caller": "scan",
+                "count": 1
+            }
+        ]
+    }
+}

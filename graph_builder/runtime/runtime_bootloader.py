@@ -1,12 +1,30 @@
 """
 Graphify
 
-Stage 20.4.2
+Stage 22.2
 
 Runtime Bootloader
 
-Responsible for bringing a repository
-package into a running Runtime.
+Responsible for reconstructing a Repository
+and preparing a Runtime.
+
+The Bootloader NEVER owns the Runtime.
+
+It prepares everything and returns it to
+RepositoryRuntime, which becomes the Runtime
+Orchestrator.
+
+Boot Sequence
+
+Verify
+    ↓
+Import
+    ↓
+Reconstruct Repository
+    ↓
+Discover Plugins
+    ↓
+Return Boot Package
 
 Author:
 Graphify Core
@@ -24,10 +42,14 @@ from graph_builder.context.repository_reconstruction_engine import (
     RepositoryReconstructionEngine,
 )
 
+from graph_builder.runtime.runtime_registration_pipeline import (
+    RuntimeRegistrationPipeline,
+)
+
 
 class RuntimeBootloader:
 
-    VERSION = "20.4.2"
+    VERSION = "22.2"
 
     def __init__(self):
 
@@ -37,7 +59,9 @@ class RuntimeBootloader:
 
         self._reconstructor = RepositoryReconstructionEngine()
 
-    # --------------------------------------------
+        self._pipeline = RuntimeRegistrationPipeline()
+
+    # --------------------------------------------------
 
     def boot(
 
@@ -46,6 +70,10 @@ class RuntimeBootloader:
         package_directory,
 
     ):
+
+        # ------------------------------------------
+        # Verify Transfer Package
+        # ------------------------------------------
 
         verification = self._verifier.verify(
 
@@ -63,7 +91,13 @@ class RuntimeBootloader:
 
                 "verification": verification,
 
+                "version": self.VERSION,
+
             }
+
+        # ------------------------------------------
+        # Import Repository Context
+        # ------------------------------------------
 
         imported = self._importer.import_package(
 
@@ -71,22 +105,40 @@ class RuntimeBootloader:
 
         )
 
-        reconstructed = self._reconstructor.reconstruct(
+        # ------------------------------------------
+        # Reconstruct Repository Brain
+        # ------------------------------------------
+
+        repository = self._reconstructor.reconstruct(
 
             imported["repository_context"],
 
         )
 
+        # ------------------------------------------
+        # Prepare Runtime Plugins
+        # ------------------------------------------
+
+        runtime = self._pipeline.build()
+
+        # ------------------------------------------
+        # Boot Package
+        # ------------------------------------------
+
         return {
 
             "status": "success",
 
-            "runtime_ready": True,
+            "version": self.VERSION,
 
             "verification": verification,
 
-            "repository": reconstructed,
+            "repository": repository,
 
-            "version": self.VERSION,
+            "plugins": runtime["plugins"],
+
+            "runtime_metrics": runtime["metrics"],
+
+            "runtime_ready": True,
 
         }

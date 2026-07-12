@@ -1,0 +1,1028 @@
+{
+    "nodes": [
+        {
+            "id": "test.py",
+            "type": "file"
+        },
+        {
+            "id": "validate_user",
+            "type": "function",
+            "line": 4
+        },
+        {
+            "id": "connect_db",
+            "type": "function",
+            "line": 8
+        },
+        {
+            "id": "save_user",
+            "type": "function",
+            "line": 12
+        },
+        {
+            "id": "json",
+            "type": "module"
+        },
+        {
+            "id": "test_graph.py",
+            "type": "file"
+        },
+        {
+            "id": "parser.python_parser",
+            "type": "module"
+        },
+        {
+            "id": "graph_builder.builder",
+            "type": "module"
+        },
+        {
+            "id": "graph_builder.exporter",
+            "type": "module"
+        },
+        {
+            "id": "test_parser.py",
+            "type": "file"
+        },
+        {
+            "id": "test_repo_graph.py",
+            "type": "file"
+        },
+        {
+            "id": "graph_builder.repository_graph",
+            "type": "module"
+        },
+        {
+            "id": "test_symbol_index.py",
+            "type": "file"
+        },
+        {
+            "id": "graph_builder.symbol_index",
+            "type": "module"
+        },
+        {
+            "id": "cli\\main.py",
+            "type": "file"
+        },
+        {
+            "id": "scan",
+            "type": "function",
+            "line": 18
+        },
+        {
+            "id": "time",
+            "type": "module"
+        },
+        {
+            "id": "pathlib",
+            "type": "module"
+        },
+        {
+            "id": "datetime",
+            "type": "module"
+        },
+        {
+            "id": "typer",
+            "type": "module"
+        },
+        {
+            "id": "rich.console",
+            "type": "module"
+        },
+        {
+            "id": "scanner.scanner",
+            "type": "module"
+        },
+        {
+            "id": "scanner.ignore",
+            "type": "module"
+        },
+        {
+            "id": "scanner.duplicates",
+            "type": "module"
+        },
+        {
+            "id": "cli\\__init__.py",
+            "type": "file"
+        },
+        {
+            "id": "graph_builder\\builder.py",
+            "type": "file"
+        },
+        {
+            "id": "build_graph",
+            "type": "function",
+            "line": 1
+        },
+        {
+            "id": "graph_builder\\exporter.py",
+            "type": "file"
+        },
+        {
+            "id": "export_graph",
+            "type": "function",
+            "line": 5
+        },
+        {
+            "id": "graph_builder\\repository_graph.py",
+            "type": "file"
+        },
+        {
+            "id": "build_repository_graph",
+            "type": "function",
+            "line": 7
+        },
+        {
+            "id": "graph_builder\\symbol_index.py",
+            "type": "file"
+        },
+        {
+            "id": "build_symbol_index",
+            "type": "function",
+            "line": 6
+        },
+        {
+            "id": "graph_builder\\__init__.py",
+            "type": "file"
+        },
+        {
+            "id": "parser\\ast_models.py",
+            "type": "file"
+        },
+        {
+            "id": "FunctionNode",
+            "type": "class",
+            "line": 5
+        },
+        {
+            "id": "ClassNode",
+            "type": "class",
+            "line": 11
+        },
+        {
+            "id": "ImportNode",
+            "type": "class",
+            "line": 17
+        },
+        {
+            "id": "dataclasses",
+            "type": "module"
+        },
+        {
+            "id": "parser\\python_parser.py",
+            "type": "file"
+        },
+        {
+            "id": "parse_python_file",
+            "type": "function",
+            "line": 4
+        },
+        {
+            "id": "ast",
+            "type": "module"
+        },
+        {
+            "id": "parser\\__init__.py",
+            "type": "file"
+        },
+        {
+            "id": "scanner\\classifier.py",
+            "type": "file"
+        },
+        {
+            "id": "classify_file",
+            "type": "function",
+            "line": 15
+        },
+        {
+            "id": "scanner\\config.py",
+            "type": "file"
+        },
+        {
+            "id": "scanner\\duplicates.py",
+            "type": "file"
+        },
+        {
+            "id": "find_duplicates",
+            "type": "function",
+            "line": 1
+        },
+        {
+            "id": "scanner\\hash_utils.py",
+            "type": "file"
+        },
+        {
+            "id": "calculate_sha256",
+            "type": "function",
+            "line": 4
+        },
+        {
+            "id": "hashlib",
+            "type": "module"
+        },
+        {
+            "id": "scanner\\ignore.py",
+            "type": "file"
+        },
+        {
+            "id": "load_ignore_patterns",
+            "type": "function",
+            "line": 5
+        },
+        {
+            "id": "pathspec",
+            "type": "module"
+        },
+        {
+            "id": "scanner\\report.py",
+            "type": "file"
+        },
+        {
+            "id": "generate_report",
+            "type": "function",
+            "line": 4
+        },
+        {
+            "id": "scanner\\scanner.py",
+            "type": "file"
+        },
+        {
+            "id": "scan_repository",
+            "type": "function",
+            "line": 23
+        },
+        {
+            "id": "rich.progress",
+            "type": "module"
+        },
+        {
+            "id": "scanner.classifier",
+            "type": "module"
+        },
+        {
+            "id": "scanner.hash_utils",
+            "type": "module"
+        }
+    ],
+    "edges": [
+        {
+            "source": "test.py",
+            "target": "json",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "test.py",
+            "target": "validate_user",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "test.py",
+            "target": "connect_db",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "test.py",
+            "target": "save_user",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "test.py",
+            "target": "json",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "save_user",
+            "target": "validate_user",
+            "type": "CALLS"
+        },
+        {
+            "source": "save_user",
+            "target": "connect_db",
+            "type": "CALLS"
+        },
+        {
+            "source": "test_graph.py",
+            "target": "parser.python_parser",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "test_graph.py",
+            "target": "graph_builder\\builder.py",
+            "type": "DEPENDS_ON"
+        },
+        {
+            "source": "test_graph.py",
+            "target": "graph_builder\\exporter.py",
+            "type": "DEPENDS_ON"
+        },
+        {
+            "source": "test_graph.py",
+            "target": "parser.python_parser",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "test_graph.py",
+            "target": "graph_builder.builder",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "test_graph.py",
+            "target": "graph_builder.exporter",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "test_parser.py",
+            "target": "parser.python_parser",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "test_parser.py",
+            "target": "parser.python_parser",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "test_repo_graph.py",
+            "target": "graph_builder\\repository_graph.py",
+            "type": "DEPENDS_ON"
+        },
+        {
+            "source": "test_repo_graph.py",
+            "target": "graph_builder\\exporter.py",
+            "type": "DEPENDS_ON"
+        },
+        {
+            "source": "test_repo_graph.py",
+            "target": "graph_builder.repository_graph",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "test_repo_graph.py",
+            "target": "graph_builder.exporter",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "test_symbol_index.py",
+            "target": "json",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "test_symbol_index.py",
+            "target": "graph_builder\\symbol_index.py",
+            "type": "DEPENDS_ON"
+        },
+        {
+            "source": "test_symbol_index.py",
+            "target": "json",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "test_symbol_index.py",
+            "target": "graph_builder.symbol_index",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "json",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "time",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "pathlib",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "datetime",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "typer",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "rich.console",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "scanner\\scanner.py",
+            "type": "DEPENDS_ON"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "scanner\\ignore.py",
+            "type": "DEPENDS_ON"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "scanner\\duplicates.py",
+            "type": "DEPENDS_ON"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "scan",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "json",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "time",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "pathlib",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "datetime",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "typer",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "rich.console",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "scanner.scanner",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "scanner.ignore",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "cli\\main.py",
+            "target": "scanner.duplicates",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "scan",
+            "target": "Path",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "load_ignore_patterns",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "scan_repository",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "find_duplicates",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "sum",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "round",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "open",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "open",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "sorted",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "len",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "len",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "open",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "open",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "open",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "sorted",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "len",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "len",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "len",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan",
+            "target": "len",
+            "type": "CALLS"
+        },
+        {
+            "source": "graph_builder\\builder.py",
+            "target": "build_graph",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "graph_builder\\exporter.py",
+            "target": "json",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "graph_builder\\exporter.py",
+            "target": "pathlib",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "graph_builder\\exporter.py",
+            "target": "export_graph",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "graph_builder\\exporter.py",
+            "target": "json",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "graph_builder\\exporter.py",
+            "target": "pathlib",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "export_graph",
+            "target": "Path",
+            "type": "CALLS"
+        },
+        {
+            "source": "export_graph",
+            "target": "open",
+            "type": "CALLS"
+        },
+        {
+            "source": "graph_builder\\repository_graph.py",
+            "target": "pathlib",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "graph_builder\\repository_graph.py",
+            "target": "parser.python_parser",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "graph_builder\\repository_graph.py",
+            "target": "graph_builder\\builder.py",
+            "type": "DEPENDS_ON"
+        },
+        {
+            "source": "graph_builder\\repository_graph.py",
+            "target": "build_repository_graph",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "graph_builder\\repository_graph.py",
+            "target": "pathlib",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "graph_builder\\repository_graph.py",
+            "target": "parser.python_parser",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "graph_builder\\repository_graph.py",
+            "target": "graph_builder.builder",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "build_repository_graph",
+            "target": "Path",
+            "type": "CALLS"
+        },
+        {
+            "source": "build_repository_graph",
+            "target": "set",
+            "type": "CALLS"
+        },
+        {
+            "source": "build_repository_graph",
+            "target": "str",
+            "type": "CALLS"
+        },
+        {
+            "source": "build_repository_graph",
+            "target": "str",
+            "type": "CALLS"
+        },
+        {
+            "source": "build_repository_graph",
+            "target": "parse_python_file",
+            "type": "CALLS"
+        },
+        {
+            "source": "build_repository_graph",
+            "target": "build_graph",
+            "type": "CALLS"
+        },
+        {
+            "source": "build_repository_graph",
+            "target": "str",
+            "type": "CALLS"
+        },
+        {
+            "source": "graph_builder\\symbol_index.py",
+            "target": "pathlib",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "graph_builder\\symbol_index.py",
+            "target": "parser.python_parser",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "graph_builder\\symbol_index.py",
+            "target": "build_symbol_index",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "graph_builder\\symbol_index.py",
+            "target": "pathlib",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "graph_builder\\symbol_index.py",
+            "target": "parser.python_parser",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "build_symbol_index",
+            "target": "Path",
+            "type": "CALLS"
+        },
+        {
+            "source": "build_symbol_index",
+            "target": "parse_python_file",
+            "type": "CALLS"
+        },
+        {
+            "source": "build_symbol_index",
+            "target": "str",
+            "type": "CALLS"
+        },
+        {
+            "source": "parser\\ast_models.py",
+            "target": "dataclasses",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "parser\\ast_models.py",
+            "target": "FunctionNode",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "parser\\ast_models.py",
+            "target": "ClassNode",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "parser\\ast_models.py",
+            "target": "ImportNode",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "parser\\ast_models.py",
+            "target": "dataclasses",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "parser\\python_parser.py",
+            "target": "ast",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "parser\\python_parser.py",
+            "target": "parse_python_file",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "parser\\python_parser.py",
+            "target": "ast",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "parse_python_file",
+            "target": "open",
+            "type": "CALLS"
+        },
+        {
+            "source": "parse_python_file",
+            "target": "isinstance",
+            "type": "CALLS"
+        },
+        {
+            "source": "parse_python_file",
+            "target": "isinstance",
+            "type": "CALLS"
+        },
+        {
+            "source": "parse_python_file",
+            "target": "isinstance",
+            "type": "CALLS"
+        },
+        {
+            "source": "parse_python_file",
+            "target": "isinstance",
+            "type": "CALLS"
+        },
+        {
+            "source": "parse_python_file",
+            "target": "isinstance",
+            "type": "CALLS"
+        },
+        {
+            "source": "parse_python_file",
+            "target": "isinstance",
+            "type": "CALLS"
+        },
+        {
+            "source": "scanner\\classifier.py",
+            "target": "pathlib",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "scanner\\classifier.py",
+            "target": "classify_file",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "scanner\\classifier.py",
+            "target": "pathlib",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "classify_file",
+            "target": "Path",
+            "type": "CALLS"
+        },
+        {
+            "source": "scanner\\duplicates.py",
+            "target": "find_duplicates",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "find_duplicates",
+            "target": "len",
+            "type": "CALLS"
+        },
+        {
+            "source": "scanner\\hash_utils.py",
+            "target": "hashlib",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "scanner\\hash_utils.py",
+            "target": "calculate_sha256",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "scanner\\hash_utils.py",
+            "target": "hashlib",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "calculate_sha256",
+            "target": "open",
+            "type": "CALLS"
+        },
+        {
+            "source": "scanner\\ignore.py",
+            "target": "pathlib",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "scanner\\ignore.py",
+            "target": "pathspec",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "scanner\\ignore.py",
+            "target": "load_ignore_patterns",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "scanner\\ignore.py",
+            "target": "pathlib",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "scanner\\ignore.py",
+            "target": "pathspec",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "load_ignore_patterns",
+            "target": "Path",
+            "type": "CALLS"
+        },
+        {
+            "source": "load_ignore_patterns",
+            "target": "Path",
+            "type": "CALLS"
+        },
+        {
+            "source": "load_ignore_patterns",
+            "target": "open",
+            "type": "CALLS"
+        },
+        {
+            "source": "load_ignore_patterns",
+            "target": "open",
+            "type": "CALLS"
+        },
+        {
+            "source": "scanner\\report.py",
+            "target": "datetime",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "scanner\\report.py",
+            "target": "generate_report",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "scanner\\report.py",
+            "target": "datetime",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "generate_report",
+            "target": "sum",
+            "type": "CALLS"
+        },
+        {
+            "source": "generate_report",
+            "target": "sorted",
+            "type": "CALLS"
+        },
+        {
+            "source": "generate_report",
+            "target": "open",
+            "type": "CALLS"
+        },
+        {
+            "source": "generate_report",
+            "target": "sorted",
+            "type": "CALLS"
+        },
+        {
+            "source": "generate_report",
+            "target": "len",
+            "type": "CALLS"
+        },
+        {
+            "source": "generate_report",
+            "target": "len",
+            "type": "CALLS"
+        },
+        {
+            "source": "scanner\\scanner.py",
+            "target": "pathlib",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "scanner\\scanner.py",
+            "target": "datetime",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "scanner\\scanner.py",
+            "target": "rich.progress",
+            "type": "IMPORTS"
+        },
+        {
+            "source": "scanner\\scanner.py",
+            "target": "scanner\\classifier.py",
+            "type": "DEPENDS_ON"
+        },
+        {
+            "source": "scanner\\scanner.py",
+            "target": "scanner\\hash_utils.py",
+            "type": "DEPENDS_ON"
+        },
+        {
+            "source": "scanner\\scanner.py",
+            "target": "scan_repository",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "scanner\\scanner.py",
+            "target": "pathlib",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "scanner\\scanner.py",
+            "target": "datetime",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "scanner\\scanner.py",
+            "target": "rich.progress",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "scanner\\scanner.py",
+            "target": "scanner.classifier",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "scanner\\scanner.py",
+            "target": "scanner.hash_utils",
+            "type": "CONTAINS"
+        },
+        {
+            "source": "scan_repository",
+            "target": "list",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan_repository",
+            "target": "track",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan_repository",
+            "target": "any",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan_repository",
+            "target": "str",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan_repository",
+            "target": "classify_file",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan_repository",
+            "target": "calculate_sha256",
+            "type": "CALLS"
+        },
+        {
+            "source": "scan_repository",
+            "target": "Path",
+            "type": "CALLS"
+        }
+    ]
+}

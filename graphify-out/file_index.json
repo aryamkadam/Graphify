@@ -1,0 +1,82 @@
+[
+    {
+        "id": "file_1",
+        "path": ".graphifyignore",
+        "type": "unknown",
+        "size": 55,
+        "modified": "2026-06-07T15:48:35.021667",
+        "sha256": "4417ec2e926993b280d78c6cb15320e3dc5dbe72aaa570ab6e03a6ffa2383b22"
+    },
+    {
+        "id": "file_2",
+        "path": "cli\\main.py",
+        "type": "python",
+        "size": 3966,
+        "modified": "2026-06-07T16:54:18.896538",
+        "sha256": "1c6594ee0d798feb217de5c1ea7f81a541bc32ad038357150982a735f16113e6"
+    },
+    {
+        "id": "file_3",
+        "path": "cli\\__init__.py",
+        "type": "python",
+        "size": 0,
+        "modified": "2026-06-04T16:51:13.297373",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+        "id": "file_4",
+        "path": "scanner\\classifier.py",
+        "type": "python",
+        "size": 356,
+        "modified": "2026-06-04T16:45:36.767254",
+        "sha256": "3177adc258a22231f93dd3f063073ec0ab78b79b96bc1146bfb69fc9fb4c9c3c"
+    },
+    {
+        "id": "file_5",
+        "path": "scanner\\config.py",
+        "type": "python",
+        "size": 272,
+        "modified": "2026-06-04T17:47:05.672166",
+        "sha256": "4f10645176f1262110786467eb0627487e3aeb8a55cc8da703033cef545d0df2"
+    },
+    {
+        "id": "file_6",
+        "path": "scanner\\duplicates.py",
+        "type": "python",
+        "size": 489,
+        "modified": "2026-06-04T18:21:12.036853",
+        "sha256": "d3479a9a015e97074aa309fea902345f0cdf02ad7f480487c8181510a093ec08"
+    },
+    {
+        "id": "file_7",
+        "path": "scanner\\hash_utils.py",
+        "type": "python",
+        "size": 289,
+        "modified": "2026-06-04T17:37:45.876617",
+        "sha256": "a982cc65baab52c433994087b38045d52a0ea7dbf3c72088ee0673e3da53b6ff"
+    },
+    {
+        "id": "file_8",
+        "path": "scanner\\ignore.py",
+        "type": "python",
+        "size": 828,
+        "modified": "2026-06-07T15:46:09.485714",
+        "sha256": "164f393b8f8bdca100f02e0fa47413a3acfe76487ae8fa227b953935376bf7a3"
+    },
+    {
+        "id": "file_9",
+        "path": "scanner\\report.py",
+        "type": "python",
+        "size": 1402,
+        "modified": "2026-06-04T17:48:29.195028",
+        "sha256": "2191b3a3a102281f7b4bd26e63720b546c310f1d4aa66e4bb735f99d56be44e4"
+    },
+    {
+        "id": "file_10",
+        "path": "scanner\\scanner.py",
+        "type": "python",
+        "size": 1605,
+        "modified": "2026-06-04T17:57:16.964813",
+        "sha256": "af3d508dd9b6736f489af825896a65f6d245cd7b513acfacf296f016df8b9043"
+    }
+]

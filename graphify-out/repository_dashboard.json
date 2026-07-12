@@ -1,0 +1,292 @@
+{
+    "health_report": {
+        "health_score": 71,
+        "status": "GOOD",
+        "dead_code": 14,
+        "god_files": 1,
+        "high_risk_symbols": 2,
+        "top_recommendations": [
+            {
+                "priority": "HIGH",
+                "score": 120,
+                "message": "Reduce dependency on parse_python_file."
+            },
+            {
+                "priority": "HIGH",
+                "score": 60,
+                "message": "Review high-risk symbol extract_parameters."
+            },
+            {
+                "priority": "MEDIUM",
+                "score": 50,
+                "message": "Consider splitting parser\\ast_models.py."
+            },
+            {
+                "priority": "LOW",
+                "score": 14,
+                "message": "Remove or review 14 dead symbols."
+            }
+        ]
+    },
+    "knowledge_pack": {
+        "total_symbols": 25,
+        "critical_symbols": [
+            {
+                "symbol": "parse_python_file",
+                "critical_score": 12,
+                "usage_count": 5,
+                "depth": 2,
+                "impact_score": 5,
+                "file": "parser\\python_parser.py"
+            },
+            {
+                "symbol": "extract_parameters",
+                "critical_score": 10,
+                "usage_count": 1,
+                "depth": 3,
+                "impact_score": 6,
+                "file": "parser\\python_parser.py"
+            },
+            {
+                "symbol": "classify_file",
+                "critical_score": 5,
+                "usage_count": 1,
+                "depth": 2,
+                "impact_score": 2,
+                "file": "scanner\\classifier.py"
+            },
+            {
+                "symbol": "calculate_sha256",
+                "critical_score": 5,
+                "usage_count": 1,
+                "depth": 2,
+                "impact_score": 2,
+                "file": "scanner\\hash_utils.py"
+            },
+            {
+                "symbol": "build_graph",
+                "critical_score": 3,
+                "usage_count": 1,
+                "depth": 1,
+                "impact_score": 1,
+                "file": "graph_builder\\builder.py"
+            },
+            {
+                "symbol": "build_module_dependency_map",
+                "critical_score": 3,
+                "usage_count": 1,
+                "depth": 1,
+                "impact_score": 1,
+                "file": "graph_builder\\module_dependency_map.py"
+            },
+            {
+                "symbol": "find_duplicates",
+                "critical_score": 3,
+                "usage_count": 1,
+                "depth": 1,
+                "impact_score": 1,
+                "file": "scanner\\duplicates.py"
+            },
+            {
+                "symbol": "load_ignore_patterns",
+                "critical_score": 3,
+                "usage_count": 1,
+                "depth": 1,
+                "impact_score": 1,
+                "file": "scanner\\ignore.py"
+            },
+            {
+                "symbol": "scan_repository",
+                "critical_score": 3,
+                "usage_count": 1,
+                "depth": 1,
+                "impact_score": 1,
+                "file": "scanner\\scanner.py"
+            },
+            {
+                "symbol": "analyze_impact",
+                "critical_score": 2,
+                "usage_count": 1,
+                "depth": 1,
+                "impact_score": 0,
+                "file": "graph_builder\\impact_analysis.py"
+            }
+        ],
+        "risky_symbols": [
+            {
+                "symbol": "extract_parameters",
+                "impact_score": 6,
+                "severity": "HIGH"
+            },
+            {
+                "symbol": "parse_python_file",
+                "impact_score": 5,
+                "severity": "HIGH"
+            },
+            {
+                "symbol": "classify_file",
+                "impact_score": 2,
+                "severity": "MEDIUM"
+            },
+            {
+                "symbol": "calculate_sha256",
+                "impact_score": 2,
+                "severity": "MEDIUM"
+            },
+            {
+                "symbol": "build_graph",
+                "impact_score": 1,
+                "severity": "LOW"
+            },
+            {
+                "symbol": "build_module_dependency_map",
+                "impact_score": 1,
+                "severity": "LOW"
+            },
+            {
+                "symbol": "find_duplicates",
+                "impact_score": 1,
+                "severity": "LOW"
+            },
+            {
+                "symbol": "load_ignore_patterns",
+                "impact_score": 1,
+                "severity": "LOW"
+            },
+            {
+                "symbol": "scan_repository",
+                "impact_score": 1,
+                "severity": "LOW"
+            },
+            {
+                "symbol": "scan",
+                "impact_score": 0,
+                "severity": "LOW"
+            }
+        ],
+        "dead_code": [
+            {
+                "symbol": "scan",
+                "type": "function",
+                "file": "cli\\main.py"
+            },
+            {
+                "symbol": "detect_architecture_layers",
+                "type": "function",
+                "file": "graph_builder\\architecture_layers.py"
+            },
+            {
+                "symbol": "generate_context_pack",
+                "type": "function",
+                "file": "graph_builder\\context_pack.py"
+            },
+            {
+                "symbol": "detect_critical_symbols",
+                "type": "function",
+                "file": "graph_builder\\critical_path.py"
+            },
+            {
+                "symbol": "export_graph",
+                "type": "function",
+                "file": "graph_builder\\exporter.py"
+            },
+            {
+                "symbol": "load_symbol_index",
+                "type": "function",
+                "file": "graph_builder\\query_engine.py"
+            },
+            {
+                "symbol": "find_symbol",
+                "type": "function",
+                "file": "graph_builder\\query_engine.py"
+            },
+            {
+                "symbol": "build_repository_graph",
+                "type": "function",
+                "file": "graph_builder\\repository_graph.py"
+            },
+            {
+                "symbol": "generate_repository_summary",
+                "type": "function",
+                "file": "graph_builder\\repository_summary.py"
+            },
+            {
+                "symbol": "build_symbol_index",
+                "type": "function",
+                "file": "graph_builder\\symbol_index.py"
+            },
+            {
+                "symbol": "FunctionNode",
+                "type": "class",
+                "file": "parser\\ast_models.py"
+            },
+            {
+                "symbol": "ClassNode",
+                "type": "class",
+                "file": "parser\\ast_models.py"
+            },
+            {
+                "symbol": "ImportNode",
+                "type": "class",
+                "file": "parser\\ast_models.py"
+            },
+            {
+                "symbol": "generate_report",
+                "type": "function",
+                "file": "scanner\\report.py"
+            }
+        ],
+        "hotspots": [
+            {
+                "file": "parser\\python_parser.py",
+                "symbols": 2,
+                "usage_count": 6
+            },
+            {
+                "file": "graph_builder\\builder.py",
+                "symbols": 1,
+                "usage_count": 1
+            },
+            {
+                "file": "graph_builder\\impact_analysis.py",
+                "symbols": 1,
+                "usage_count": 1
+            },
+            {
+                "file": "graph_builder\\module_dependency_map.py",
+                "symbols": 1,
+                "usage_count": 1
+            },
+            {
+                "file": "graph_builder\\repository_flow.py",
+                "symbols": 1,
+                "usage_count": 1
+            },
+            {
+                "file": "scanner\\classifier.py",
+                "symbols": 1,
+                "usage_count": 1
+            },
+            {
+                "file": "scanner\\duplicates.py",
+                "symbols": 1,
+                "usage_count": 1
+            },
+            {
+                "file": "scanner\\hash_utils.py",
+                "symbols": 1,
+                "usage_count": 1
+            },
+            {
+                "file": "scanner\\ignore.py",
+                "symbols": 1,
+                "usage_count": 1
+            },
+            {
+                "file": "scanner\\scanner.py",
+                "symbols": 1,
+                "usage_count": 1
+            }
+        ]
+    }
+}
