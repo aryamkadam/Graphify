@@ -1,26 +1,34 @@
 """
-Stage 16.4
+Graphify
+
+Phase 4.0
 
 Repository Evolution Reasoning Engine
 
 Transforms repository evolution data into
 high-level engineering understanding.
 
-This engine explains WHAT changed
-and WHY it matters.
+This engine explains WHAT changed,
+WHY it matters,
+and WHAT the Executive should do next.
 
-Future AI agents will use this
+Future AI agents will consume this
 instead of raw evolution metrics.
+
+Author:
+Graphify Core
 """
 
 
 class RepositoryEvolutionReasoningEngine:
 
+    VERSION = "P4.0"
+
     def __init__(self, evolution_report):
 
         self.report = evolution_report
 
-    # ---------------------------------------------
+    # --------------------------------------------------
 
     def _health_reasoning(self):
 
@@ -46,7 +54,7 @@ class RepositoryEvolutionReasoningEngine:
             "Repository health remains stable."
         )
 
-    # ---------------------------------------------
+    # --------------------------------------------------
 
     def _execution_reasoning(self):
 
@@ -72,7 +80,7 @@ class RepositoryEvolutionReasoningEngine:
             "Execution architecture remains stable."
         )
 
-    # ---------------------------------------------
+    # --------------------------------------------------
 
     def _knowledge_reasoning(self):
 
@@ -116,7 +124,7 @@ class RepositoryEvolutionReasoningEngine:
 
         return " ".join(observations)
 
-    # ---------------------------------------------
+    # --------------------------------------------------
 
     def _engineering_direction(self):
 
@@ -132,7 +140,10 @@ class RepositoryEvolutionReasoningEngine:
             "status", "stable"
         )
 
-        if health_status == "improved" and execution_status == "expanded":
+        if (
+            health_status == "improved"
+            and execution_status == "expanded"
+        ):
 
             return (
                 "Engineering effort is improving quality while "
@@ -155,7 +166,7 @@ class RepositoryEvolutionReasoningEngine:
             "Engineering direction appears stable."
         )
 
-    # ---------------------------------------------
+    # --------------------------------------------------
 
     def _repository_momentum(self):
 
@@ -175,7 +186,60 @@ class RepositoryEvolutionReasoningEngine:
 
         return "Stable"
 
-    # ---------------------------------------------
+    # --------------------------------------------------
+
+    def _repository_stage(self):
+
+        momentum = self._repository_momentum()
+
+        if momentum == "Positive":
+
+            return "GROWING"
+
+        elif momentum == "Negative":
+
+            return "RECOVERY"
+
+        return "STABLE"
+
+    # --------------------------------------------------
+
+    def _executive_priority(self):
+
+        momentum = self._repository_momentum()
+
+        if momentum == "Positive":
+
+            return "EXPANSION"
+
+        elif momentum == "Negative":
+
+            return "REPAIR"
+
+        return "OPTIMIZATION"
+
+    # --------------------------------------------------
+
+    def _executive_recommendation(self):
+
+        priority = self._executive_priority()
+
+        recommendations = {
+
+            "EXPANSION":
+                "Expand repository engineering capabilities.",
+
+            "REPAIR":
+                "Prioritize repository stabilization.",
+
+            "OPTIMIZATION":
+                "Improve engineering efficiency.",
+
+        }
+
+        return recommendations[priority]
+
+    # --------------------------------------------------
 
     def build(self):
 
@@ -194,7 +258,19 @@ class RepositoryEvolutionReasoningEngine:
                 self._engineering_direction(),
 
             "repository_momentum":
-                self._repository_momentum()
+                self._repository_momentum(),
+
+            "repository_stage":
+                self._repository_stage(),
+
+            "executive_priority":
+                self._executive_priority(),
+
+            "executive_recommendation":
+                self._executive_recommendation(),
+
+            "version":
+                self.VERSION,
 
         }
 

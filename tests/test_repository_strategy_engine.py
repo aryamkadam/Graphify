@@ -4,42 +4,50 @@ from graph_builder.executive.repository_strategy_engine import (
     RepositoryStrategyEngine,
 )
 
-consciousness = {
 
-    "repository_identity": {
+def main():
 
-        "phase": "Stabilization",
+    consciousness = {
 
-        "technical_direction": "Positive",
+        "repository_identity": {
+
+            "phase": "Stabilization",
+
+            "technical_direction": "Positive",
+
+        }
 
     }
 
-}
+    knowledge = {
 
-knowledge = {
+        "knowledge_confidence": 0.95
 
-    "knowledge_confidence": 0.95
+    }
 
-}
+    experience = {
 
-experience = {
+        "experience_level": "Senior"
 
-    "experience_level": "Junior"
+    }
 
-}
+    report = RepositoryStrategyEngine().build(
 
-report = RepositoryStrategyEngine().build(
+        consciousness,
 
-    consciousness,
+        knowledge,
 
-    knowledge,
+        experience,
 
-    experience,
+    )
 
-)
+    print("\n========================================")
+    print("Repository Strategy Engine")
+    print("========================================\n")
 
-print("\n========================================")
-print("Repository Strategy Engine")
-print("========================================\n")
+    pprint(report)
 
-pprint(report)
+
+if __name__ == "__main__":
+
+    main()

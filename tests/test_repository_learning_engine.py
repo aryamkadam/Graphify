@@ -1,77 +1,54 @@
 from pprint import pprint
 
-from graph_builder.intelligence.repository_learning_engine import (
-    RepositoryLearningEngine,
-)
+from graph_builder.repository.repository_snapshot import RepositorySnapshot
+from graph_builder.repository.repository_knowledge_builder import RepositoryKnowledgeBuilder
+from graph_builder.repository.repository_metrics_engine import RepositoryMetricsEngine
+from graph_builder.repository.repository_evolution_engine import RepositoryEvolutionEngine
+from graph_builder.repository.repository_learning_engine import RepositoryLearningEngine
 
 
 def main():
 
-    history = [
+    print("\n========================================")
+    print("Repository Learning Engine")
+    print("========================================\n")
 
-        {
-
-            "health": {"delta": 5},
-
-            "execution": {"delta": 20},
-
-            "knowledge": {
-
-                "dead_code": {"delta": -2},
-
-                "hotspots": {"delta": -1}
-
-            }
-
-        },
-
-        {
-
-            "health": {"delta": 4},
-
-            "execution": {"delta": 15},
-
-            "knowledge": {
-
-                "dead_code": {"delta": -1},
-
-                "hotspots": {"delta": -2}
-
-            }
-
-        },
-
-        {
-
-            "health": {"delta": 3},
-
-            "execution": {"delta": 18},
-
-            "knowledge": {
-
-                "dead_code": {"delta": -1},
-
-                "hotspots": {"delta": -1}
-
-            }
-
-        }
-
-    ]
-
-    learning = (
-
-        RepositoryLearningEngine()
-
-        .build(history)
-
+    snapshot = RepositorySnapshot(
+        repository_name="Graphify",
+        repository_path="E:/Projects/graphify",
     )
 
-    print("\nRepository Learning\n")
+    snapshot.directories = ["graph_builder", "tests"]
+    snapshot.files = [
+        "main.py",
+        "runtime.py",
+        "planner.py",
+        "repository.py",
+    ]
+    snapshot.modules = [
+        "runtime",
+        "repository",
+    ]
 
-    pprint(learning)
+    knowledge = RepositoryKnowledgeBuilder().build(snapshot)
+
+    metrics = RepositoryMetricsEngine().analyze(knowledge)
+
+    evolution = RepositoryEvolutionEngine().evolve(metrics)
+
+    learning = RepositoryLearningEngine()
+
+    report = learning.learn(evolution)
+
+    print("Learning Report\n")
+    pprint(report)
+
+    print("\nRepository History\n")
+    pprint(learning.history())
+
+    print("\nSummary\n")
+    pprint(learning.summary())
 
 
 if __name__ == "__main__":
-
     main()

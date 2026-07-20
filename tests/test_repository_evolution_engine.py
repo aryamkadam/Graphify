@@ -1,65 +1,69 @@
 from pprint import pprint
 
-from graph_builder.history.repository_evolution_engine import (
+from graph_builder.repository.repository_snapshot import RepositorySnapshot
+from graph_builder.repository.repository_knowledge_builder import (
+    RepositoryKnowledgeBuilder,
+)
+from graph_builder.repository.repository_metrics_engine import (
+    RepositoryMetricsEngine,
+)
+from graph_builder.repository.repository_evolution_engine import (
     RepositoryEvolutionEngine,
 )
 
-old_snapshot = {
 
-    "health": {
+def main():
 
-        "health_score": 90
+    print("\n========================================")
+    print("Repository Evolution Engine")
+    print("========================================\n")
 
-    },
+    snapshot = RepositorySnapshot(
 
-    "execution": {
+        repository_name="Graphify",
 
-        "graph_nodes": 200
+        repository_path="E:/Projects/graphify",
 
-    },
+    )
 
-    "knowledge": {
+    snapshot.directories = [
 
-        "dead_code_count": 4,
+        "graph_builder",
 
-        "hotspot_count": 8
+        "tests",
 
-    }
+    ]
 
-}
+    snapshot.files = [
 
-new_snapshot = {
+        "main.py",
 
-    "health": {
+        "runtime.py",
 
-        "health_score": 96
+        "planner.py",
 
-    },
+        "repository.py",
 
-    "execution": {
+    ]
 
-        "graph_nodes": 260
+    snapshot.modules = [
 
-    },
+        "runtime",
 
-    "knowledge": {
+        "repository",
 
-        "dead_code_count": 1,
+    ]
 
-        "hotspot_count": 5
+    builder = RepositoryKnowledgeBuilder()
 
-    }
+    knowledge = builder.build(snapshot)
 
-}
+    metrics = RepositoryMetricsEngine().analyze(knowledge)
 
-report = RepositoryEvolutionEngine(
+    evolution = RepositoryEvolutionEngine().evolve(metrics)
 
-    old_snapshot,
+    pprint(evolution)
 
-    new_snapshot
 
-).build()
-
-print("\nRepository Evolution Report\n")
-
-pprint(report)
+if __name__ == "__main__":
+    main()

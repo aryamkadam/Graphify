@@ -1,12 +1,12 @@
 """
 Graphify
 
-Stage 60.0
+Stage 60.1
 
 Testing Engineer Worker
 
 Responsible for validating completed
-engineering tasks.
+engineering work.
 
 Author:
 Graphify Core
@@ -17,14 +17,13 @@ from graph_builder.workers.runtime_worker import RuntimeWorker
 
 class TestingEngineerWorker(RuntimeWorker):
 
-    VERSION = "60.0"
+    VERSION = "60.1"
 
     def __init__(self):
 
         super().__init__(
-
-            "Testing Engineer",
-
+            worker_name="Testing Engineer",
+            role="TESTING",
         )
 
     # --------------------------------------------------
@@ -35,14 +34,10 @@ class TestingEngineerWorker(RuntimeWorker):
 
         return {
 
-            "worker": self.name,
-
             "decision":
-
                 "Review engineering task",
 
             "version":
-
                 self.VERSION,
 
         }
@@ -50,71 +45,50 @@ class TestingEngineerWorker(RuntimeWorker):
     # --------------------------------------------------
 
     def execute(
-
         self,
-
         task,
-
     ):
 
         self.state = "WORKING"
 
-        result = {
+        self.complete_task()
 
-            "worker":
+        self.state = "IDLE"
 
-                self.name,
+        return {
 
-            "task":
+            "worker": self.name,
 
-                task,
+            "task": task,
 
             "implementation":
-
                 f"Testing completed for '{task}'.",
 
             "status":
-
                 "EXECUTED",
 
             "version":
-
                 self.VERSION,
 
         }
 
-        self.state = "IDLE"
-
-        return result
-
     # --------------------------------------------------
 
     def validate(
-
         self,
-
         task,
-
     ):
 
         return {
 
-            "task":
+            "task": task,
 
-                task,
-
-            "result":
-
-                "VERIFIED",
+            "result": "VERIFIED",
 
             "issues": [],
 
-            "status":
+            "status": "SUCCESS",
 
-                "SUCCESS",
-
-            "version":
-
-                self.VERSION,
+            "version": self.VERSION,
 
         }

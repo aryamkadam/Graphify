@@ -1,14 +1,12 @@
 """
 Graphify
 
-Stage 60.0
+Stage 60.1
 
 Repository Architect Worker
 
-Chief engineering worker.
-
-Responsible for architectural decisions,
-repository evolution and long-term planning.
+Chief engineering worker responsible for
+repository architecture and long-term evolution.
 
 Author:
 Graphify Core
@@ -19,14 +17,13 @@ from graph_builder.workers.runtime_worker import RuntimeWorker
 
 class RepositoryArchitectWorker(RuntimeWorker):
 
-    VERSION = "60.0"
+    VERSION = "60.1"
 
     def __init__(self):
 
         super().__init__(
-
-            "Repository Architect",
-
+            worker_name="Repository Architect",
+            role="ARCHITECT",
         )
 
     # --------------------------------------------------
@@ -36,91 +33,59 @@ class RepositoryArchitectWorker(RuntimeWorker):
         self.state = "THINKING"
 
         return {
-
-            "worker": self.name,
-
-            "decision":
-
-                "Analyze repository architecture",
-
-            "version":
-
-                self.VERSION,
-
+            "decision": "Analyze repository architecture",
+            "version": self.VERSION,
         }
 
     # --------------------------------------------------
 
     def execute(
-
         self,
-
-        task,
-
+        task=None,
     ):
 
         self.state = "WORKING"
 
-        result = {
+        self.complete_task()
 
-            "worker":
+        self.state = "IDLE"
 
-                self.name,
+        return {
 
-            "task":
+            "worker": self.name,
 
-                task,
+            "task": task,
 
             "implementation":
 
                 f"Architectural guidance completed for '{task}'.",
 
-            "status":
+            "status": "EXECUTED",
 
-                "EXECUTED",
-
-            "version":
-
-                self.VERSION,
+            "version": self.VERSION,
 
         }
-
-        self.state = "IDLE"
-
-        return result
 
     # --------------------------------------------------
 
     def recommend(
-
         self,
-
         repository_brain,
-
     ):
 
         identity = repository_brain.get(
-
             "identity",
-
             {},
-
         )
 
         phase = identity.get(
-
             "phase",
-
             "Unknown",
-
         )
 
         direction = identity.get(
-
             "technical_direction",
-
             "Unknown",
-
         )
 
         return {
@@ -130,11 +95,8 @@ class RepositoryArchitectWorker(RuntimeWorker):
             "technical_direction": direction,
 
             "recommendation":
+                "Continue repository evolution.",
 
-                "Continue repository evolution",
-
-            "version":
-
-                self.VERSION,
+            "version": self.VERSION,
 
         }

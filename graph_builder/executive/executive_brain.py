@@ -1,74 +1,105 @@
 """
 Graphify
 
-Phase 3
+Phase 5
 
-Stage P3.2
+Stage P5.12
 
 Executive Brain
 
-Central reasoning system of Graphify.
+Single executive entry point for Graphify.
 
-Every strategic engineering decision
-flows through this brain.
+The Executive Brain owns executive memory
+and delegates reasoning to the Executive
+Cognitive Core.
 
 Author:
 Graphify Core
 """
 
-from graph_builder.executive.strategic_planning_engine import (
-    StrategicPlanningEngine,
+from graph_builder.executive.executive_memory_engine import (
+    ExecutiveMemoryEngine,
+)
+
+from graph_builder.executive.executive_cognitive_core import (
+    ExecutiveCognitiveCore,
 )
 
 
 class ExecutiveBrain:
 
-    VERSION = "P3.2"
+    VERSION = "P5.12"
 
-    def __init__(
+    def __init__(self):
 
-        self,
+        self.memory = ExecutiveMemoryEngine()
 
-        experience_engine,
+        self.core = ExecutiveCognitiveCore(
 
-    ):
-
-        self.strategy = StrategicPlanningEngine(
-
-            experience_engine,
+            self.memory,
 
         )
 
     # --------------------------------------------------
 
-    def think(self):
+    def think(
 
-        """
-        Central executive reasoning.
+        self,
 
-        Future versions will include:
+        consciousness,
 
-        - Repository Analysis
+        knowledge,
 
-        - Risk Analysis
+        experience,
 
-        - Priority Planning
+    ):
 
-        - Roadmap Planning
+        executive_state = self.core.execute(
 
-        - Worker Coordination
-        """
+            consciousness,
 
-        strategy = self.strategy.generate_plan()
+            knowledge,
+
+            experience,
+
+        )
 
         return {
 
             "executive_state": "THINKING",
 
-            "engineering_strategy": strategy,
+            "executive_decision":
 
-            "next_action": strategy["priority"],
+                executive_state["decision"],
 
-            "version": self.VERSION,
+            "executive_strategy":
+
+                executive_state["strategy"],
+
+            "version":
+
+                self.VERSION,
+
+        }
+
+    # --------------------------------------------------
+
+    def executive_memory(self):
+
+        return self.memory.export()
+
+    # --------------------------------------------------
+
+    def summary(self):
+
+        return {
+
+            "executive_decisions":
+
+                self.memory.summary()["executive_decisions"],
+
+            "version":
+
+                self.VERSION,
 
         }

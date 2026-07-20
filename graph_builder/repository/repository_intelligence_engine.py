@@ -1,110 +1,86 @@
 """
 Graphify
 
-Phase 3
+Phase 9
 
-Stage P3.11
+Stage P9.7
 
 Repository Intelligence Engine
 
-Analyzes repository engineering metrics
-to support Executive decisions.
+Synthesizes repository understanding
+from engineering knowledge.
 
 Author:
 Graphify Core
 """
 
+from graph_builder.repository.repository_intelligence_report import (
+    RepositoryIntelligenceReport,
+)
+
 
 class RepositoryIntelligenceEngine:
 
-    VERSION = "P3.11"
+    VERSION = "P9.7"
 
-    def __init__(
-
-        self,
-
-        graph,
-
-    ):
-
-        self.graph = graph
-
-    # --------------------------------------------------
-
-    def analyze(self):
-
-        nodes = self.graph.node_count()
-
-        edges = self.graph.edge_count()
-
-        return {
-
-            "repository_size": nodes,
-
-            "relationships": edges,
-
-            "complexity":
-
-                self._complexity(nodes, edges),
-
-            "growth":
-
-                self._growth(nodes),
-
-            "version":
-
-                self.VERSION,
-
-        }
-
-    # --------------------------------------------------
-
-    def _complexity(
+    def analyze(
 
         self,
 
-        nodes,
+        knowledge,
 
-        edges,
+        metrics,
 
-    ):
+        evolution,
 
-        if nodes == 0:
-
-            return "EMPTY"
-
-        ratio = edges / nodes
-
-        if ratio < 1:
-
-            return "LOW"
-
-        elif ratio < 2:
-
-            return "MODERATE"
-
-        else:
-
-            return "HIGH"
-
-    # --------------------------------------------------
-
-    def _growth(
-
-        self,
-
-        nodes,
+        learning,
 
     ):
 
-        if nodes < 20:
+        repository_name = knowledge.repository_name
 
-            return "EARLY"
+        stage = metrics["repository_size"]
 
-        elif nodes < 100:
+        health = metrics["health"]
 
-            return "GROWING"
+        strategy = evolution["strategy"]
 
-        else:
+        executive_summary = (
 
-            return "MATURE"
+            f"{repository_name} is currently "
+
+            f"{stage.lower()} with "
+
+            f"{health.lower()} engineering health."
+
+        )
+
+        historical_context = (
+
+            f"Repository has "
+
+            f"{learning.summary()['repository_history']} "
+
+            f"recorded evolution cycle(s)."
+
+        )
+
+        recommendations = evolution["recommended_actions"]
+
+        return RepositoryIntelligenceReport(
+
+            repository_name,
+
+            stage,
+
+            health,
+
+            strategy,
+
+            executive_summary,
+
+            historical_context,
+
+            recommendations,
+
+        )

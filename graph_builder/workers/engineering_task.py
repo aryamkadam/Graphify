@@ -1,24 +1,31 @@
 """
 Graphify
 
-Stage 25.1
+Phase 7
 
-Engineering Task
+Stage P7.4
 
-Represents one engineering unit of work.
+Engineering Task Evolution
+
+Standard engineering work package
+used throughout Graphify.
+
+Every engineering worker communicates
+using EngineeringTask.
+
+Backward compatible with Stage 25.1.
 
 Author:
 Graphify Core
 """
 
 import uuid
-
 from datetime import datetime
 
 
 class EngineeringTask:
 
-    VERSION = "25.1"
+    VERSION = "P7.4"
 
     def __init__(
 
@@ -46,6 +53,24 @@ class EngineeringTask:
 
         self.created_at = datetime.utcnow().isoformat() + "Z"
 
+        # ------------------------------------------
+        # Phase 7 Extensions
+        # ------------------------------------------
+
+        self.complexity = "MEDIUM"
+
+        self.dependencies = []
+
+        self.expected_output = None
+
+        self.actual_output = None
+
+        self.parent_task = None
+
+        self.tags = []
+
+        self.estimated_effort = None
+
     # --------------------------------------------------
 
     def assign(
@@ -68,9 +93,81 @@ class EngineeringTask:
 
     # --------------------------------------------------
 
-    def complete(self):
+    def complete(
+
+        self,
+
+        output=None,
+
+    ):
 
         self.status = "COMPLETED"
+
+        self.actual_output = output
+
+    # --------------------------------------------------
+
+    def add_dependency(
+
+        self,
+
+        task_id,
+
+    ):
+
+        if task_id not in self.dependencies:
+
+            self.dependencies.append(task_id)
+
+    # --------------------------------------------------
+
+    def add_tag(
+
+        self,
+
+        tag,
+
+    ):
+
+        if tag not in self.tags:
+
+            self.tags.append(tag)
+
+    # --------------------------------------------------
+
+    def set_complexity(
+
+        self,
+
+        complexity,
+
+    ):
+
+        self.complexity = complexity
+
+    # --------------------------------------------------
+
+    def set_expected_output(
+
+        self,
+
+        expected,
+
+    ):
+
+        self.expected_output = expected
+
+    # --------------------------------------------------
+
+    def set_estimated_effort(
+
+        self,
+
+        effort,
+
+    ):
+
+        self.estimated_effort = effort
 
     # --------------------------------------------------
 
@@ -91,6 +188,20 @@ class EngineeringTask:
             "assigned_worker": self.assigned_worker,
 
             "created_at": self.created_at,
+
+            "complexity": self.complexity,
+
+            "dependencies": self.dependencies,
+
+            "expected_output": self.expected_output,
+
+            "actual_output": self.actual_output,
+
+            "parent_task": self.parent_task,
+
+            "tags": self.tags,
+
+            "estimated_effort": self.estimated_effort,
 
             "version": self.VERSION,
 

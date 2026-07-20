@@ -1,15 +1,17 @@
 """
 Graphify
 
-Phase 3
+Phase 5
 
-Stage P3.8
+Stage P5.0
 
 Executive Feedback Engine
 
 Analyzes worker evolution after each
 engineering sprint and produces
-repository-level insights.
+repository-level engineering insights.
+
+Backward compatible with Phase 3.
 
 Author:
 Graphify Core
@@ -18,7 +20,7 @@ Graphify Core
 
 class ExecutiveFeedbackEngine:
 
-    VERSION = "P3.8"
+    VERSION = "P5.0"
 
     def __init__(self, registry):
 
@@ -37,19 +39,24 @@ class ExecutiveFeedbackEngine:
             profile = {}
 
             if hasattr(worker, "identity"):
+
                 profile = worker.identity.profile()
 
-            insights.append({
+            insights.append(
 
-                "worker": worker_name,
+                {
 
-                "confidence": profile.get("confidence", 0),
+                    "worker": worker_name,
 
-                "experience": profile.get("experience", 0),
+                    "confidence": profile.get("confidence", 0),
 
-                "knowledge": profile.get("knowledge", 0),
+                    "experience": profile.get("experience", 0),
 
-            })
+                    "knowledge": profile.get("knowledge", 0),
+
+                }
+
+            )
 
         return {
 
@@ -59,34 +66,97 @@ class ExecutiveFeedbackEngine:
 
                 self._recommend(insights),
 
-            "version": self.VERSION,
+            "average_confidence":
+
+                self._average_confidence(insights),
+
+            "version":
+
+                self.VERSION,
 
         }
 
     # --------------------------------------------------
 
-    def _recommend(self, workers):
+    def build(self):
+        """
+        Phase 5 alias.
+
+        AutonomousEngineeringLoop expects build().
+
+        Phase 3 tests can still use analyze().
+        """
+
+        return self.analyze()
+
+    # --------------------------------------------------
+
+    def _average_confidence(
+
+        self,
+
+        workers,
+
+    ):
+
+        if not workers:
+
+            return 0
+
+        return sum(
+
+            worker["confidence"]
+
+            for worker in workers
+
+        ) / len(workers)
+
+    # --------------------------------------------------
+
+    def _recommend(
+
+        self,
+
+        workers,
+
+    ):
 
         if not workers:
 
             return "No engineering data available."
 
-        average = sum(
+        average = self._average_confidence(
 
-            w["confidence"]
+            workers
 
-            for w in workers
+        )
 
-        ) / len(workers)
+        if average >= 80:
 
-        if average >= 70:
+            return (
 
-            return "Repository ready for expansion."
+                "Repository ready for autonomous expansion."
+
+            )
+
+        elif average >= 60:
+
+            return (
+
+                "Repository engineering is progressing well."
+
+            )
 
         elif average >= 50:
 
-            return "Continue engineering evolution."
+            return (
 
-        else:
+                "Continue engineering evolution."
 
-            return "Improve worker capabilities."
+            )
+
+        return (
+
+            "Improve worker capabilities."
+
+        )

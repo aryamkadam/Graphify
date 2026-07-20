@@ -1,7 +1,7 @@
 """
 Graphify
 
-Stage 60.0
+Stage 60.1
 
 Code Engineer Worker
 
@@ -17,14 +17,13 @@ from graph_builder.workers.runtime_worker import RuntimeWorker
 
 class CodeEngineerWorker(RuntimeWorker):
 
-    VERSION = "60.0"
+    VERSION = "60.1"
 
     def __init__(self):
 
         super().__init__(
-
-            "Code Engineer",
-
+            worker_name="Code Engineer",
+            role="IMPLEMENTATION",
         )
 
     # --------------------------------------------------
@@ -35,14 +34,10 @@ class CodeEngineerWorker(RuntimeWorker):
 
         return {
 
-            "worker": self.name,
-
             "decision":
-
                 "Analyze implementation requirements",
 
             "version":
-
                 self.VERSION,
 
         }
@@ -50,42 +45,32 @@ class CodeEngineerWorker(RuntimeWorker):
     # --------------------------------------------------
 
     def execute(
-
         self,
-
         task,
-
     ):
 
         self.state = "WORKING"
 
-        result = {
-
-            "worker":
-
-                self.name,
-
-            "task":
-
-                task,
-
-            "implementation":
-
-                f"Implemented '{task}'.",
-
-            "status":
-
-                "EXECUTED",
-
-            "version":
-
-                self.VERSION,
-
-        }
+        self.complete_task()
 
         self.state = "IDLE"
 
-        return result
+        return {
+
+            "worker": self.name,
+
+            "task": task,
+
+            "implementation":
+                f"Implemented '{task}'.",
+
+            "status":
+                "EXECUTED",
+
+            "version":
+                self.VERSION,
+
+        }
 
     # --------------------------------------------------
 
@@ -93,20 +78,15 @@ class CodeEngineerWorker(RuntimeWorker):
 
         return {
 
-            "worker":
-
-                self.name,
+            "worker": self.name,
 
             "role":
-
                 "Implementation",
 
             "state":
-
                 self.state,
 
             "version":
-
                 self.VERSION,
 
         }
