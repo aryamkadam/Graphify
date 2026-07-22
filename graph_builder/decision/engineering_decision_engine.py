@@ -1,12 +1,17 @@
 """
 Graphify
 
-Stage 29.0
+Phase 13
+
+Stage P13.4
 
 Engineering Decision Engine
 
-Creates engineering decisions using
-previous engineering knowledge.
+Transforms engineering reasoning,
+repository mission,
+repository goals,
+and engineering knowledge
+into engineering decisions.
 
 Author:
 Graphify Core
@@ -19,62 +24,81 @@ from graph_builder.knowledge.engineering_knowledge_retriever import (
 
 class EngineeringDecisionEngine:
 
-    VERSION = "29.0"
+    VERSION = "P13.4"
 
-    def __init__(self):
-
+    def __init__(
+        self,
+        reasoning=None,
+        mission=None,
+        goals=None,
+    ):
         self.retriever = EngineeringKnowledgeRetriever()
+
+        self.reasoning = reasoning
+        self.mission = mission
+        self.goals = goals
 
     # --------------------------------------------------
 
-    def remember(
-
-        self,
-
-        review,
-
-    ):
-
+    def remember(self, review):
         return self.retriever.remember(review)
 
     # --------------------------------------------------
 
-    def decide(
-
-        self,
-
-        task,
-
-    ):
+    def decide(self, task):
 
         previous = self.retriever.retrieve_by_title(
-
             task["title"]
-
         )
+
+        decision_context = {
+            "mission": self.mission,
+            "goals": self.goals,
+            "reasoning": self.reasoning,
+        }
 
         if previous:
 
             recommendation = {
+                "strategy":
+                    "Reuse previous engineering experience",
 
-                "strategy": "Reuse previous engineering experience",
+                "experience_found":
+                    len(previous),
 
-                "experience_found": len(previous),
+                "confidence":
+                    "HIGH",
 
-                "confidence": "HIGH",
+                "reasoning_used":
+                    self.reasoning is not None,
 
+                "goal_alignment":
+                    self.goals is not None,
+
+                "mission_alignment":
+                    self.mission is not None,
             }
 
         else:
 
             recommendation = {
+                "strategy":
+                    "Create new engineering solution",
 
-                "strategy": "Create new engineering solution",
+                "experience_found":
+                    0,
 
-                "experience_found": 0,
+                "confidence":
+                    "NORMAL",
 
-                "confidence": "NORMAL",
+                "reasoning_used":
+                    self.reasoning is not None,
 
+                "goal_alignment":
+                    self.goals is not None,
+
+                "mission_alignment":
+                    self.mission is not None,
             }
 
         return {
@@ -83,10 +107,11 @@ class EngineeringDecisionEngine:
 
             "task": task["title"],
 
+            "decision_context": decision_context,
+
             "recommendation": recommendation,
 
             "version": self.VERSION,
-
         }
 
     # --------------------------------------------------
@@ -97,6 +122,15 @@ class EngineeringDecisionEngine:
 
             "version": self.VERSION,
 
-            "knowledge": self.retriever.knowledge_summary(),
+            "knowledge":
+                self.retriever.knowledge_summary(),
 
+            "reasoning_available":
+                self.reasoning is not None,
+
+            "mission_available":
+                self.mission is not None,
+
+            "goals_available":
+                self.goals is not None,
         }
