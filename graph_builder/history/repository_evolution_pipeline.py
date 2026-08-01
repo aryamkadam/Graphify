@@ -11,10 +11,7 @@ Responsibilities
 
 • Scan repository
 • Parse repository
-• Extract symbols
-• Extract relationships
-• Build repository graphs
-• Build intelligence
+• Build repository intelligence
 • Populate Repository Intelligence Context
 
 Author:
@@ -39,14 +36,6 @@ from graph_builder.relationships.relationship_extractor import (
     RelationshipExtractor,
 )
 
-from graph_builder.knowledge_graph.builder import (
-    KnowledgeGraphBuilder,
-)
-
-from graph_builder.knowledge_graph.symbol_graph_builder import (
-    SymbolGraphBuilder,
-)
-
 from graph_builder.intelligence.repository_behavior_intelligence_engine import (
     RepositoryBehaviorIntelligenceEngine,
 )
@@ -66,7 +55,7 @@ from graph_builder.intelligence.repository_intelligence_context import (
 
 class RepositoryIntelligencePipeline:
 
-    VERSION = "P17.2"
+    VERSION = "P17.1"
 
     # --------------------------------------------------
 
@@ -82,10 +71,6 @@ class RepositoryIntelligencePipeline:
 
     ):
 
-        # --------------------------------------------------
-        # Repository Inventory
-        # --------------------------------------------------
-
         scanner = RepositoryScanner(
 
             repository_name,
@@ -96,10 +81,6 @@ class RepositoryIntelligencePipeline:
 
         inventory = scanner.scan()
 
-        # --------------------------------------------------
-        # Parse Repository
-        # --------------------------------------------------
-
         parser = PythonASTParser()
 
         module = parser.parse(
@@ -107,10 +88,6 @@ class RepositoryIntelligencePipeline:
             Path(repository_path) / entry_file
 
         )
-
-        # --------------------------------------------------
-        # Symbol Intelligence
-        # --------------------------------------------------
 
         symbols = SymbolExtractor().extract(
 
@@ -123,24 +100,6 @@ class RepositoryIntelligencePipeline:
             module,
 
         )
-
-        # --------------------------------------------------
-        # Graph Layer
-        # --------------------------------------------------
-
-        repository_graph = KnowledgeGraphBuilder(
-
-            repository_path
-
-        ).build()
-
-        symbol_graph = SymbolGraphBuilder().build(
-            symbols
-)
-
-        # --------------------------------------------------
-        # Repository Behaviour
-        # --------------------------------------------------
 
         behavior = RepositoryBehaviorIntelligenceEngine().analyze(
 
@@ -160,13 +119,17 @@ class RepositoryIntelligencePipeline:
 
             repository=inventory.repository_name,
 
-            capabilities=[capability]
+            capabilities=[
+
+                capability.to_dict()
+
+            ],
 
         )
 
-        # --------------------------------------------------
-        # Repository Intelligence Context
-        # --------------------------------------------------
+        # ----------------------------------------------
+        # Build Repository Intelligence Context
+        # ----------------------------------------------
 
         context = RepositoryIntelligenceContext()
 
@@ -177,10 +140,6 @@ class RepositoryIntelligencePipeline:
         context.symbols = symbols
 
         context.relationships = relationships
-
-        context.repository_graph = repository_graph
-
-        context.symbol_graph = symbol_graph
 
         context.behavior = behavior
 

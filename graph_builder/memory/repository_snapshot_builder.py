@@ -25,7 +25,7 @@ from graph_builder.repository_brain import (
 )
 
 from graph_builder.reasoning.repository_consciousness_engine import (
-    RepositoryConsciousnessEngine,
+    RepositoryRuntimeIdentityEngine,
 )
 
 from graph_builder.reasoning.repository_reasoning_engine import (
@@ -36,8 +36,8 @@ from graph_builder.reasoning.repository_story_engine import (
     RepositoryStoryEngine,
 )
 
-from graph_builder.planning.repository_planning_engine import (
-    RepositoryPlanningEngine,
+from graph_builder.planning.repository_roadmap_engine import (
+    RepositoryRoadmapEngine,
 )
 
 from graph_builder.prediction.repository_prediction_engine import (
@@ -53,7 +53,7 @@ from graph_builder.intelligence.repository_trend_analyzer import (
 )
 
 
-class RepositorySnapshot:
+class RepositorySnapshotBuilder:
 
     def __init__(
         self,
@@ -87,7 +87,7 @@ class RepositorySnapshot:
         # ----------------------------------------------
 
         consciousness = (
-            RepositoryConsciousnessEngine(
+            RepositoryRuntimeIdentityEngine(
                 brain
             ).build()
         )
@@ -112,7 +112,7 @@ class RepositorySnapshot:
         )
 
         planning = (
-            RepositoryPlanningEngine()
+           RepositoryRoadmapEngine()
             .generate(
                 brain,
                 reasoning_summary,

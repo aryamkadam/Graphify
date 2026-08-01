@@ -1,143 +1,107 @@
 """
-Stage 15.3
+Graphify
+
+Phase 17
+
+Stage P17.2
 
 Repository Intelligence Engine
 
-This engine combines every intelligence
-module into one unified repository model.
+Builds the canonical Repository Intelligence object
+from a Repository Intelligence Context.
 
-Future AI reasoning, prediction,
-planning and autonomous engineering
-will consume this object.
+The Engine performs no repository scanning.
+
+It converts Repository Context into the unified
+Repository Intelligence representation.
+
+Pipeline
+    ↓
+Context
+    ↓
+Repository Intelligence Engine
+    ↓
+RepositoryIntelligence
+    ↓
+Repository Brain
+
+Author:
+Graphify Core
 """
 
-from graph_builder.execution.execution_engine import (
-    ExecutionEngine,
+from graph_builder.intelligence.repository_intelligence_context import (
+    RepositoryIntelligenceContext,
 )
 
-from graph_builder.repository_metadata import (
-    get_repository_metadata,
-)
-
-from graph_builder.repository_health_report import (
-    generate_health_report,
-)
-
-from graph_builder.repository_knowledge_pack import (
-    build_repository_knowledge_pack,
-)
-
-from graph_builder.project_decision_brain import (
-    generate_project_decision_brain,
-)
-
-from graph_builder.decision_insights import (
-    generate_decision_insights,
+from graph_builder.intelligence.repository_intelligence import (
+    RepositoryIntelligence,
 )
 
 
 class RepositoryIntelligenceEngine:
 
+    VERSION = "P17.2"
+
+    # --------------------------------------------------
+
     def __init__(
+
         self,
-        symbol_index,
-        knowledge_graph,
-        repository_path="."
+
+        context: RepositoryIntelligenceContext,
+
     ):
 
-        self.symbol_index = symbol_index
+        self.context = context
 
-        self.knowledge_graph = knowledge_graph
-
-        self.repository_path = repository_path
-
-    # -----------------------------------------
+    # --------------------------------------------------
 
     def build(self):
 
-        metadata = get_repository_metadata()
+        intelligence = RepositoryIntelligence(
 
-        health = generate_health_report(
+            inventory=self.context.inventory,
 
-            self.symbol_index,
+            module=self.context.module,
 
-            self.knowledge_graph
+            symbols=self.context.symbols,
+
+            relationships=self.context.relationships,
+
+            repository_graph=self.context.repository_graph,
+
+            symbol_graph=self.context.symbol_graph,
+
+            behavior=self.context.behavior,
+
+            capability=self.context.capability,
+
+            identity=self.context.identity,
+
+            health=self.context.health,
+
+            knowledge=self.context.knowledge,
+
+            execution=self.context.execution,
+
+            evolution=self.context.evolution,
+
+            decisions=self.context.decisions,
+
+            insights=self.context.insights,
+
+            metadata=self.context.metadata,
+
+            extra=self.context.extra,
 
         )
-
-        knowledge = build_repository_knowledge_pack(
-
-            self.symbol_index,
-
-            self.knowledge_graph
-
-        )
-
-        execution = ExecutionEngine(
-
-            self.repository_path
-
-        ).build()
-
-        decision_brain = (
-
-            generate_project_decision_brain()
-
-        )
-
-        decision_insights = (
-
-            generate_decision_insights()
-
-        )
-
-        intelligence = {
-
-            "identity": {
-
-                "current_branch":
-                    metadata.get(
-                        "current_branch"
-                    ),
-
-                "latest_commit":
-                    metadata.get(
-                        "latest_commit"
-                    ),
-
-                "latest_tag":
-                    metadata.get(
-                        "latest_tag"
-                    ),
-
-                "total_commits":
-                    metadata.get(
-                        "total_commits"
-                    ),
-
-                "current_stage":
-                    metadata.get(
-                        "current_stage"
-                    ),
-
-            },
-
-            "health": health,
-
-            "knowledge": knowledge,
-
-            "execution": execution,
-
-            "decisions": {
-
-                "brain":
-                    decision_brain,
-
-                "insights":
-                    decision_insights,
-
-            }
-
-        }
 
         return intelligence
+
+    # --------------------------------------------------
+
+    def summary(self):
+
+        intelligence = self.build()
+
+        return intelligence.summary()

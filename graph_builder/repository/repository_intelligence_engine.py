@@ -19,7 +19,7 @@ from graph_builder.repository.repository_intelligence_report import (
 )
 
 
-class RepositoryIntelligenceEngine:
+class RepositoryIntelligenceReportEngine:
 
     VERSION = "P9.7"
 

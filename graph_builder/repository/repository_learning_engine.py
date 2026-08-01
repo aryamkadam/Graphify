@@ -17,7 +17,7 @@ Graphify Core
 from datetime import datetime
 
 
-class RepositoryLearningEngine:
+class RepositoryLearningStore:
 
     VERSION = "P9.6"
 

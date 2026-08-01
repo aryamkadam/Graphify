@@ -9,8 +9,7 @@ Consumes the NEW Repository Brain structure.
 """
 
 
-class RepositoryConsciousnessEngine:
-
+class RepositoryRuntimeIdentityEngine:
     def __init__(self, intelligence):
 
         self.intelligence = intelligence

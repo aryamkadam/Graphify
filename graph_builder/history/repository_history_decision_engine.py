@@ -13,8 +13,7 @@ This becomes part of the Repository Brain.
 """
 
 
-class RepositoryDecisionGraphEngine:
-
+class RepositoryHistoryDecisionEngine:
     def build(self, cause_effect_report):
 
         chains = cause_effect_report.get(

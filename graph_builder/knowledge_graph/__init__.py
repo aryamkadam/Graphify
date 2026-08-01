@@ -1,7 +1,16 @@
 """
 Knowledge Graph Module
 
-Builds semantic relationships between repository files.
+Public API for Graphify Knowledge Graph.
 
-Stage 14.2
+Author:
+Graphify Core
 """
+
+from .builder import KnowledgeGraphBuilder
+from .legacy_builder import build_knowledge_graph
+
+__all__ = [
+    "KnowledgeGraphBuilder",
+    "build_knowledge_graph",
+]

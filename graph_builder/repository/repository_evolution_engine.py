@@ -15,8 +15,7 @@ Graphify Core
 """
 
 
-class RepositoryEvolutionEngine:
-
+class RepositoryStrategyPlanner:
     VERSION = "P9.5"
 
     def evolve(self, metrics):

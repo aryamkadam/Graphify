@@ -15,8 +15,7 @@ Graphify Core
 """
 
 
-class RepositoryLearningEngine:
-
+class RepositoryPatternLearningEngine:
     VERSION = "P5.3"
 
     # --------------------------------------------------

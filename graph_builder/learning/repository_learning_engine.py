@@ -14,7 +14,7 @@ instead of raw repository history.
 """
 
 
-class RepositoryLearningEngine:
+class RepositoryHistoryLearningEngine:
 
     def build(self, evolution_history):
 
