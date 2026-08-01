@@ -1,9 +1,9 @@
 """
 Graphify
 
-Phase 18
+Phase 19
 
-Commit 6
+Stage P19.2
 
 Repository Bootstrap
 
@@ -16,6 +16,7 @@ Responsibilities
 • Build Repository Intelligence Context
 • Build Repository Intelligence
 • Build Repository Brain
+• Load Repository Cognitive Memory
 • Attach Engineering Runtime
 • Update Repository Context
 
@@ -45,10 +46,14 @@ from graph_builder.brain.repository_brain import (
     RepositoryBrain,
 )
 
+from graph_builder.memory.repository_cognitive_memory import (
+    RepositoryCognitiveMemory,
+)
+
 
 class RepositoryBootstrap:
 
-    VERSION = "P18.1"
+    VERSION = "P19.2"
 
     # --------------------------------------------------
 
@@ -65,6 +70,8 @@ class RepositoryBootstrap:
         self.context = context
 
         self.engineering_kernel = engineering_kernel
+
+        self.memory = RepositoryCognitiveMemory()
 
     # --------------------------------------------------
 
@@ -129,6 +136,20 @@ class RepositoryBootstrap:
         self.context.repository_brain = brain
 
         #
+        # Load Repository Cognitive Memory
+        #
+
+        self.memory.load(
+
+            intelligence_context,
+
+            brain,
+
+        )
+
+        self.context.repository_memory = self.memory
+
+        #
         # Attach Engineering Runtime
         #
 
@@ -150,6 +171,12 @@ class RepositoryBootstrap:
 
     def shutdown(self):
 
+        if self.memory:
+
+            self.memory.clear()
+
+        self.context.repository_memory = None
+
         self.context.repository_brain = None
 
         self.context.repository_intelligence = None
@@ -169,15 +196,15 @@ class RepositoryBootstrap:
             "bootstrap": "READY",
 
             "repository_loaded":
-
                 self.context.repository_loaded,
 
-            "project":
+            "memory_loaded":
+                self.memory.is_loaded(),
 
+            "project":
                 self.context.project_name,
 
             "version":
-
                 self.VERSION,
 
         }
