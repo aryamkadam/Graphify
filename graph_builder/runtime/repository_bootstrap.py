@@ -1,9 +1,9 @@
 """
 Graphify
 
-Phase 19
+Phase 20
 
-Stage P19.2
+Stage P20.4
 
 Repository Bootstrap
 
@@ -17,6 +17,8 @@ Responsibilities
 • Build Repository Intelligence
 • Build Repository Brain
 • Load Repository Cognitive Memory
+• Build Repository Evolution Memory
+• Build Repository State
 • Attach Engineering Runtime
 • Update Repository Context
 
@@ -50,10 +52,18 @@ from graph_builder.memory.repository_cognitive_memory import (
     RepositoryCognitiveMemory,
 )
 
+from graph_builder.memory.repository_evolution_memory import (
+    RepositoryEvolutionMemory,
+)
+
+from graph_builder.state.repository_state_engine import (
+    RepositoryStateEngine,
+)
+
 
 class RepositoryBootstrap:
 
-    VERSION = "P19.2"
+    VERSION = "P20.4"
 
     # --------------------------------------------------
 
@@ -73,6 +83,8 @@ class RepositoryBootstrap:
 
         self.memory = RepositoryCognitiveMemory()
 
+        self.evolution_memory = RepositoryEvolutionMemory()
+
     # --------------------------------------------------
 
     def boot(self):
@@ -82,7 +94,7 @@ class RepositoryBootstrap:
         """
 
         #
-        # Discover repository entry point
+        # Discover Repository Entry
         #
 
         discovery = RepositoryEntryDiscovery(
@@ -94,7 +106,7 @@ class RepositoryBootstrap:
         entry = discovery.discover()
 
         #
-        # Build Repository Intelligence Context
+        # Repository Intelligence Context
         #
 
         pipeline = RepositoryIntelligencePipeline()
@@ -112,7 +124,7 @@ class RepositoryBootstrap:
         self.context.intelligence_context = intelligence_context
 
         #
-        # Build Repository Intelligence
+        # Repository Intelligence
         #
 
         intelligence = RepositoryIntelligenceEngine(
@@ -124,7 +136,7 @@ class RepositoryBootstrap:
         self.context.repository_intelligence = intelligence
 
         #
-        # Build Repository Brain
+        # Repository Brain
         #
 
         brain = RepositoryBrain(
@@ -136,7 +148,7 @@ class RepositoryBootstrap:
         self.context.repository_brain = brain
 
         #
-        # Load Repository Cognitive Memory
+        # Repository Cognitive Memory
         #
 
         self.memory.load(
@@ -148,6 +160,34 @@ class RepositoryBootstrap:
         )
 
         self.context.repository_memory = self.memory
+
+        #
+        # Repository Evolution Memory
+        #
+
+        self.evolution_memory.record(
+
+            intelligence_context,
+
+        )
+
+        self.context.repository_evolution_memory = (
+
+            self.evolution_memory
+
+        )
+
+        #
+        # Repository State
+        #
+
+        repository_state = RepositoryStateEngine().build(
+
+            self.context,
+
+        )
+
+        self.context.repository_state = repository_state
 
         #
         # Attach Engineering Runtime
@@ -171,9 +211,29 @@ class RepositoryBootstrap:
 
     def shutdown(self):
 
+        #
+        # Clear Cognitive Memory
+        #
+
         if self.memory:
 
             self.memory.clear()
+
+        #
+        # Clear Evolution Memory
+        #
+
+        if self.evolution_memory:
+
+            self.evolution_memory.clear()
+
+        #
+        # Clear Runtime Objects
+        #
+
+        self.context.repository_state = None
+
+        self.context.repository_evolution_memory = None
 
         self.context.repository_memory = None
 
@@ -200,6 +260,14 @@ class RepositoryBootstrap:
 
             "memory_loaded":
                 self.memory.is_loaded(),
+
+            "evolution_memory_loaded":
+                self.context.repository_evolution_memory
+                is not None,
+
+            "repository_state_loaded":
+                self.context.repository_state
+                is not None,
 
             "project":
                 self.context.project_name,

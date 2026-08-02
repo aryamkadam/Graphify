@@ -1,9 +1,9 @@
 """
 Graphify
 
-Phase 19
+Phase 20
 
-Stage P19.5
+Stage P20.1
 
 Repository Cognitive Memory
 
@@ -26,7 +26,9 @@ from graph_builder.memory.repository_evolution_memory import (
 
 class RepositoryCognitiveMemory:
 
-    VERSION = "P19.5"
+    VERSION = "P20.1"
+
+    # -----------------------------------------------------
 
     def __init__(self):
 
@@ -51,7 +53,7 @@ class RepositoryCognitiveMemory:
         self.repository_path = None
 
         #
-        # Long-term Cognitive Memory
+        # Repository Snapshot History
         #
 
         self.history = []
@@ -76,27 +78,19 @@ class RepositoryCognitiveMemory:
 
     ):
 
+        #
+        # Active Runtime Memory
+        #
+
         self.intelligence_context = intelligence_context
 
         self.repository_brain = repository_brain
 
-        self.repository_identity = (
+        self.repository_identity = intelligence_context.identity
 
-            intelligence_context.identity
+        self.repository_capability = intelligence_context.capability
 
-        )
-
-        self.repository_capability = (
-
-            intelligence_context.capability
-
-        )
-
-        self.repository_behavior = (
-
-            intelligence_context.behavior
-
-        )
+        self.repository_behavior = intelligence_context.behavior
 
         self.repository_name = (
 
@@ -113,36 +107,20 @@ class RepositoryCognitiveMemory:
         self.boot_timestamp = datetime.utcnow()
 
         #
-        # Build Snapshot
+        # Repository Snapshot
         #
 
         snapshot = self._create_snapshot()
 
         #
-        # Compare with previous snapshot
+        # Repository Evolution
         #
 
-        previous_snapshot = (
+        evolution = self.evolution_memory.record(
 
-            self.history[-1]
-
-            if self.history
-
-            else None
+            intelligence_context,
 
         )
-
-        evolution = self.evolution_memory.compare(
-
-            previous_snapshot,
-
-            snapshot,
-
-        )
-
-        #
-        # Store evolution first
-        #
 
         self.evolution_history.append(
 
@@ -151,7 +129,7 @@ class RepositoryCognitiveMemory:
         )
 
         #
-        # Store snapshot
+        # Snapshot Timeline
         #
 
         self.history.append(
@@ -207,20 +185,38 @@ class RepositoryCognitiveMemory:
         self.repository_path = None
 
         #
-        # Preserve history and evolution history
+        # Preserve history and evolution timeline
         #
 
     # -----------------------------------------------------
 
     def timeline(self):
 
-        return list(self.history)
+        return list(
+
+            self.history
+
+        )
 
     # -----------------------------------------------------
 
     def evolution(self):
 
-        return list(self.evolution_history)
+        return list(
+
+            self.evolution_history
+
+        )
+
+    # -----------------------------------------------------
+
+    def latest_snapshot(self):
+
+        if not self.history:
+
+            return None
+
+        return self.history[-1]
 
     # -----------------------------------------------------
 
@@ -248,7 +244,11 @@ class RepositoryCognitiveMemory:
 
             "history_entries": len(self.history),
 
-            "evolution_entries": len(self.evolution_history),
+            "evolution_entries": len(
+
+                self.evolution_history
+
+            ),
 
             "version": self.VERSION,
 

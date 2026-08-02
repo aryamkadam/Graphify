@@ -1,98 +1,152 @@
 """
 Graphify
 
-Phase 19
+Phase 20
 
-Stage P19.4
+Stage P20.5
 
 Repository Evolution Memory
 
-Compares Repository Cognitive Memory snapshots
-to understand repository evolution over time.
+Maintains the runtime evolution history of the
+currently loaded repository.
+
+Unlike RepositoryEvolutionMemoryEngine,
+this class is the active runtime memory.
 
 Responsibilities
 
-• Compare consecutive snapshots
-• Detect identity changes
-• Detect capability changes
-• Detect behavior changes
-• Report repository evolution
+• Record repository snapshots
+• Detect evolution
+• Maintain timeline
+• Provide evolution history
 
 Author:
 Graphify Core
 """
 
+from copy import deepcopy
+from datetime import datetime
+
 
 class RepositoryEvolutionMemory:
 
-    VERSION = "P19.4"
+    VERSION = "P20.5"
 
-    # -----------------------------------------------------
+    # --------------------------------------------------
 
-    def compare(
+    def __init__(self):
+
+        self.timeline = []
+
+        self.last_snapshot = None
+
+    # --------------------------------------------------
+
+    def record(
 
         self,
 
-        previous_snapshot,
-
-        current_snapshot,
+        intelligence_context,
 
     ):
 
-        if previous_snapshot is None:
+        snapshot = {
 
-            return {
-
-                "repository":
-
-                    current_snapshot.get("repository"),
-
-                "first_snapshot": True,
-
-                "identity_changed": False,
-
-                "capability_changed": False,
-
-                "behavior_changed": False,
-
-                "timeline_length": 1,
-
-                "version": self.VERSION,
-
-            }
-
-        return {
+            "timestamp": datetime.utcnow(),
 
             "repository":
 
-                current_snapshot.get("repository"),
+                intelligence_context.inventory.repository_name,
 
-            "first_snapshot": False,
+            "identity":
 
-            "previous_identity":
+                intelligence_context.identity,
 
-                previous_snapshot.get("identity"),
+            "capability":
 
-            "current_identity":
+                intelligence_context.capability,
 
-                current_snapshot.get("identity"),
+            "behavior":
 
-            "identity_changed":
+                intelligence_context.behavior,
 
-                previous_snapshot.get("identity")
-                != current_snapshot.get("identity"),
+        }
 
-            "capability_changed":
+        if self.last_snapshot is None:
 
-                previous_snapshot.get("capability")
-                != current_snapshot.get("capability"),
+            snapshot["event"] = "INITIAL_BOOT"
 
-            "behavior_changed":
+        else:
 
-                previous_snapshot.get("behavior")
-                != current_snapshot.get("behavior"),
+            snapshot["event"] = self._detect_change(
 
-            "timeline_length": 2,
+                self.last_snapshot,
+
+                snapshot,
+
+            )
+
+        self.timeline.append(snapshot)
+
+        self.last_snapshot = deepcopy(snapshot)
+
+        return snapshot
+
+    # --------------------------------------------------
+
+    def _detect_change(
+
+        self,
+
+        previous,
+
+        current,
+
+    ):
+
+        if previous["identity"] != current["identity"]:
+
+            return "IDENTITY_CHANGED"
+
+        if previous["capability"] != current["capability"]:
+
+            return "CAPABILITY_CHANGED"
+
+        if previous["behavior"] != current["behavior"]:
+
+            return "BEHAVIOR_CHANGED"
+
+        return "NO_CHANGE"
+
+    # --------------------------------------------------
+
+    def history(self):
+
+        return list(self.timeline)
+
+    # --------------------------------------------------
+
+    def latest(self):
+
+        return self.last_snapshot
+
+    # --------------------------------------------------
+
+    def clear(self):
+
+        self.timeline.clear()
+
+        self.last_snapshot = None
+
+    # --------------------------------------------------
+
+    def status(self):
+
+        return {
+
+            "entries": len(self.timeline),
+
+            "loaded": self.last_snapshot is not None,
 
             "version": self.VERSION,
 

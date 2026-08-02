@@ -93,6 +93,9 @@ class RepositoryIntelligenceContext:
     def to_dict(self):
 
         return {
+            "repository_graph": self.repository_graph,
+
+            "symbol_graph": self.symbol_graph,
 
             "inventory": self.inventory,
 
