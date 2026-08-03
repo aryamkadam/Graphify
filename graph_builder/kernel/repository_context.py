@@ -1,9 +1,9 @@
 """
 Graphify
 
-Phase 20
+Phase 21
 
-Stage P20.3
+Stage P21.3
 
 Repository Context
 
@@ -25,7 +25,7 @@ from dataclasses import dataclass, field
 @dataclass
 class RepositoryContext:
 
-    VERSION = "P20.3"
+    VERSION = "P21.3"
 
     # --------------------------------------------------
     # Repository
@@ -74,6 +74,12 @@ class RepositoryContext:
     repository_state = None
 
     # --------------------------------------------------
+    # Repository Awareness Layer
+    # --------------------------------------------------
+
+    repository_awareness = None
+
+    # --------------------------------------------------
     # Runtime
     # --------------------------------------------------
 
@@ -113,11 +119,8 @@ class RepositoryContext:
         return (
 
             self.booted
-
             and self.repository_loaded
-
             and self.repository_intelligence is not None
-
             and self.repository_brain is not None
 
         )
@@ -152,6 +155,9 @@ class RepositoryContext:
 
             "repository_state":
                 self.repository_state is not None,
+
+            "repository_awareness":
+                self.repository_awareness is not None,
 
             "version": self.VERSION,
 

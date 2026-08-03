@@ -1,32 +1,14 @@
 """
 Graphify
 
-Phase 20
+Phase 21
 
-Stage P20.4
+Stage P21.3
 
 Repository Bootstrap
 
 Bootstraps a Repository into a fully
 operational Graphify Runtime.
-
-Responsibilities
-
-• Discover repository entry point
-• Build Repository Intelligence Context
-• Build Repository Intelligence
-• Build Repository Brain
-• Load Repository Cognitive Memory
-• Build Repository Evolution Memory
-• Build Repository State
-• Attach Engineering Runtime
-• Update Repository Context
-
-The Bootstrap never performs engineering.
-
-The Bootstrap never performs reasoning.
-
-It only assembles the Repository Runtime.
 
 Author:
 Graphify Core
@@ -60,10 +42,14 @@ from graph_builder.state.repository_state_engine import (
     RepositoryStateEngine,
 )
 
+from graph_builder.awareness.repository_awareness_manager import (
+    RepositoryAwarenessManager,
+)
+
 
 class RepositoryBootstrap:
 
-    VERSION = "P20.4"
+    VERSION = "P21.3"
 
     # --------------------------------------------------
 
@@ -85,13 +71,13 @@ class RepositoryBootstrap:
 
         self.evolution_memory = RepositoryEvolutionMemory()
 
+        self.awareness_manager = RepositoryAwarenessManager(
+            self.context
+        )
+
     # --------------------------------------------------
 
     def boot(self):
-
-        """
-        Bootstrap one repository.
-        """
 
         #
         # Discover Repository Entry
@@ -205,31 +191,37 @@ class RepositoryBootstrap:
 
         self.context.repository_loaded = True
 
+        #
+        # Repository Awareness
+        #
+
+        self.awareness_manager.build()
+
+        self.context.repository_awareness = (
+
+            self.awareness_manager
+
+        )
+
         return self.context
 
     # --------------------------------------------------
 
     def shutdown(self):
 
-        #
-        # Clear Cognitive Memory
-        #
-
         if self.memory:
 
             self.memory.clear()
-
-        #
-        # Clear Evolution Memory
-        #
 
         if self.evolution_memory:
 
             self.evolution_memory.clear()
 
-        #
-        # Clear Runtime Objects
-        #
+        if self.awareness_manager:
+
+            self.awareness_manager.clear()
+
+        self.context.repository_awareness = None
 
         self.context.repository_state = None
 
@@ -267,6 +259,10 @@ class RepositoryBootstrap:
 
             "repository_state_loaded":
                 self.context.repository_state
+                is not None,
+
+            "repository_awareness_loaded":
+                self.context.repository_awareness
                 is not None,
 
             "project":
