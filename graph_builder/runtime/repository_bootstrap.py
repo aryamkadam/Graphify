@@ -1,14 +1,36 @@
 """
 Graphify
 
-Phase 21
+Phase 22
 
-Stage P21.3
+Stage P22.6
 
 Repository Bootstrap
 
 Bootstraps a Repository into a fully
 operational Graphify Runtime.
+
+Runtime Order
+
+Repository
+    ↓
+Repository Intelligence
+    ↓
+Repository Brain
+    ↓
+Repository Memory
+    ↓
+Repository Evolution Memory
+    ↓
+Repository State
+    ↓
+Engineering Runtime
+    ↓
+Repository Ready
+    ↓
+Repository Awareness
+    ↓
+Repository Understanding
 
 Author:
 Graphify Core
@@ -46,33 +68,40 @@ from graph_builder.awareness.repository_awareness_manager import (
     RepositoryAwarenessManager,
 )
 
+from graph_builder.understanding.repository_understanding_manager import (
+    RepositoryUnderstandingManager,
+)
+
 
 class RepositoryBootstrap:
 
-    VERSION = "P21.3"
+    VERSION = "P22.6"
 
     # --------------------------------------------------
 
     def __init__(
-
         self,
-
         context,
-
         engineering_kernel,
-
     ):
 
         self.context = context
-
         self.engineering_kernel = engineering_kernel
+
+        #
+        # Runtime Components
+        #
 
         self.memory = RepositoryCognitiveMemory()
 
         self.evolution_memory = RepositoryEvolutionMemory()
 
         self.awareness_manager = RepositoryAwarenessManager(
-            self.context
+            self.context,
+        )
+
+        self.understanding_manager = RepositoryUnderstandingManager(
+            self.context,
         )
 
     # --------------------------------------------------
@@ -80,13 +109,11 @@ class RepositoryBootstrap:
     def boot(self):
 
         #
-        # Discover Repository Entry
+        # Repository Entry Discovery
         #
 
         discovery = RepositoryEntryDiscovery(
-
             self.context.repository_path,
-
         )
 
         entry = discovery.discover()
@@ -98,13 +125,9 @@ class RepositoryBootstrap:
         pipeline = RepositoryIntelligencePipeline()
 
         intelligence_context = pipeline.build(
-
             repository_name=self.context.project_name,
-
             repository_path=self.context.repository_path,
-
             entry_file=entry["entry_file"],
-
         )
 
         self.context.intelligence_context = intelligence_context
@@ -114,9 +137,7 @@ class RepositoryBootstrap:
         #
 
         intelligence = RepositoryIntelligenceEngine(
-
             intelligence_context,
-
         ).build()
 
         self.context.repository_intelligence = intelligence
@@ -126,9 +147,7 @@ class RepositoryBootstrap:
         #
 
         brain = RepositoryBrain(
-
             intelligence,
-
         )
 
         self.context.repository_brain = brain
@@ -138,11 +157,8 @@ class RepositoryBootstrap:
         #
 
         self.memory.load(
-
             intelligence_context,
-
             brain,
-
         )
 
         self.context.repository_memory = self.memory
@@ -152,15 +168,11 @@ class RepositoryBootstrap:
         #
 
         self.evolution_memory.record(
-
             intelligence_context,
-
         )
 
         self.context.repository_evolution_memory = (
-
             self.evolution_memory
-
         )
 
         #
@@ -168,9 +180,7 @@ class RepositoryBootstrap:
         #
 
         repository_state = RepositoryStateEngine().build(
-
             self.context,
-
         )
 
         self.context.repository_state = repository_state
@@ -180,9 +190,7 @@ class RepositoryBootstrap:
         #
 
         self.context.engineering_runtime = (
-
             self.engineering_kernel
-
         )
 
         #
@@ -195,13 +203,17 @@ class RepositoryBootstrap:
         # Repository Awareness
         #
 
-        self.awareness_manager.build()
+        awareness = self.awareness_manager.build()
 
-        self.context.repository_awareness = (
+        self.context.repository_awareness = awareness
 
-            self.awareness_manager
+        #
+        # Repository Understanding
+        #
 
-        )
+        understanding = self.understanding_manager.build()
+
+        self.context.repository_understanding = understanding
 
         return self.context
 
@@ -209,32 +221,38 @@ class RepositoryBootstrap:
 
     def shutdown(self):
 
-        if self.memory:
+        #
+        # Managers
+        #
 
+        if self.understanding_manager:
+            self.understanding_manager.clear()
+
+        if self.awareness_manager:
+            self.awareness_manager.clear()
+
+        #
+        # Memory
+        #
+
+        if self.memory:
             self.memory.clear()
 
         if self.evolution_memory:
-
             self.evolution_memory.clear()
 
-        if self.awareness_manager:
+        #
+        # Runtime Context
+        #
 
-            self.awareness_manager.clear()
-
+        self.context.repository_understanding = None
         self.context.repository_awareness = None
-
         self.context.repository_state = None
-
         self.context.repository_evolution_memory = None
-
         self.context.repository_memory = None
-
         self.context.repository_brain = None
-
         self.context.repository_intelligence = None
-
         self.context.intelligence_context = None
-
         self.context.engineering_runtime = None
 
         self.context.repository_loaded = False
@@ -263,6 +281,10 @@ class RepositoryBootstrap:
 
             "repository_awareness_loaded":
                 self.context.repository_awareness
+                is not None,
+
+            "repository_understanding_loaded":
+                self.context.repository_understanding
                 is not None,
 
             "project":

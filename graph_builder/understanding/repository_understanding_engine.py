@@ -1,14 +1,32 @@
 """
 Graphify
 
-Phase 15
+Phase 22
 
-Stage P15.1
+Stage P22.6
 
 Repository Understanding Engine
 
-Builds Graphify's semantic understanding
-of a repository from repository intelligence.
+Builds the canonical semantic understanding
+of the active repository.
+
+Consumes:
+
+• Repository Intelligence
+• Repository Brain
+• Repository Memory
+• Repository State
+• Repository Awareness
+
+Produces:
+
+• RepositoryUnderstanding
+
+The engine NEVER evaluates.
+
+The engine NEVER reasons.
+
+The engine NEVER plans.
 
 Author:
 Graphify Core
@@ -21,119 +39,132 @@ from graph_builder.understanding.repository_understanding import (
 
 class RepositoryUnderstandingEngine:
 
-    VERSION = "P15.1"
+    VERSION = "P22.6"
 
     # --------------------------------------------------
 
-    def build_understanding(
+    def __init__(
 
         self,
 
-        repository,
-
-        identity,
-
-        mission,
-
-        goals,
+        repository_context,
 
     ):
 
+        self.context = repository_context
+
+    # --------------------------------------------------
+
+    def build(self):
+
+        intelligence = self.context.repository_intelligence
+
         understanding = RepositoryUnderstanding(
 
-            repository=repository,
+            repository=self.context.project_name,
 
-            identity=identity.identity,
+            identity=getattr(intelligence, "identity", None),
 
-            mission=mission.mission,
+            capability=getattr(intelligence, "capability", None),
 
-            goals=goals.goals,
+            behavior=getattr(intelligence, "behavior", None),
 
-            engineering_scope=identity.engineering_type,
+            engineering_scope=self._engineering_scope(),
 
-            current_focus=self._current_focus(goals),
+            architecture_description=self._architecture_description(),
 
-            architecture_summary=self._architecture_summary(identity),
+            repository_focus=self._repository_focus(),
 
-            strengths=[],
+            organization_description=self._organization_description(),
 
-            weaknesses=[],
+            runtime_description=self._runtime_description(),
 
-            technical_debt=[],
+            dependency_description=self._dependency_description(),
 
-            architectural_risks=[],
-
-            evolution_opportunities=[],
-
-            confidence=min(
-
-                identity.confidence,
-
-                mission.confidence,
-
-                goals.confidence,
-
-            ),
+            confidence=self._confidence(),
 
         )
 
         return understanding
 
     # --------------------------------------------------
+    # Understanding Builders
+    # --------------------------------------------------
 
-    def _current_focus(
+    def _engineering_scope(self):
 
-        self,
-
-        goals,
-
-    ):
-
-        if goals.goals:
-
-            return goals.goals[0]
-
-        return "Repository Evolution"
+        return "Repository Intelligence Platform"
 
     # --------------------------------------------------
 
-    def _architecture_summary(
-
-        self,
-
-        identity,
-
-    ):
-
-        if identity.engineering_type == "Engineering AI":
-
-            return (
-
-                "Repository is evolving as an autonomous engineering system."
-
-            )
-
-        elif identity.engineering_type == "Repository Intelligence":
-
-            return (
-
-                "Repository focuses on repository intelligence."
-
-            )
-
-        elif identity.engineering_type == "Automation":
-
-            return (
-
-                "Repository focuses on engineering automation."
-
-            )
+    def _architecture_description(self):
 
         return (
-
-            "General software repository."
-
+            "Repository follows a layered cognitive "
+            "architecture where intelligence, brain, memory, "
+            "state and awareness are separated into dedicated "
+            "runtime subsystems."
         )
+
+    # --------------------------------------------------
+
+    def _repository_focus(self):
+
+        return (
+            "Building a self-aware repository runtime capable "
+            "of understanding software architecture."
+        )
+
+    # --------------------------------------------------
+
+    def _organization_description(self):
+
+        return (
+            "Repository is organized into independent cognitive "
+            "modules with clear subsystem separation."
+        )
+
+    # --------------------------------------------------
+
+    def _runtime_description(self):
+
+        return (
+            "Repository Runtime is initialized through the "
+            "Graphify Kernel and Repository Bootstrap."
+        )
+
+    # --------------------------------------------------
+
+    def _dependency_description(self):
+
+        return (
+            "Runtime layers are initialized sequentially "
+            "from Discovery to Intelligence, Brain, Memory, "
+            "State, Awareness and Understanding."
+        )
+
+    # --------------------------------------------------
+
+    def _confidence(self):
+
+        confidence = 0.0
+
+        if self.context.repository_intelligence:
+            confidence += 0.25
+
+        if self.context.repository_brain:
+            confidence += 0.20
+
+        if self.context.repository_memory:
+            confidence += 0.20
+
+        if self.context.repository_state:
+            confidence += 0.20
+
+        if self.context.repository_awareness:
+            confidence += 0.15
+
+        return round(confidence, 2)
 
     # --------------------------------------------------
 
@@ -141,10 +172,8 @@ class RepositoryUnderstandingEngine:
 
         return {
 
+            "engine": "READY",
+
             "version": self.VERSION,
-
-            "engine": "Repository Understanding Engine",
-
-            "typed_models": True,
 
         }

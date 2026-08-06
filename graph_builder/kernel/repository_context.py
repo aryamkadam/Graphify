@@ -129,36 +129,39 @@ class RepositoryContext:
 
     def status(self):
 
-        return {
+     return {
 
-            "booted": self.booted,
+        "booted": self.booted,
 
-            "repository_loaded": self.repository_loaded,
+        "repository_loaded": self.repository_loaded,
 
-            "project_name": self.project_name,
+        "project_name": self.project_name,
 
-            "repository_path": self.repository_path,
+        "repository_path": self.repository_path,
 
-            "ready": self.ready,
+        "ready": self.ready,
 
-            "repository_intelligence":
-                self.repository_intelligence is not None,
+        "repository_intelligence":
+            self.repository_intelligence is not None,
 
-            "repository_brain":
-                self.repository_brain is not None,
+        "repository_brain":
+            self.repository_brain is not None,
 
-            "repository_memory":
-                self.repository_memory is not None,
+        "repository_memory":
+            self.repository_memory is not None,
 
-            "repository_evolution_memory":
-                self.repository_evolution_memory is not None,
+        "repository_evolution_memory":
+            self.repository_evolution_memory is not None,
 
-            "repository_state":
-                self.repository_state is not None,
+        "repository_state":
+            self.repository_state is not None,
 
-            "repository_awareness":
-                self.repository_awareness is not None,
+        "repository_awareness":
+            self.repository_awareness is not None,
 
-            "version": self.VERSION,
+        "repository_understanding":
+            self.repository_understanding is not None,
 
-        }
+        "version": self.VERSION,
+
+    }

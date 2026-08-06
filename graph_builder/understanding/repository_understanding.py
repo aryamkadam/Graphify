@@ -1,56 +1,67 @@
 """
 Graphify
 
-Phase 15
+Phase 22
 
-Stage P15.1
+Stage P22.5
 
 Repository Understanding
 
-Represents Graphify's semantic understanding
-of an entire repository.
+Canonical semantic understanding of an active repository.
+
+Built directly from Repository Intelligence.
+
+This object represents WHAT the repository is.
+
+It never evaluates.
+
+It never judges.
 
 Author:
 Graphify Core
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass
 class RepositoryUnderstanding:
 
-    VERSION = "P15.1"
+    VERSION = "P22.5"
+
+    # --------------------------------------------------
+    # Repository
+    # --------------------------------------------------
 
     repository: str
 
-    # Existing intelligence
+    # --------------------------------------------------
+    # Intelligence
+    # --------------------------------------------------
 
-    identity: str = ""
+    identity: object = None
 
-    mission: str = ""
+    capability: object = None
 
-    goals: list[str] = field(default_factory=list)
+    behavior: object = None
 
-    # Repository meaning
+    # --------------------------------------------------
+    # Understanding
+    # --------------------------------------------------
 
     engineering_scope: str = ""
 
-    current_focus: str = ""
+    architecture_description: str = ""
 
-    architecture_summary: str = ""
+    repository_focus: str = ""
 
-    # Future cognition
+    organization_description: str = ""
 
-    strengths: list[str] = field(default_factory=list)
+    runtime_description: str = ""
 
-    weaknesses: list[str] = field(default_factory=list)
+    dependency_description: str = ""
 
-    technical_debt: list[str] = field(default_factory=list)
-
-    architectural_risks: list[str] = field(default_factory=list)
-
-    evolution_opportunities: list[str] = field(default_factory=list)
+    # --------------------------------------------------
 
     confidence: float = 0.0
 
@@ -64,17 +75,21 @@ class RepositoryUnderstanding:
 
             "identity": self.identity,
 
-            "mission": self.mission,
+            "capability": self.capability,
 
-            "goal_count": len(self.goals),
+            "behavior": self.behavior,
 
-            "strengths": len(self.strengths),
+            "engineering_scope": self.engineering_scope,
 
-            "weaknesses": len(self.weaknesses),
+            "architecture_description": self.architecture_description,
 
-            "technical_debt": len(self.technical_debt),
+            "repository_focus": self.repository_focus,
 
-            "architectural_risks": len(self.architectural_risks),
+            "organization_description": self.organization_description,
+
+            "runtime_description": self.runtime_description,
+
+            "dependency_description": self.dependency_description,
 
             "confidence": self.confidence,
 
