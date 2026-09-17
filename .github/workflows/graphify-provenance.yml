@@ -1,9 +1,6 @@
 name: Graphify Provenance
 
 on:
-  push:
-    branches:
-      - "feature/**"
   pull_request:
     branches:
       - develop
