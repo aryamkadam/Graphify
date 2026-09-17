@@ -275,11 +275,9 @@ def test_check_evidence_is_verification():
     assert evidence["classification"] == "VERIFICATION"
     assert evidence["evidence_strength"] == "DIRECT"
     assert evidence["causality_status"] == "NOT_INFERRED"
-def test_collect_pull_request_returns_targeted_binding():
-    from graph_builder.provenance.github_evidence_adapter import (
-        GitHubEvidenceAdapter,
-    )
 
+
+def test_collect_pull_request_returns_targeted_binding():
     adapter = GitHubEvidenceAdapter(
         token="test-token",
         api_base="https://example.test",
@@ -300,9 +298,15 @@ def test_collect_pull_request_returns_targeted_binding():
                 "title": "Add engineering proof binding",
                 "state": "open",
                 "merged_at": None,
-                "html_url": "https://github.com/aryamkadam/Graphify/pull/123",
-                "user": {"login": "aryamkadam"},
-                "base": {"ref": "develop"},
+                "html_url": (
+                    "https://github.com/aryamkadam/Graphify/pull/123"
+                ),
+                "user": {
+                    "login": "aryamkadam"
+                },
+                "base": {
+                    "ref": "develop"
+                },
                 "head": {
                     "ref": "feature/proof",
                     "sha": "abc123",
@@ -321,12 +325,35 @@ def test_collect_pull_request_returns_targeted_binding():
                         },
                     },
                     "files": [
-                        {"filename": "graph_builder/provenance/engineering_proof.py"},
+                        {
+                            "filename":
+                                "graph_builder/provenance/engineering_proof.py"
+                        }
                     ],
                 }
             ]
 
-        if path == "/repos/aryamkadam/Graphify/commits/abc123/check-runs":
+        if path == "/repos/aryamkadam/Graphify/pulls/123/files":
+            return [
+                {
+                    "filename":
+                        "graph_builder/provenance/engineering_proof.py",
+                    "status": "modified",
+                    "additions": 10,
+                    "deletions": 2,
+                    "changes": 12,
+                    "blob_url": (
+                        "https://github.com/aryamkadam/Graphify/"
+                        "blob/abc123/"
+                        "graph_builder/provenance/engineering_proof.py"
+                    ),
+                }
+            ]
+
+        if (
+            path
+            == "/repos/aryamkadam/Graphify/commits/abc123/check-runs"
+        ):
             return {
                 "check_runs": [
                     {
@@ -338,7 +365,9 @@ def test_collect_pull_request_returns_targeted_binding():
                 ]
             }
 
-        raise AssertionError(f"Unexpected GitHub path: {path}")
+        raise AssertionError(
+            f"Unexpected GitHub path: {path}"
+        )
 
     adapter._get_json = fake_get_json
 
@@ -348,7 +377,10 @@ def test_collect_pull_request_returns_targeted_binding():
     )
 
     assert result["connected"] is True
-    assert result["status"] == "CONNECTED_WITH_EVIDENCE"
+    assert (
+        result["status"]
+        == "CONNECTED_WITH_EVIDENCE"
+    )
 
     assert result["binding"] == {
         "provider": "github",
@@ -360,6 +392,39 @@ def test_collect_pull_request_returns_targeted_binding():
 
     assert result["counts"]["pull_requests"] == 1
     assert result["counts"]["commits"] == 1
+    assert result["counts"]["files"] == 1
     assert result["counts"]["checks"] == 1
+
     assert result["causality_inferred"] is False
     assert result["read_only"] is True
+
+
+def test_file_evidence_is_observational():
+    adapter = GitHubEvidenceAdapter()
+
+    evidence = adapter._file_evidence(
+        "acme/example",
+        42,
+        {
+            "filename": "src/example.py",
+            "status": "modified",
+            "additions": 10,
+            "deletions": 2,
+            "changes": 12,
+            "blob_url": (
+                "https://github.com/acme/example/blob/abc123/src/example.py"
+            ),
+        },
+    )
+
+    assert evidence["type"] == "github_file"
+    assert evidence["repository"] == "acme/example"
+    assert evidence["pull_request"] == 42
+    assert evidence["path"] == "src/example.py"
+    assert evidence["status"] == "modified"
+    assert evidence["additions"] == 10
+    assert evidence["deletions"] == 2
+    assert evidence["changes"] == 12
+    assert evidence["classification"] == "DIRECT"
+    assert evidence["evidence_strength"] == "DIRECT"
+    assert evidence["causality_status"] == "NOT_INFERRED"

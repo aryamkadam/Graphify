@@ -170,6 +170,12 @@ class EngineeringDecisionRecord:
                 external_evidence=external_evidence,
             )
         )
+        external_binding = (
+            self._external_binding_projection(
+                evidence=evidence,
+                external_evidence=external_evidence,
+            )
+        )
 
         # --------------------------------------------------
         # Canonical Projections
@@ -223,7 +229,8 @@ class EngineeringDecisionRecord:
 
             "repository_path":
                 str(repository),
-
+            "external_binding":
+                external_binding,
             "decision":
                 decision_projection,
 
@@ -1158,7 +1165,6 @@ class EngineeringDecisionRecord:
                 external_evidence=None,
             )
         )
-
         if (
             external_integration.get(
                 "requested"

@@ -552,6 +552,37 @@ class GitHubEvidenceAdapter:
                 )
             )
 
+        # --------------------------------------------------
+        # Pull request changed files
+        # --------------------------------------------------
+
+        try:
+            pull_request_files = self._get_json(
+                f"/repos/{repository}/pulls/{pull_request}/files",
+                params={"per_page": 100},
+            )
+        except _GitHubRequestError as exc:
+            return self._error_result(
+                status=exc.status,
+                repository=repository,
+                message=exc.message,
+            )
+
+        if not isinstance(pull_request_files, list):
+            pull_request_files = []
+
+        for pull_request_file in pull_request_files:
+            if not isinstance(pull_request_file, dict):
+                continue
+
+            evidence.append(
+                self._file_evidence(
+                    repository,
+                    pull_request,
+                    pull_request_file,
+                )
+            )
+
         head_sha = (
             pr.get("head", {})
             or {}
@@ -601,6 +632,11 @@ class GitHubEvidenceAdapter:
                     for item in evidence
                     if item.get("type") == "github_commit"
                 ),
+                "files": sum(
+                    1
+                    for item in evidence
+                    if item.get("type") == "github_file"
+                ),
                 "checks": sum(
                     1
                     for item in evidence
@@ -617,6 +653,33 @@ class GitHubEvidenceAdapter:
             "version": self.VERSION,
             "read_only": True,
             "causality_inferred": False,
+        }
+
+    # ==================================================
+    # Pull Request File
+    # ==================================================
+
+    @staticmethod
+    def _file_evidence(
+        repository: str,
+        pr_number: int,
+        pull_request_file: dict[str, Any],
+    ) -> dict[str, Any]:
+
+        return {
+            "source": "github",
+            "type": "github_file",
+            "repository": repository,
+            "pull_request": pr_number,
+            "path": pull_request_file.get("filename"),
+            "status": pull_request_file.get("status"),
+            "additions": pull_request_file.get("additions", 0),
+            "deletions": pull_request_file.get("deletions", 0),
+            "changes": pull_request_file.get("changes", 0),
+            "blob_url": pull_request_file.get("blob_url"),
+            "classification": "DIRECT",
+            "evidence_strength": "DIRECT",
+            "causality_status": "NOT_INFERRED",
         }
 
     # ==================================================
@@ -660,6 +723,9 @@ class GitHubEvidenceAdapter:
                     0,
 
                 "commits":
+                    0,
+
+                "files":
                     0,
 
                 "checks":

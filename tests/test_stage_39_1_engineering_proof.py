@@ -453,3 +453,30 @@ def test_external_binding_is_projected_without_claiming_causality():
 
     assert proof["outcome"]["causality"] == "UNKNOWN"
     assert proof["trust"]["causality_inferred"] is False
+def test_decision_observed_requires_real_decision():
+    proof = EngineeringProof()
+
+    real_decision = {
+        "decision": "Use GitHub pull request evidence"
+    }
+
+    unknown_decision = {
+        "decision": "UNKNOWN"
+    }
+
+    trust_real = proof._trust(
+        decision=real_decision,
+        provenance={},
+        execution={},
+        outcome={},
+    )
+
+    trust_unknown = proof._trust(
+        decision=unknown_decision,
+        provenance={},
+        execution={},
+        outcome={},
+    )
+
+    assert trust_real["decision_observed"] is True
+    assert trust_unknown["decision_observed"] is False

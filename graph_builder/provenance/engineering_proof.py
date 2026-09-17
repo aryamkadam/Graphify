@@ -191,6 +191,7 @@ class EngineeringProof:
         )
 
         trust = self._trust(
+            decision=decision,
             provenance=provenance,
             execution=execution,
             outcome=outcome,
@@ -446,6 +447,26 @@ class EngineeringProof:
             == "github_commit"
         ]
 
+        files = [
+            item
+            for item in external
+            if isinstance(item, dict)
+            and item.get("type")
+            == "github_file"
+        ]
+
+        files_changed = [
+            item.get("path")
+            for item in files
+            if item.get("path")
+        ]
+
+        for path_value in EngineeringProof._collect_changed_files(
+            commits
+        ):
+            if path_value not in files_changed:
+                files_changed.append(path_value)
+
         return {
             "pull_requests":
                 pull_requests,
@@ -454,9 +475,7 @@ class EngineeringProof:
                 commits,
 
             "files_changed":
-                EngineeringProof._collect_changed_files(
-                    commits
-                ),
+                files_changed,
 
             "status":
                 (
@@ -678,6 +697,7 @@ class EngineeringProof:
 
     @staticmethod
     def _trust(
+        decision,
         provenance,
         execution,
         outcome,
@@ -686,9 +706,19 @@ class EngineeringProof:
         return {
             "decision_observed":
                 bool(
-                    provenance.get(
-                        "creates_decision"
-                    ) is False
+                    isinstance(
+                        decision,
+                        dict,
+                    )
+                    and decision.get(
+                        "decision",
+                        "UNKNOWN",
+                    )
+                    not in {
+                        None,
+                        "",
+                        "UNKNOWN",
+                    }
                 ),
 
             "work_executed":
