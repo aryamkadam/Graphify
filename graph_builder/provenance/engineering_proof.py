@@ -162,6 +162,35 @@ class EngineeringProof:
             if normalized is not None
         ]
 
+        # --------------------------------------------------
+        # Semantic evidence scopes
+        # --------------------------------------------------
+        #
+        # Selected evidence may contain different semantic
+        # roles. A verification artifact must not be
+        # presented as evidence explaining WHY a decision
+        # was made.
+        #
+
+        why_evidence = [
+            item
+            for item in selected_evidence
+            if item.get("role")
+            in {
+                "DECISION",
+                "ARCHITECTURE",
+                "RISK",
+                "DOCUMENTATION",
+            }
+        ]
+
+        verification_evidence = [
+            item
+            for item in selected_evidence
+            if item.get("role")
+            == "VERIFICATION"
+        ]
+
         decision_projection = self._decision(
             decision
         )
@@ -174,6 +203,7 @@ class EngineeringProof:
         verification = self._verification(
             evidence=evidence,
             review=review,
+            selected_evidence=verification_evidence,
         )
 
         outcome = self._outcome(
@@ -235,14 +265,12 @@ class EngineeringProof:
             "decision": decision_projection,
 
             "why": {
-                "evidence": selected_evidence,
+                "evidence": why_evidence,
 
-                # Presentation-safe summary.
-                # Canonical decision rationale remains upstream.
                 "summary": self._decision_summary(
                     decision=decision,
                     evidence_count=len(
-                        selected_evidence
+                        why_evidence
                     ),
                 ),
             },
@@ -352,27 +380,25 @@ class EngineeringProof:
         evidence_count: int,
     ) -> str:
 
+        statement = (
+            decision.get(
+                "decision",
+                "UNKNOWN",
+            )
+            or "UNKNOWN"
+        )
+
         goal = (
             decision.get(
                 "selected_goal",
-                decision.get(
-                    "goal",
-                    "The selected engineering goal",
-                ),
+                "UNKNOWN",
             )
-            or "The selected engineering goal"
+            or "UNKNOWN"
         )
 
-        strategy = (
-            decision.get(
-                "strategy",
-                decision.get(
-                    "strategic_focus",
-                    "engineering",
-                ),
-            )
-            or "engineering"
-        )
+        reason = (
+            decision.get("decision_reason", "UNKNOWN") or "UNKNOWN"
+        ).strip().rstrip(".")
 
         priority = (
             decision.get(
@@ -382,33 +408,33 @@ class EngineeringProof:
             or "UNKNOWN"
         )
 
-        goal = str(goal).strip()
-        strategy = str(strategy).strip()
-        priority = str(priority).strip()
-
-        evidence_phrase = (
-            "evidence-supported"
-            if evidence_count > 0
-            else "not yet supported by external evidence"
+        confidence = (
+            decision.get(
+                "confidence",
+                "UNKNOWN",
+            )
+            or "UNKNOWN"
         )
 
-        priority_phrase = (
-            f" The decision carries {priority.lower()} priority."
-            if priority != "UNKNOWN"
-            else ""
+        summary = (
+            f"Decision: {statement}. "
+            f"Goal: {goal}. "
+            f"Rationale: {reason}. "
+            f"Priority: {priority}. "
+            f"Confidence: {confidence}."
         )
 
-        return (
-            f"{goal} was selected because it aligns with the "
-            f"repository's long-term engineering direction and "
-            f"supports the {strategy.lower()} strategy. "
-            f"The decision preserves the repository vision "
-            f"rather than allowing an isolated technical observation "
-            f"to redirect the roadmap. "
-            f"The candidate is strategically valuable, "
-            f"{evidence_phrase}, and engineering-relevant."
-            f"{priority_phrase}"
-        )
+        if evidence_count > 0:
+            summary += (
+                " Supporting decision evidence items: "
+                f"{evidence_count}."
+            )
+        else:
+            summary += (
+                " No decision-supporting evidence was selected."
+            )
+
+        return summary
 
     # ==================================================
     # Change
@@ -493,6 +519,7 @@ class EngineeringProof:
     def _verification(
         evidence: dict[str, Any],
         review: dict[str, Any],
+        selected_evidence: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
 
         external = (
@@ -505,6 +532,27 @@ class EngineeringProof:
 
         if not isinstance(external, list):
             external = []
+
+        selected_evidence = (
+            selected_evidence
+            if isinstance(
+                selected_evidence,
+                list,
+            )
+            else []
+        )
+        verification_evidence = [
+            {
+                "type": item.get("type"),
+                "path": item.get("path"),
+                "relevance": item.get("relevance"),
+                "strength": item.get("strength"),
+                "score": item.get("score"),
+                "role": item.get("role"),
+            }
+            for item in selected_evidence
+            if isinstance(item, dict)
+        ]
 
         checks = [
             item
@@ -531,8 +579,16 @@ class EngineeringProof:
             "review",
             "NOT_AVAILABLE",
         )
-
+        for check in checks:
+            if (
+                isinstance(check, dict)
+                and check.get("type") == "github_check"
+            ):
+                check["classification"] = "VERIFICATION"
         return {
+            "evidence":
+                verification_evidence,
+
             "checks":
                 checks,
 

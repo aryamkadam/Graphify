@@ -48,6 +48,12 @@ def test_connected_no_evidence_status(monkeypatch):
     assert result["connected"] is True
     assert result["evidence_available"] is False
     assert result["evidence_count"] == 0
+    assert result["evidence"] == []
+
+    assert result["counts"]["pull_requests"] == 0
+    assert result["counts"]["commits"] == 0
+    assert result["counts"]["files"] == 0
+    assert result["counts"]["checks"] == 0
 
 
 def test_connected_with_evidence_status(monkeypatch):
@@ -96,6 +102,21 @@ def test_connected_with_evidence_status(monkeypatch):
         if path == "/repos/acme/example/pulls/42/commits":
             return []
 
+        if path == "/repos/acme/example/pulls/42/files":
+            return [
+                {
+                    "filename": "src/example.py",
+                    "status": "modified",
+                    "additions": 5,
+                    "deletions": 2,
+                    "changes": 7,
+                    "blob_url": (
+                        "https://github.com/acme/example/blob/"
+                        "abc123/src/example.py"
+                    ),
+                }
+            ]
+
         if (
             path
             == "/repos/acme/example/commits/abc123/check-runs"
@@ -128,9 +149,30 @@ def test_connected_with_evidence_status(monkeypatch):
     )
     assert result["connected"] is True
     assert result["evidence_available"] is True
-    assert result["evidence_count"] == 2
+
+    # 1 PR + 1 changed file + 1 check
+    assert result["evidence_count"] == 3
+
     assert result["counts"]["pull_requests"] == 1
+    assert result["counts"]["commits"] == 0
+    assert result["counts"]["files"] == 1
     assert result["counts"]["checks"] == 1
+
+    files = [
+        item
+        for item in result["evidence"]
+        if item["type"] == "github_file"
+    ]
+
+    assert len(files) == 1
+    assert files[0]["path"] == "src/example.py"
+    assert files[0]["status"] == "modified"
+    assert files[0]["additions"] == 5
+    assert files[0]["deletions"] == 2
+    assert files[0]["changes"] == 7
+    assert files[0]["classification"] == "DIRECT"
+    assert files[0]["evidence_strength"] == "DIRECT"
+    assert files[0]["causality_status"] == "NOT_INFERRED"
 
 
 def test_authentication_failure_status(monkeypatch):
@@ -299,7 +341,8 @@ def test_collect_pull_request_returns_targeted_binding():
                 "state": "open",
                 "merged_at": None,
                 "html_url": (
-                    "https://github.com/aryamkadam/Graphify/pull/123"
+                    "https://github.com/aryamkadam/Graphify/"
+                    "pull/123"
                 ),
                 "user": {
                     "login": "aryamkadam"
@@ -327,7 +370,8 @@ def test_collect_pull_request_returns_targeted_binding():
                     "files": [
                         {
                             "filename":
-                                "graph_builder/provenance/engineering_proof.py"
+                                "graph_builder/provenance/"
+                                "engineering_proof.py"
                         }
                     ],
                 }
@@ -337,7 +381,8 @@ def test_collect_pull_request_returns_targeted_binding():
             return [
                 {
                     "filename":
-                        "graph_builder/provenance/engineering_proof.py",
+                        "graph_builder/provenance/"
+                        "engineering_proof.py",
                     "status": "modified",
                     "additions": 10,
                     "deletions": 2,
@@ -345,14 +390,16 @@ def test_collect_pull_request_returns_targeted_binding():
                     "blob_url": (
                         "https://github.com/aryamkadam/Graphify/"
                         "blob/abc123/"
-                        "graph_builder/provenance/engineering_proof.py"
+                        "graph_builder/provenance/"
+                        "engineering_proof.py"
                     ),
                 }
             ]
 
         if (
             path
-            == "/repos/aryamkadam/Graphify/commits/abc123/check-runs"
+            == "/repos/aryamkadam/Graphify/"
+            "commits/abc123/check-runs"
         ):
             return {
                 "check_runs": [
@@ -412,7 +459,8 @@ def test_file_evidence_is_observational():
             "deletions": 2,
             "changes": 12,
             "blob_url": (
-                "https://github.com/acme/example/blob/abc123/src/example.py"
+                "https://github.com/acme/example/blob/"
+                "abc123/src/example.py"
             ),
         },
     )

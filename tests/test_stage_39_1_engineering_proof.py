@@ -106,6 +106,9 @@ def test_engineering_proof_is_read_only_projection():
 
                 "score":
                     16,
+
+                "selection_role":
+                    "ARCHITECTURE",
             }
         ],
 
@@ -480,3 +483,137 @@ def test_decision_observed_requires_real_decision():
 
     assert trust_real["decision_observed"] is True
     assert trust_unknown["decision_observed"] is False
+def test_decision_summary_uses_canonical_rationale():
+    summary = EngineeringProof._decision_summary(
+        decision={
+            "decision": "Add GitHub engineering proof",
+            "selected_goal": "Improve engineering traceability",
+            "decision_reason": (
+                "Track engineering decisions with observable "
+                "GitHub evidence."
+            ),
+            "priority": "HIGH",
+            "confidence": "MEDIUM",
+        },
+        evidence_count=3,
+    )
+
+    assert (
+        "Track engineering decisions with observable GitHub evidence."
+        in summary
+    )
+
+    assert (
+        "long-term engineering direction"
+        not in summary
+    )
+
+    assert (
+        "strategically valuable"
+        not in summary
+    )
+
+    assert (
+        "Supporting decision evidence items: 3"
+        in summary
+    )
+def test_verification_evidence_is_not_presented_as_why():
+    record = {
+        "repository": "graphify",
+        "decision": {
+            "decision": "Improve engineering traceability",
+            "selected_goal": "Bind engineering work to evidence",
+            "decision_reason": "Track engineering decisions with observable evidence.",
+        },
+        "plan": {},
+        "evidence": {
+            "direct": [],
+            "related": [],
+            "context": [],
+            "external": [],
+        },
+        "knowledge": {},
+        "provenance": {
+            "read_only": True,
+            "causality_inference": False,
+        },
+    }
+
+    review = {
+        "evidence": [
+            {
+                "type": "repository_file",
+                "path": "tests/test_example.py",
+                "relevance": "HIGH",
+                "relevance_score": 9,
+                "evidence_strength": "EXPLICIT",
+                "selection_role": "VERIFICATION",
+            },
+        ],
+    }
+
+    proof = EngineeringProof().build(
+        record=record,
+        review=review,
+    )
+
+    assert proof["why"]["evidence"] == []
+def test_verification_evidence_is_exposed_under_verification():
+    record = {
+        "repository": "graphify",
+        "decision": {
+            "decision": "Improve engineering traceability",
+            "selected_goal": "Bind engineering work to evidence",
+            "decision_reason": (
+                "Track engineering decisions with observable evidence."
+            ),
+        },
+        "plan": {},
+        "evidence": {
+            "direct": [],
+            "related": [],
+            "context": [],
+            "external": [],
+        },
+        "knowledge": {},
+        "provenance": {
+            "read_only": True,
+            "causality_inference": False,
+        },
+    }
+
+    review = {
+        "evidence": [
+            {
+                "type": "repository_file",
+                "path": "tests/test_example.py",
+                "relevance": "HIGH",
+                "relevance_score": 9,
+                "evidence_strength": "EXPLICIT",
+                "selection_role": "VERIFICATION",
+            },
+        ],
+    }
+
+    proof = EngineeringProof().build(
+        record=record,
+        review=review,
+    )
+
+    assert len(
+        proof["verification"]["evidence"]
+    ) == 1
+
+    assert (
+        proof["verification"]["evidence"][0]["path"]
+        == "tests/test_example.py"
+    )
+    verification_evidence = proof["verification"]["evidence"]
+
+    assert verification_evidence
+    assert verification_evidence[0]["role"] == "VERIFICATION"
+    assert verification_evidence[0]["relevance"] == "HIGH"
+    assert verification_evidence[0]["strength"] == "EXPLICIT"
+    assert "excerpt" not in verification_evidence[0]
+
+    assert proof["why"]["evidence"] == []

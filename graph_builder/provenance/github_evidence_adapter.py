@@ -283,6 +283,55 @@ class GitHubEvidenceAdapter:
                 )
 
             # --------------------------------------------------
+            # Pull request changed files
+            # --------------------------------------------------
+
+            try:
+
+                pull_request_files = (
+                    self._get_json(
+                        (
+                            f"/repos/{repository}/pulls/"
+                            f"{pr_number}/files"
+                        ),
+                        params={
+                            "per_page": 100,
+                        },
+                    )
+                )
+
+            except _GitHubRequestError as exc:
+
+                return self._error_result(
+                    status=exc.status,
+                    repository=repository,
+                    message=exc.message,
+                )
+
+            if not isinstance(
+                pull_request_files,
+                list,
+            ):
+
+                pull_request_files = []
+
+            for pull_request_file in pull_request_files:
+
+                if not isinstance(
+                    pull_request_file,
+                    dict,
+                ):
+                    continue
+
+                evidence.append(
+                    self._file_evidence(
+                        repository,
+                        pr_number,
+                        pull_request_file,
+                    )
+                )
+
+            # --------------------------------------------------
             # Checks
             # --------------------------------------------------
 
@@ -416,6 +465,17 @@ class GitHubEvidenceAdapter:
                             "type"
                         )
                         == "github_commit"
+                    ),
+
+                "files":
+                    sum(
+                        1
+                        for item
+                        in evidence
+                        if item.get(
+                            "type"
+                        )
+                        == "github_file"
                     ),
 
                 "checks":
